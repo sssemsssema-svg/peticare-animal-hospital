@@ -1,4 +1,232 @@
 
+// ==============================================================================
+// 📝 AUTOMATIC VISIT DRAFT RECOVERY & ANTI-REFRESH SYSTEM (حفظ المسودة التلقائي)
+// ==============================================================================
+let _draftSaveTimeout = null;
+
+function saveVisitDraft() {
+    try {
+        const patientSelect = document.getElementById('visitPatientSelect');
+        const patientId = (currentSelectedPatient ? currentSelectedPatient.id : '') || (patientSelect ? patientSelect.value : '');
+        const diagnosis = document.getElementById('visitDiagnosis') ? document.getElementById('visitDiagnosis').value : '';
+        const treatment = document.getElementById('visitTreatment') ? document.getElementById('visitTreatment').value : '';
+        const dosage = document.getElementById('visitDosage') ? document.getElementById('visitDosage').value : '';
+        const labs = document.getElementById('visitLabs') ? document.getElementById('visitLabs').value : '';
+        const followDays = document.getElementById('visitFollowDays') ? document.getElementById('visitFollowDays').value : '';
+        const followDate = document.getElementById('visitFollowDate') ? document.getElementById('visitFollowDate').value : '';
+        const chronicNotes = document.getElementById('visitChronicNotes') ? document.getElementById('visitChronicNotes').value : '';
+        const hasChronic = document.getElementById('chkVisitHasChronic') ? document.getElementById('chkVisitHasChronic').checked : false;
+
+        const hasAnyContent = (patientId && patientId.trim()) ||
+                              diagnosis.trim() ||
+                              treatment.trim() ||
+                              labs.trim() ||
+                              chronicNotes.trim() ||
+                              (uploadedImages && (uploadedImages.prescriptionImage || uploadedImages.caseImage || (uploadedImages.labImages && uploadedImages.labImages.length > 0)));
+
+        if (!hasAnyContent) {
+            localStorage.removeItem('peticare_active_visit_draft');
+            const banner = document.getElementById('draftRestoredBanner');
+            if (banner) banner.style.display = 'none';
+            return;
+        }
+
+        const draft = {
+            patientId,
+            diagnosis,
+            treatment,
+            dosage,
+            labs,
+            followDays,
+            followDate,
+            chronicNotes,
+            hasChronic,
+            uploadedImages: {
+                prescriptionImage: uploadedImages.prescriptionImage || '',
+                caseImage: uploadedImages.caseImage || '',
+                labImages: (uploadedImages.labImages && Array.isArray(uploadedImages.labImages)) ? [...uploadedImages.labImages] : [],
+                clientImage: uploadedImages.clientImage || ''
+            },
+            updatedAt: Date.now()
+        };
+
+        localStorage.setItem('peticare_active_visit_draft', JSON.stringify(draft));
+    } catch (e) {
+        console.warn('Draft auto-save warning:', e);
+    }
+}
+window.saveVisitDraft = saveVisitDraft;
+
+function debouncedSaveVisitDraft() {
+    clearTimeout(_draftSaveTimeout);
+    _draftSaveTimeout = setTimeout(saveVisitDraft, 350);
+}
+
+function restoreVisitDraft() {
+    try {
+        const draftStr = localStorage.getItem('peticare_active_visit_draft');
+        if (!draftStr) return;
+        const draft = JSON.parse(draftStr);
+        if (!draft) return;
+
+        // Discard drafts older than 24 hours
+        if (draft.updatedAt && (Date.now() - draft.updatedAt > 24 * 60 * 60 * 1000)) {
+            localStorage.removeItem('peticare_active_visit_draft');
+            return;
+        }
+
+        let restoredSomething = false;
+
+        // 1. Patient selection
+        if (draft.patientId) {
+            const pSel = document.getElementById('visitPatientSelect');
+            if (pSel) pSel.value = draft.patientId;
+            if (typeof updateSelectedPatientQuickCard === 'function') {
+                updateSelectedPatientQuickCard(draft.patientId);
+            }
+            restoredSomething = true;
+        }
+
+        // 2. Text fields
+        if (draft.diagnosis) {
+            const el = document.getElementById('visitDiagnosis');
+            if (el) { el.value = draft.diagnosis; restoredSomething = true; }
+        }
+        if (draft.treatment) {
+            const el = document.getElementById('visitTreatment');
+            if (el) { el.value = draft.treatment; restoredSomething = true; }
+        }
+        if (draft.dosage) {
+            const el = document.getElementById('visitDosage');
+            if (el) { el.value = draft.dosage; restoredSomething = true; }
+        }
+        if (draft.labs) {
+            const el = document.getElementById('visitLabs');
+            if (el) { el.value = draft.labs; restoredSomething = true; }
+        }
+        if (draft.followDays) {
+            const el = document.getElementById('visitFollowDays');
+            if (el) { el.value = draft.followDays; restoredSomething = true; }
+        }
+        if (draft.followDate) {
+            const el = document.getElementById('visitFollowDate');
+            if (el) { el.value = draft.followDate; restoredSomething = true; }
+        }
+        if (draft.hasChronic) {
+            const chk = document.getElementById('chkVisitHasChronic');
+            if (chk) {
+                chk.checked = true;
+                if (typeof toggleVisitChronicField === 'function') toggleVisitChronicField(true);
+            }
+        }
+        if (draft.chronicNotes) {
+            const el = document.getElementById('visitChronicNotes');
+            if (el) { el.value = draft.chronicNotes; restoredSomething = true; }
+        }
+
+        // 3. Uploaded Attachments
+        if (draft.uploadedImages) {
+            if (draft.uploadedImages.prescriptionImage) {
+                uploadedImages.prescriptionImage = draft.uploadedImages.prescriptionImage;
+                const pBox = document.getElementById('prescriptionImgPreview');
+                const pImg = document.getElementById('prescriptionPreviewImg');
+                if (pBox && pImg) {
+                    pImg.src = uploadedImages.prescriptionImage;
+                    pBox.style.display = 'flex';
+                }
+                const btnRx = document.getElementById('btnUploadPrescriptionImg');
+                if (btnRx) {
+                    btnRx.classList.add('has-file');
+                    const lbl = btnRx.querySelector('.btn-label');
+                    if (lbl) lbl.textContent = 'تم الرفع ✓';
+                }
+                restoredSomething = true;
+            }
+            if (draft.uploadedImages.caseImage) {
+                uploadedImages.caseImage = draft.uploadedImages.caseImage;
+                const cBox = document.getElementById('caseImgPreview');
+                if (cBox) {
+                    const cImg = cBox.querySelector('img');
+                    if (cImg) cImg.src = uploadedImages.caseImage;
+                    cBox.style.display = 'flex';
+                }
+                restoredSomething = true;
+            }
+            if (draft.uploadedImages.labImages && draft.uploadedImages.labImages.length > 0) {
+                uploadedImages.labImages = [...draft.uploadedImages.labImages];
+                if (typeof renderLabThumbsGallery === 'function') {
+                    renderLabThumbsGallery();
+                }
+                restoredSomething = true;
+            }
+        }
+
+        if (restoredSomething) {
+            const banner = document.getElementById('draftRestoredBanner');
+            if (banner) banner.style.display = 'flex';
+            if (typeof showToast === 'function') {
+                showToast('📝 تم استرجاع مسودة كشف غير محفوظة تلقائياً', 'info');
+            }
+        }
+    } catch (e) {
+        console.warn('Draft restore error:', e);
+    }
+}
+window.restoreVisitDraft = restoreVisitDraft;
+
+function clearVisitDraft(resetUI = false) {
+    localStorage.removeItem('peticare_active_visit_draft');
+    const banner = document.getElementById('draftRestoredBanner');
+    if (banner) banner.style.display = 'none';
+
+    if (resetUI) {
+        const form = document.getElementById('formNewVisit');
+        if (form) form.reset();
+        if (typeof resetUploaders === 'function') resetUploaders();
+        if (typeof updateSelectedPatientQuickCard === 'function') updateSelectedPatientQuickCard('');
+        if (typeof showToast === 'function') showToast('تم مسح المسودة والبدء من جديد', 'info');
+    }
+}
+window.clearVisitDraft = clearVisitDraft;
+
+function setupDraftAutoSaveListeners() {
+    const inputIds = ['visitDiagnosis', 'visitTreatment', 'visitDosage', 'visitLabs', 'visitFollowDays', 'visitFollowDate', 'visitChronicNotes'];
+    inputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', debouncedSaveVisitDraft);
+            el.addEventListener('change', debouncedSaveVisitDraft);
+        }
+    });
+
+    const chk = document.getElementById('chkVisitHasChronic');
+    if (chk) {
+        chk.addEventListener('change', saveVisitDraft);
+    }
+
+    const pSel = document.getElementById('visitPatientSelect');
+    if (pSel) {
+        pSel.addEventListener('change', saveVisitDraft);
+    }
+}
+window.setupDraftAutoSaveListeners = setupDraftAutoSaveListeners;
+
+// Anti-Accidental Refresh / Close Warning
+window.addEventListener('beforeunload', (e) => {
+    try {
+        const draftStr = localStorage.getItem('peticare_active_visit_draft');
+        if (draftStr) {
+            const d = JSON.parse(draftStr);
+            if (d && (d.diagnosis || d.treatment || d.patientId || (d.uploadedImages && d.uploadedImages.prescriptionImage))) {
+                e.preventDefault();
+                e.returnValue = '';
+                return '';
+            }
+        }
+    } catch(err) {}
+});
+
+
 function confirmDeleteCurrentPatient() {
     if (!isUserAdmin()) {
         alert('عذراً، صلاحية حذف ملف المريض مقتصرة على حساب الأدمن (مدير النظام) فقط.');
@@ -16,6 +244,12 @@ function confirmDeleteCurrentPatient() {
         if (typeof closePatientModal === 'function') closePatientModal();
         if (typeof renderPatientsList === 'function') renderPatientsList();
         if (typeof refreshLiveTodayVisitsUI === 'function') refreshLiveTodayVisitsUI();
+        // Initialize Auto-Draft System & Restore if exists
+        setTimeout(() => {
+            setupDraftAutoSaveListeners();
+            restoreVisitDraft();
+        }, 300);
+
         if (typeof switchSection === 'function') switchSection('section-visit');
     }
 }
@@ -9743,6 +9977,7 @@ function setupCaseImagePicker() {
         if (!file) return;
         compressImageFile(file, (base64) => {
             uploadedImages.caseImage = base64;
+            saveVisitDraft();
             if (previewBox) {
                 const imgElem = previewBox.querySelector('img');
                 if (imgElem) imgElem.src = base64;
@@ -10003,6 +10238,7 @@ function setupMultiLabImagePicker() {
             compressImageFile(file, (base64) => {
                 uploadedImages.labImages.push(base64);
                 renderLabThumbsGallery();
+                saveVisitDraft();
             });
         });
     }
@@ -10114,6 +10350,7 @@ function setupPrescriptionImagePicker() {
                 }
             });
             showToast('📷 تم إرفاق صورة الروشتة بنجاح!', 'success');
+            saveVisitDraft();
         });
     }
 
@@ -10380,6 +10617,7 @@ function initFormHandlers() {
 
 
             if (saveVisitForm) saveVisitForm.reset();
+            clearVisitDraft(false);
 
 
 

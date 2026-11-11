@@ -1258,6 +1258,17 @@
 
 
 
+                                <!-- Auto-Recovered Draft Notification Banner -->
+                <div id="draftRestoredBanner" style="display: none; justify-content: space-between; align-items: center; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: #a7f3d0; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">📝</span>
+                        <span><strong>تم استرجاع مسودة كشف غير محفوظة تلقائياً</strong> (يمكنك استكمال الكشف أو حذفه)</span>
+                    </div>
+                    <button type="button" class="btn btn-outline-glass btn-sm" onclick="clearVisitDraft(true)" style="font-size: 11px; padding: 4px 10px; border-radius: 6px; color: #fca5a5; border-color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.15); cursor: pointer;">
+                        🗑️ مسح المسودة
+                    </button>
+                </div>
+
                 <form id="formNewVisit" novalidate>
 
 
