@@ -1,0 +1,5816 @@
+<!DOCTYPE html>
+
+
+
+<html lang="ar" dir="rtl">
+
+
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+
+
+
+    <!-- Viewport Settings Required for Mobile App -->
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+
+
+    <meta name="theme-color" content="#0b1f1a">
+
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+    <meta name="apple-mobile-web-app-title" content="PetiCare">
+
+
+
+    
+
+
+
+    <title>PetiCare Animal Hospital | مستشفى بيتي كير البيطري</title>
+
+
+
+
+
+
+
+    <!-- PWA Manifest -->
+
+
+
+    <link rel="manifest" href="manifest.json">
+
+
+
+
+
+
+
+    <!-- Stylesheets -->
+
+
+
+    <link rel="stylesheet" href="assets/css/style.css?v=20261111_v49">
+    <link rel="stylesheet" href="assets/css/mobile_fix.css?v=20261111_v494">
+
+
+
+
+
+
+
+    <!-- QR Code Script (Local Offline) -->
+
+
+
+    <script src="assets/js/qrcode.min.js"></script>
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+
+
+    <!-- Splash Screen (Fades out after 2.5s) -->
+
+
+
+    <div id="splashScreen" class="splash-screen">
+
+
+
+        <div class="splash-content">
+
+
+
+            <div class="splash-logo-box">
+
+
+
+                <img 
+
+
+
+                    src="assets/images/splash-logo.gif" 
+
+
+
+                    alt="PetiCare Splash Logo" 
+
+
+
+                    class="splash-logo-img"
+
+
+
+                    onerror="this.style.display='none'; document.getElementById('splashFallback').style.display='block';"
+
+
+
+                >
+
+
+
+                <div id="splashFallback" class="splash-fallback-icon" style="display: none;">
+
+
+
+                    🩺🐾
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <h1 class="splash-title">PetiCare</h1>
+
+
+
+            <p class="splash-subtitle">ANIMAL HOSPITAL &bull; رعاية بيطرية متكاملة</p>
+
+
+
+            <div class="splash-spinner"></div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Login Screen Overlay (3 Portals: Admin, Doctors, Client) -->
+
+
+
+    <!-- Unified Premium Login Screen Overlay -->
+
+
+
+    <div id="loginScreenOverlay" class="login-screen-overlay" style="display: none;">
+
+
+
+        <div class="login-card-container" style="max-width: 400px; padding: 26px 20px;">
+
+
+
+            <div class="login-logo-box" style="width: 72px; height: 72px; margin: 0 auto 12px;">
+
+
+
+                <img src="assets/images/logo.gif" alt="PetiCare Logo" class="login-logo-img" onerror="this.style.display='none'; document.getElementById('loginFallbackIcon').style.display='block';">
+
+
+
+                <div id="loginFallbackIcon" style="display: none; font-size: 38px;">🐾🩺</div>
+
+
+
+            </div>
+
+
+
+            <h1 class="login-title" style="font-size: 22px; margin-bottom: 4px; font-weight: 900;">PetiCare Animal Hospital</h1>
+
+
+
+            <p class="login-subtitle" style="font-size: 13px; margin-bottom: 18px; color: #94a3b8;">مستشفى بيتي كير البيطري &bull; بوابة الأطباء والكادر الطبي</p>
+
+
+
+
+
+
+
+            <div id="loginErrorMsg" class="login-error-banner" style="display: none; margin-bottom: 14px; font-size: 12px; padding: 10px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5;"></div>
+
+
+
+
+
+
+
+            <!-- Single Unified Premium Login Form -->
+
+
+
+            <form id="unifiedLoginForm" onsubmit="handleUnifiedLogin(event); return false;">
+
+
+
+                <div class="form-group" style="margin-bottom: 14px; text-align: right;">
+
+
+
+                    <label for="unifiedUsername" style="font-size: 13px; color: #e2e8f0; font-weight: 700; margin-bottom: 6px; display: block;">
+
+
+
+                        👤 اسم المستخدم (كادر العيادة والأطباء):
+
+
+
+                    </label>
+
+
+
+                    <input type="text" id="unifiedUsername" class="input-glass" placeholder="اسم مستخدم الطبيب أو الإدارة" required autocomplete="username" style="width: 100%; padding: 12px 14px; font-size: 14px; font-weight: 700;">
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="form-group" style="margin-bottom: 16px; text-align: right;">
+
+
+
+                    <label for="unifiedPassword" style="font-size: 13px; color: #e2e8f0; font-weight: 700; margin-bottom: 6px; display: block;">
+
+
+
+                        🔒 كلمة المرور:
+
+
+
+                    </label>
+
+
+
+                    <div style="position: relative;">
+
+
+
+                        <input type="password" id="unifiedPassword" class="input-glass" placeholder="••••••••" required autocomplete="current-password" style="width: 100%; padding: 12px 14px; padding-left: 42px; font-size: 14px; font-weight: 700;">
+
+
+
+                        <button type="button" onclick="togglePasswordVisibility('unifiedPassword', this)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 18px; cursor: pointer; padding: 4px;" title="إظهار/إخفاء كلمة المرور">
+
+
+
+                            👁️
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <button type="submit" id="btnUnifiedSubmit" class="btn btn-primary-glass btn-block" style="padding: 13px; font-weight: 900; font-size: 15px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: 100%; border: none; border-radius: 12px; color: #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.35); transition: all 0.2s;">
+
+
+
+                    <span>🔐 تسجيل الدخول</span>
+
+
+
+                </button>
+
+
+
+            </form>
+
+
+
+
+
+
+
+            <!-- Links: Forgot Password & Register New Account -->
+
+
+
+            <div style="margin-top: 14px; text-align: center;">
+
+
+
+                <button type="button" onclick="openForgotPasswordWhatsAppModal()" style="background: none; border: none; color: #38bdf8; font-size: 12px; text-decoration: underline; cursor: pointer; font-weight: 700;">
+
+
+
+                    🔑 نسيت كلمة المرور؟ استعادة عبر واتساب
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    <!-- Main Mobile Application Container (100dvh) -->
+
+
+
+    <div id="appContainer" class="mobile-app-wrapper">
+
+
+
+        
+
+
+
+        <!-- Header -->
+
+
+
+        <header class="app-header">
+
+
+
+            <div class="header-brand">
+
+
+
+                <div class="header-logo-frame">
+
+
+
+                    <img 
+
+
+
+                        src="assets/images/logo.gif" 
+
+
+
+                        alt="PetiCare Logo" 
+
+
+
+                        class="header-logo-img"
+
+
+
+                        onerror="this.style.display='none'; document.getElementById('headerFallback').style.display='block';"
+
+
+
+                    >
+
+
+
+                    <div id="headerFallback" style="display: none; font-size: 22px;">🐾</div>
+
+
+
+                </div>
+
+
+
+                <div class="header-text">
+
+
+
+                    <div class="clinic-title">PetiCare Animal Hospital</div>
+
+
+
+                    <div class="clinic-sub">مستشفى بيتي كير &bull; عيادة الكشف الذكي</div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="header-actions-right">
+
+                <!-- Live Today's Consultations Feed Button (v49) -->
+                <button type="button" id="btnLiveTodayVisits" class="btn-quick-today" onclick="openLiveTodayVisitsModal()" title="مراجعة كشوفات اليوم لحظياً" style="background: rgba(56, 189, 248, 0.18); border: 1px solid rgba(56, 189, 248, 0.45); color: #7dd3fc; padding: 5px 10px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s;">
+                    <span>📋</span>
+                    <span>كشوفات اليوم</span>
+                    <span id="liveTodayVisitsCount" class="badge-tag" style="background:#0284c7; color:#fff; padding:1px 6px; border-radius:10px; font-size:10px;">0</span>
+                </button>
+
+
+
+
+                <!-- Customer Store View Button -->
+
+
+
+                <a href="index.html" target="_blank" class="btn-quick-store" title="معاينة متجر العملاء" style="background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); color: #6ee7b7; padding: 5px 10px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; text-decoration: none; transition: all 0.2s;">
+
+
+
+                    <span>🛍️</span>
+
+
+
+                    <span>متجر العملاء</span>
+
+
+
+                </a>
+
+
+
+                <!-- Quick Sign Out Button -->
+
+
+
+                <button type="button" class="btn-quick-logout" onclick="handleLogout()" title="تسجيل الخروج" style="background: rgba(239, 68, 68, 0.18); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5; padding: 5px 10px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;">
+
+
+
+                    <span>🚪</span>
+
+
+
+                    <span>خروج</span>
+
+
+
+                </button>
+
+
+
+                <div class="header-badge">
+
+
+
+                    <span class="status-dot"></span>
+
+
+
+                    <span>متصل</span>
+
+
+
+                </div>
+
+
+
+                <div id="cloudSyncIndicator" class="cloud-sync-pill" title="حالة الاتصال ومزامنة البيانات مع الأجهزة الأخرى (اضغط للتحديث الفوري)" onclick="if(window.PetiCareCloud) window.PetiCareCloud.syncAllCloudData()">
+
+
+
+                    ☁️ <span>السيستم متزامن لحظياً ✓</span>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- User Profile & Account Dropdown -->
+
+
+
+                <div id="headerUserSection" class="header-user-section">
+
+
+
+                    <button type="button" id="headerUserBtn" class="header-user-btn" onclick="toggleUserDropdown(event)" title="حساب المستخدم">
+
+
+
+                        <span id="headerUserAvatar" class="user-avatar-icon">👨‍⚕️</span>
+
+
+
+                        <span id="headerUserName" class="user-display-name">د. شريف</span>
+
+
+
+                        <span class="dropdown-chevron">▾</span>
+
+
+
+                    </button>
+
+
+
+                                        <div id="userDropdownMenu" class="user-dropdown-menu" style="display: none;">
+
+
+
+                        <div class="user-dropdown-header">
+
+
+
+                            <strong id="dropdownUserFullName">د. شريف دياب (المدير العام)</strong>
+
+
+
+                            <small id="dropdownUserRole">⭐ مدير النظام (كامل الصلاحيات)</small>
+
+
+
+                        </div>
+
+
+
+                        <div class="dropdown-divider"></div>
+
+
+
+                        <button type="button" id="btnAdminDashboard" class="dropdown-item" onclick="openAdminDashboardSection()">
+
+
+
+                            📊 لوحة الإدارة (متابعة حالات اليوم المباشرة)
+
+
+
+                        </button>
+
+
+
+                        <a href="print_sheet.html" target="_blank" id="btnDropdownPrintSheet" class="dropdown-item" style="text-decoration: none;">
+
+
+
+                            🖨️ شيت سجل المرضى للطباعة (A4)
+
+
+
+                        </a>
+
+
+
+                        <button type="button" id="btnExportDatabase" class="dropdown-item" onclick="exportDatabaseJSON()">
+
+
+
+                            💾 تصدير قاعدة البيانات (JSON)
+
+
+
+                        </button>
+
+
+
+                        <button type="button" id="btnCloudWhatsAppSettings" class="dropdown-item" onclick="if(window.openCloudWhatsAppSettingsModal) window.openCloudWhatsAppSettingsModal(); else { var u=document.getElementById('userDropdownMenu'); if(u) u.style.display='none'; var m=document.getElementById('modalCloudWhatsAppSettings'); if(m) { m.style.display='flex'; m.style.opacity='1'; m.style.pointerEvents='auto'; } }" style="display: none;">
+                            ⚙️ إعدادات السحابة والواتساب (Admin)
+                        </button>
+                        <button type="button" id="btnOpenChangePass" class="dropdown-item" onclick="openChangePasswordModal()">
+
+
+
+                            🔑 تغيير كلمة المرور
+
+
+
+                        </button>
+
+
+
+                        <button type="button" class="dropdown-item" style="color: #f87171;" onclick="confirmResetClinicData()">
+
+
+
+                            🧹 تصفير بيانات التجربة للبدء الفعلي
+
+
+
+                        </button>
+
+
+
+                        <button type="button" class="dropdown-item text-danger" onclick="handleLogout()">
+
+
+
+                            🚪 تسجيل الخروج
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </header>
+
+
+
+
+
+
+
+        <!-- Radar Top Alert Banner -->
+
+
+
+        <div id="radarHeaderAlert" class="radar-alert-banner" style="display: none;" onclick="if(window.switchSection) window.switchSection('section-radar');">
+
+
+
+            <div class="radar-alert-text">
+
+
+
+                <span style="font-size: 18px;">📡</span>
+
+
+
+                <span><strong>رادار المتابعة:</strong> يوجد <span id="radarAlertCount" class="badge-alert-count">0</span> عملاء مستحقين للزيارة بكرة!</span>
+
+
+
+            </div>
+
+
+
+            <button type="button" class="btn btn-sm btn-outline-glass" style="font-size: 11px; padding: 3px 8px; border-radius: 8px;">
+
+
+
+                عرض وإرسال &larr;
+
+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Main Content Area with Tab Sections -->
+
+
+
+        <main class="app-main">
+
+
+
+
+
+
+
+            <!-- TAB 1: New Visit & Smart Voice Dictation (Default / Primary) -->
+
+
+
+            <section id="section-visit" class="app-section active">
+
+
+
+                
+
+
+
+                <div class="section-header-pill">
+
+
+
+                    <h2 class="section-headline">🩺 تسجيل كشف وزيارة جديدة</h2>
+
+
+
+                    <button type="button" id="btnClearVisitFields" class="btn btn-outline-glass btn-sm" onclick="window.resetVisitFields()" style="font-size: 12px; padding: 6px 14px; font-weight: 800; color: #f87171; border-color: rgba(248, 113, 113, 0.4); display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+
+
+
+                        <span>🔄</span>
+
+
+
+                        <span>تفريغ الخانات</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Patient Selector Box -->
+
+
+
+                <div class="glass-card">
+
+
+
+                    <div class="form-group" style="margin-bottom: 0;">
+
+
+
+                        <label for="visitPatientSelect" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+
+
+
+                            <span>🐾 اختيار المريض للكشف: <span class="req">*</span></span>
+
+
+
+                            <span style="font-size: 11px; color: #34d399;">(بحث برقم الملف أو الاسم)</span>
+
+
+
+                        </label>
+
+
+
+
+
+
+
+                        <!-- Quick Search by ID or Name -->
+
+
+
+                        <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+
+
+
+                            <div style="position: relative; flex: 1;">
+
+
+
+                                <input type="text" id="visitSearchPatientInput" class="input-glass" 
+
+
+
+                                       placeholder="🔍 اكتب رقم الملف (مثل: 101) أو اسم الأليف/العميل..." 
+
+
+
+                                       style="width: 100%; padding-right: 32px; font-size: 12px; height: 38px;"
+
+
+
+                                       oninput="quickSearchVisitPatient(this.value)"
+
+
+
+                                       onkeydown="if(event.key === 'Enter'){ quickSearchVisitPatient(this.value, true); }">
+
+
+
+                                <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #34d399; pointer-events: none;">🔍</span>
+
+
+
+                            </div>
+
+
+
+                            <button type="button" class="btn btn-outline-glass btn-sm btn-field-mic" data-target="visitSearchPatientInput" title="إملاء رقم أو اسم المريض بالصوت" style="height: 38px; padding: 0 10px; font-size: 11px; font-weight: 700;">
+
+
+
+                                🎙️ إملاء
+
+
+
+                            </button>
+
+
+
+                            <button type="button" class="btn btn-outline-glass btn-sm" onclick="quickSearchVisitPatient(document.getElementById('visitSearchPatientInput').value, true)" style="height: 38px; padding: 0 12px; font-size: 11px; font-weight: 700; white-space: nowrap;" title="بحث واختيار فوراً">
+
+
+
+                                🔎 تحديد
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="input-inline-btn-group">
+
+
+
+                            <select id="visitPatientSelect" class="select-glass" style="flex: 1;">
+
+
+
+                                <option value="">-- اختر المريض من القائمة أو ابحث أعلاه --</option>
+
+
+
+                            </select>
+
+
+
+
+
+
+
+                            <!-- Client / Owner Photo Upload Button -->
+
+
+
+                            <button type="button" id="btnUploadClientImg" class="btn-inline-upload" title="رفع صورة العميل وقت الكشف">
+
+
+
+                                <span class="icon">👤</span>
+
+
+
+                                <span class="btn-label">صورة العميل</span>
+
+
+
+                            </button>
+
+
+
+                            <input type="file" id="clientImageInput" accept="image/*" capture="user" style="display: none;">
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Client Photo Thumbnail Preview -->
+
+
+
+                    <div id="clientImgPreview" class="image-inline-preview" style="display: none; margin-top: 8px;">
+
+
+
+                        <img src="" alt="صورة العميل" class="inline-thumb">
+
+
+
+                        <span class="preview-text">تم إرفاق صورة العميل بنجاح ✓</span>
+
+
+
+                        <button type="button" id="btnRemoveClientImg" class="btn-remove-inline">&times; حذف</button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Selected Patient Quick Card -->
+
+
+
+                    <div id="selectedPatientQuickCard" class="patient-quick-card" style="margin-top: 10px; margin-bottom: 0;"></div>
+
+
+
+
+
+
+
+                    <!-- Chronic Condition Alert Banner for Doctor -->
+
+
+
+                    <div id="patientChronicAlertBanner" style="display: none; margin-top: 10px; padding: 12px 14px; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; border-radius: 12px; color: #fecaca; font-size: 13px; font-weight: 700; align-items: center; gap: 8px;">
+
+
+
+                        <span style="font-size: 20px;">⚠️</span>
+
+
+
+                        <div>
+
+
+
+                            <span style="color: #fca5a5; font-weight: 800; display: block;">تنبيه طبي هام - حالة مزمنة للمريض:</span>
+
+
+
+                            <span id="chronicAlertText" style="color: #ffffff; font-weight: 700;"></span>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Smart Voice Dictation Hub -->
+
+
+
+                <!-- Smart Voice Dictation Hub -->
+
+
+
+                <div class="voice-banner" style="display: none;">
+
+
+
+                    <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px;">🎙️ التفريغ الصوتي الذكي للطبيب</h3>
+
+
+
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">
+
+
+
+                        تحدث بصوتك الطبيعي واذكر الكلمات: (التشخيص - العلاج - التحاليل - الإعادة)
+
+
+
+                    </p>
+
+
+
+
+
+
+
+                    <div class="voice-mic-container">
+
+
+
+                        <button type="button" id="btnStartVoice" class="btn-mic-round" title="اضغط للبدء بالتحدث بصوتك">
+
+
+
+                            🎙️
+
+
+
+                        </button>
+
+
+
+                        <div id="voiceStatusIndicator" class="voice-status-box status-idle">
+
+
+
+                            ⏹️ المايكروفون في وضع الاستعداد - اضغط للتحدث
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Direct Google Voice Dialog Button -->
+
+
+
+                        <button type="button" id="btnGoogleVoiceModal" class="btn btn-outline-glass btn-sm" style="font-size: 12px; margin-top: 6px; padding: 6px 14px; border-radius: 20px;">
+
+
+
+                            🗣️ نافذة مايك Google المباشرة
+
+
+
+                        </button>
+
+
+
+
+
+
+
+                        <!-- Live Audio Volume Wave Visualizer -->
+
+
+
+                        <div id="audioWaveMeter" class="audio-meter-bar" style="display: none;">
+
+
+
+                            <span class="bar b1"></span>
+
+
+
+                            <span class="bar b2"></span>
+
+
+
+                            <span class="bar b3"></span>
+
+
+
+                            <span class="bar b4"></span>
+
+
+
+                            <span class="bar b5"></span>
+
+
+
+                            <span class="meter-text">المايكروفون يلتقط صوتك الآن 🔊</span>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Live Real-Time Speech Monitor Box -->
+
+
+
+                    <div id="liveTranscriptBox" class="live-transcript-box">
+
+
+
+                        <div class="transcript-header-row">
+
+
+
+                            <span class="monitor-tag">🔴 النص الذي يسمعه المايكروفون لحظياً:</span>
+
+
+
+                            <button type="button" id="btnClearTranscript" class="btn-mini-clear" title="مسح النص">مسح</button>
+
+
+
+                        </div>
+
+
+
+                        <div id="liveTranscriptContent" class="transcript-content-text">
+
+
+
+                            (اضغط على المايكروفون بالأعلى وتحدث ليظهر كلامك هنا فوراً...)
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Clean status footer + Medical Corrector Active Badge -->
+
+
+
+                    <div style="margin-top: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+
+
+
+                        <span style="font-size: 11px; color: var(--text-muted);">
+
+
+
+                            ✨ تحدث مباشرة بالترتيب: (رقم المريض - التشخيص - العلاج - الإعادة)
+
+
+
+                        </span>
+
+
+
+                        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 20px; padding: 3px 10px; font-size: 11px; color: #6ee7b7; font-weight: 700;">
+
+
+
+                            <span>🎯 تدوين مباشر لأسماء الأدوية والتجارية وتثبيتها كما ينطقها الطبيب بدقة</span>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Visit Form Details -->
+
+
+
+                <form id="formNewVisit" novalidate>
+
+
+
+                    
+
+
+
+                    <div class="glass-card">
+
+
+
+                        
+
+
+
+                        <!-- Diagnosis Field + Inline Case Photo -->
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="visitDiagnosis">📋 التشخيص الطبي:</label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="visitDiagnosis" title="إملاء خانة التشخيص فقط">
+
+
+
+                                    🎙️ إملاء للتشخيص
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            
+
+
+
+                            <div class="input-inline-btn-group">
+
+
+
+                                <textarea id="visitDiagnosis" class="textarea-glass" rows="2" placeholder="اكتب التشخيص أو قل 'التشخيص ...'" style="flex: 1;"></textarea>
+
+
+
+                                
+
+
+
+                                <div class="upload-dual-actions">
+                                    <button type="button" id="btnCaseCamera" class="btn-inline-upload btn-camera" title="التقاط صورة الحالة بالكاميرا">
+                                        <span class="icon">📷</span>
+                                        <span class="btn-label">كاميرا</span>
+                                    </button>
+                                    <button type="button" id="btnUploadCaseImg" class="btn-inline-upload btn-file" title="رفع صورة الحالة من الجهاز">
+                                        <span class="icon">📁</span>
+                                        <span class="btn-label">من الجهاز</span>
+                                    </button>
+                                </div>
+                                <input type="file" id="caseCameraInput" accept="image/*" capture="environment" style="display: none;">
+                                <input type="file" id="caseFileInput" accept="image/*" style="display: none;">
+                                <input type="file" id="caseImageInput" accept="image/*" style="display: none;">
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <!-- Case Photo Thumbnail Preview -->
+
+
+
+                            <div id="caseImgPreview" class="image-inline-preview" style="display: none;">
+
+
+
+                                <img src="" alt="صورة الحالة" class="inline-thumb">
+
+
+
+                                <span class="preview-text">تم إرفاق صورة الحالة بنجاح ✓</span>
+
+
+
+                                <button type="button" id="btnRemoveCaseImg" class="btn-remove-inline">&times; حذف</button>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Treatment Field with Prescription Upload -->
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <div style="display: flex; align-items: center; gap: 8px;">
+
+
+
+                                    <label for="visitTreatment" style="margin: 0;">💊 العلاج المقرر:</label>
+
+
+
+                                    <button type="button" id="btnUploadPrescriptionIcon" class="btn-icon-rx" title="التقاط صورة الروشتة بالكاميرا" onclick="document.getElementById('prescriptionCameraInput').click()">
+                                        📷
+                                    </button>
+                                    <button type="button" id="btnUploadPrescriptionFileIcon" class="btn-icon-rx" title="رفع صورة الروشتة من الجهاز أو المعرض" onclick="document.getElementById('prescriptionFileInput').click()">
+                                        📁
+                                    </button>
+
+
+
+                                </div>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="visitTreatment" title="إملاء خانة العلاج فقط">
+
+
+
+                                    🎙️ إملاء للعلاج
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <!-- Textarea + Prescription Upload Button in Same Row -->
+
+
+
+                            <div class="input-inline-btn-group">
+
+
+
+                                <textarea id="visitTreatment" class="textarea-glass" rows="2" placeholder="اكتب العلاج أو قل 'العلاج ...' أو ارفع صورة الروشتة" style="flex: 1;"></textarea>
+
+
+
+                                
+
+
+
+                                <div class="upload-dual-actions">
+                                    <button type="button" id="btnUploadPrescriptionCamera" class="btn-inline-upload btn-camera" title="التقاط صورة الروشتة بالكاميرا مباشرة">
+                                        <span class="icon">📷</span>
+                                        <span class="btn-label">كاميرا</span>
+                                    </button>
+                                    <button type="button" id="btnUploadPrescriptionImg" class="btn-inline-upload btn-file" title="رفع صورة الروشتة من الجهاز أو المعرض">
+                                        <span class="icon">📁</span>
+                                        <span class="btn-label">من الجهاز</span>
+                                    </button>
+                                </div>
+                                <input type="file" id="prescriptionCameraInput" accept="image/*" capture="environment" style="display: none;">
+                                <input type="file" id="prescriptionFileInput" accept="image/*,application/pdf" style="display: none;">
+                                <input type="file" id="prescriptionImageInput" accept="image/*" style="display: none;">
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <!-- Preview for Prescription Image -->
+
+
+
+                            <div id="prescriptionImgPreview" class="image-inline-preview" style="display: none; margin-top: 8px;">
+
+
+
+                                <div class="preview-card" style="display: flex; align-items: center; gap: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 6px 12px; width: 100%;">
+
+
+
+                                    <img id="prescriptionPreviewImg" src="" alt="معاينة الروشتة" style="width: 44px; height: 44px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1.5px solid #10b981;">
+
+
+
+                                    <div style="flex: 1;">
+
+
+
+                                        <div style="font-size: 12px; font-weight: 800; color: #34d399;">تم إرفاق صورة الروشتة بنجاح ✓</div>
+
+
+
+                                        <small style="color: #94a3b8; font-size: 10px; cursor: pointer;" onclick="document.getElementById('prescriptionPreviewImg').click()">اضغط على الصورة للتكبير</small>
+
+
+
+                                    </div>
+
+
+
+                                    <button type="button" class="btn-remove-preview" id="btnRemovePrescriptionImg" title="إزالة صورة الروشتة" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">&times;</button>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Labs Field with Multi-Photo Upload (Open for multiple photos) -->
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="visitLabs">🔬 التحاليل والفحوصات المطلوبة:</label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="visitLabs" title="إملاء التحاليل فقط">
+
+
+
+                                    🎙️ إملاء للتحاليل
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <!-- Input + Multi-Photo Upload Button in Same Row -->
+
+
+
+                            <div class="input-inline-btn-group">
+
+
+
+                                <input type="text" id="visitLabs" class="input-glass" placeholder="اكتب التحاليل أو قل 'التحاليل ...'" style="flex: 1;">
+
+
+
+                                
+
+
+
+                                <div class="upload-dual-actions">
+                                    <button type="button" id="btnLabCamera" class="btn-inline-upload btn-camera" title="التقاط صور التحاليل بالكاميرا">
+                                        <span class="icon">📷</span>
+                                        <span class="btn-label">كاميرا</span>
+                                    </button>
+                                    <button type="button" id="btnUploadLabImg" class="btn-inline-upload btn-file" title="رفع صور التحاليل من الجهاز (متعدد)">
+                                        <span class="icon">📁</span>
+                                        <span class="btn-label">+ من الجهاز</span>
+                                    </button>
+                                </div>
+                                <input type="file" id="labCameraInput" accept="image/*" capture="environment" style="display: none;">
+                                <input type="file" id="labFileInput" accept="image/*,application/pdf" multiple style="display: none;">
+                                <input type="file" id="labImageInput" accept="image/*" multiple style="display: none;">
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <!-- Multi-Lab Photos Thumbnail Preview Gallery -->
+
+
+
+                            <div id="labImgGallery" class="lab-gallery-container" style="display: none; margin-top: 8px;">
+
+
+
+                                <div class="gallery-title-row">
+
+
+
+                                    <span style="font-size: 11px; color: var(--accent-emerald);">📑 صور التحاليل المرفقة (<span id="labPhotosCount">0</span> صور):</span>
+
+
+
+                                    <button type="button" id="btnClearAllLabImgs" class="btn-remove-inline" style="font-size: 10px;">مسح الكل</button>
+
+
+
+                                </div>
+
+
+
+                                <div id="labThumbsList" class="lab-thumbs-grid"></div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Chronic Condition / Special Notes for Visit (Closed by default) -->
+
+
+
+                        <div class="form-group" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 12px 14px; margin-top: 10px;">
+
+
+
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+
+
+
+                                <label for="chkVisitHasChronic" style="display: flex; align-items: center; gap: 10px; margin: 0; cursor: pointer; user-select: none;">
+
+
+
+                                    <input type="checkbox" id="chkVisitHasChronic" onchange="window.toggleVisitChronicField(this.checked)" style="width: 20px; height: 20px; accent-color: #ef4444; cursor: pointer;">
+
+
+
+                                    <span style="font-weight: 700; font-size: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+
+
+
+                                        ⚠️ تسجيل حالة مزمنة أو تنبيه طبي
+
+
+
+                                    </span>
+
+
+
+                                </label>
+
+
+
+                                <span id="visitChronicBadge" class="badge-tag" style="background: rgba(100, 116, 139, 0.3); border: 1px solid #64748b; color: #94a3b8; font-size: 11px; padding: 3px 10px; border-radius: 20px;">
+
+
+
+                                    🔒 مقفولة (افتراضي)
+
+
+
+                                </span>
+
+
+
+                            </div>
+
+
+
+                            <div id="visitChronicBox" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(239, 68, 68, 0.3);">
+
+
+
+                                <div class="field-label-row" style="margin-bottom: 6px;">
+
+
+
+                                    <label for="visitChronicNotes" style="color: #fca5a5; font-size: 12px; font-weight: 700;">📝 الملاحظات الطبية أو الحالة المزمنة:</label>
+
+
+
+                                    <button type="button" class="btn-field-mic" data-target="visitChronicNotes" title="إملاء الحالة المزمنة أو الملاحظات بالصوت">
+
+
+
+                                        🎙️ إملاء الملاحظات
+
+
+
+                                    </button>
+
+
+
+                                </div>
+
+
+
+                                <textarea id="visitChronicNotes" class="textarea-glass" rows="2" placeholder="اكتب الملاحظات الطبية أو الحالة المزمنة أو قل 'حالة مزمنة ...'"></textarea>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Follow-up Days & Date -->
+
+
+
+                        <div class="form-row-2">
+
+
+
+                            <div class="form-group">
+
+
+
+                                <div class="field-label-row">
+
+
+
+                                    <label for="visitFollowDays">🗓️ الإعادة بعد (أيام):</label>
+
+
+
+                                    <button type="button" class="btn-field-mic" data-target="visitFollowDays" title="إملاء مدة الإعادة بالصوت">
+
+
+
+                                        🎙️ إملاء
+
+
+
+                                    </button>
+
+
+
+                                </div>
+
+
+
+                                <input type="number" id="visitFollowDays" class="input-glass" min="0" placeholder="عدد الأيام">
+
+
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+
+
+                                <label for="visitFollowDate">📅 تاريخ الإعادة الفعلي:</label>
+
+
+
+                                <input type="date" id="visitFollowDate" class="input-glass">
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Computed Date Notice Badge -->
+
+
+
+                        <div id="computedDateBadge" class="computed-date-badge"></div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Save & Notify CTA Button -->
+
+
+
+                    <div style="margin-top: 16px; margin-bottom: 24px;">
+
+
+
+                        <button type="submit" id="btnSubmitVisit" class="btn btn-success-glass btn-block">
+
+
+
+                            <span>✅ تم (حفظ الزيارة وإشعار العميل)</span>
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </form>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- TAB 2: New Patient Registration -->
+
+
+
+            <section id="section-new-patient" class="app-section">
+
+
+
+                
+
+
+
+                <div class="section-header-pill">
+
+
+
+                    <h2 class="section-headline">➕ فتح ملف مريض جديد</h2>
+
+
+
+                    <button type="button" id="btnClearNewPatientFields" class="btn btn-outline-glass btn-sm" onclick="window.resetNewPatientFields()" style="font-size: 12px; padding: 6px 14px; font-weight: 800; color: #f87171; border-color: rgba(248, 113, 113, 0.4); display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+
+
+
+                        <span>🔄</span>
+
+
+
+                        <span>تفريغ الخانات</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Voice Dictation Hub for New Patient Registration -->
+
+
+
+                <div class="voice-banner" style="display: none; margin-bottom: 16px;">
+
+
+
+                    <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 4px;">🎙️ إملاء بيانات الملف الجديد بالصوت</h3>
+
+
+
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">
+
+
+
+                        تحدث بالترتيب: (الاسم ⬅️ النوع ⬅️ الوزن ⬅️ اسم العميل ⬅️ حالة مزمنة لو متاحة) ثم قل "تمام"
+
+
+
+                    </p>
+
+
+
+
+
+
+
+                    <div class="voice-mic-container">
+
+
+
+                        <button type="button" id="btnStartNewPatientVoice" class="btn-mic-round" onclick="window.handleNewPatientVoiceToggle(event)" title="اضغط لبدء إملاء بيانات الملف الجديد">
+
+
+
+                            🎙️
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div id="newPatientVoiceStatus" class="status-idle" style="margin-top: 8px; font-size: 12px; font-weight: 700;">
+
+
+
+                        🎙️ اضغط المايك وتحدث بالترتيب... واختم بكلمة "تمام"
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Live Real-Time Speech Monitor Box for New Patient -->
+
+
+
+                    <div id="newPatientTranscriptBox" class="live-transcript-box" style="margin-top: 8px;">
+
+
+
+                        <div class="transcript-header-row">
+
+
+
+                            <span class="monitor-tag">🔴 ما يسمعه المايك لحظياً:</span>
+
+
+
+                            <button type="button" id="btnClearNewPatientTranscript" class="btn-mini-clear" title="مسح النص">مسح</button>
+
+
+
+                        </div>
+
+
+
+                        <div id="newPatientTranscriptContent" class="transcript-content-text">
+
+
+
+                            (اضغط المايك بالأعلى وتحدث ليظهر كلامك هنا فوراً...)
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <form id="formNewPatient" class="glass-card">
+
+
+
+                    
+
+
+
+                    <div class="form-group">
+
+
+
+                        <div class="field-label-row">
+
+
+
+                            <label for="newPetName">🐾 اسم الحيوان الأليف: <span class="req">*</span></label>
+
+
+
+                            <button type="button" class="btn-field-mic" data-target="newPetName" title="إملاء اسم الحيوان بالصوت">
+
+
+
+                                🎙️ إملاء الاسم
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                        <input type="text" id="newPetName" class="input-glass" placeholder="مثال: لولو / ماكس / ريكو" required>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-row-2">
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="newPetType">النوع والفصيلة: <span class="req">*</span></label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="newPetType" title="إملاء نوع الحيوان بالصوت">
+
+
+
+                                    🎙️ إملاء النوع
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            <input type="text" id="newPetType" class="input-glass" placeholder="مثال: قطة شيرازي / كلب جولدن" required>
+
+
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="newPetWeight">الوزن التقريبي:</label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="newPetWeight" title="إملاء الوزن بالصوت">
+
+
+
+                                    🎙️ إملاء الوزن
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            <input type="text" id="newPetWeight" class="input-glass" placeholder="مثال: 4.2 كجم">
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-group">
+
+
+
+                        <div class="field-label-row">
+
+
+
+                            <label for="newOwnerName">👤 اسم المالك: <span class="req">*</span></label>
+
+
+
+                            <button type="button" class="btn-field-mic" data-target="newOwnerName" title="إملاء اسم المربي بالصوت">
+
+
+
+                                🎙️ إملاء الاسم
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                        <input type="text" id="newOwnerName" class="input-glass" placeholder="اسم صاحب الحالة بالكامل" required>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-group">
+
+
+
+                        <div class="field-label-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+
+
+
+                            <label for="newOwnerPhone" style="margin: 0;">📱 رقم واتساب العميل (مع كود الدولة): <span class="req">*</span></label>
+
+
+
+                            <button type="button" id="btnMicNewOwnerPhone" class="btn-field-mic" data-target="newOwnerPhone" title="تسجيل رقم الواتساب بالصوت" style="font-size: 11px; padding: 2px 8px;">
+
+
+
+                                🎙️ إملاء الرقم
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                        <input type="tel" id="newOwnerPhone" class="input-glass" placeholder="مثال: 01012345678 أو 201012345678" required>
+
+
+
+                        <small style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 4px;">
+
+
+
+                            يتم إرسال تقارير الكشف ومواعيد الإعادة عبر هذا الرقم مباشرة.
+
+
+
+                        </small>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Chronic Condition / Important Notes Field (Closed/Locked by default) -->
+
+
+
+                    <div class="form-group" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 12px 14px; margin-top: 14px;">
+
+
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+
+
+
+                            <label for="chkNewPetHasChronic" style="display: flex; align-items: center; gap: 10px; margin: 0; cursor: pointer; user-select: none;">
+
+
+
+                                <input type="checkbox" id="chkNewPetHasChronic" onchange="window.toggleNewPetChronicField(this.checked)" style="width: 20px; height: 20px; accent-color: #ef4444; cursor: pointer;">
+
+
+
+                                <span style="font-weight: 700; font-size: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+
+
+
+                                    ⚠️ هل يعاني الأليف من حالة مزمنة؟
+
+
+
+                                </span>
+
+
+
+                            </label>
+
+
+
+                            <span id="newPetChronicBadge" class="badge-tag" style="background: rgba(100, 116, 139, 0.3); border: 1px solid #64748b; color: #94a3b8; font-size: 11px; padding: 3px 10px; border-radius: 20px;">
+
+
+
+                                🔒 مقفولة (افتراضي)
+
+
+
+                            </span>
+
+
+
+                        </div>
+
+
+
+                        <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 0 0;">
+
+
+
+                            افتراضياً مقفولة ولا توجد حالة مزمنة. علّم عليها صح (✓) فقط لو في حالة مزمنة لفتح خانة التدوين.
+
+
+
+                        </p>
+
+
+
+
+
+
+
+                        <!-- Collapsible Chronic Textarea Container (Hidden by default) -->
+
+
+
+                        <div id="newPetChronicBox" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(239, 68, 68, 0.3);">
+
+
+
+                            <div class="field-label-row" style="margin-bottom: 6px;">
+
+
+
+                                <label for="newPetChronicNotes" style="color: #fca5a5; font-size: 12px; font-weight: 700;">
+
+
+
+                                    📝 تفاصيل الحالة المزمنة أو الملاحظات الحرجة:
+
+
+
+                                </label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="newPetChronicNotes" title="إملاء الحالة المزمنة أو الملاحظات">
+
+
+
+                                    🎙️ إملاء الملاحظات
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            <textarea id="newPetChronicNotes" class="textarea-glass" rows="2" placeholder="اكتب المرض المزمن هنا (مثل: حساسية بنسلين / سكري / فشل كلوي / ربو...)"></textarea>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div style="margin-top: 20px;">
+
+
+
+                        <button type="submit" class="btn btn-primary-glass btn-block">
+
+
+
+                            💾 حفظ الملف وبدء الكشف
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </form>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- TAB 3: Patients Directory -->
+
+
+
+            <section id="section-patients" class="app-section">
+
+
+
+                
+
+
+
+                <div class="section-header-pill" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+
+
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+
+
+
+                        <h2 class="section-headline" style="margin: 0;">📋 سجل ملفات المرضى</h2>
+
+
+
+                        <span id="patientsTotalCountBadge" class="badge-tag">0 ملف</span>
+
+
+
+                    </div>
+
+
+
+                    <a href="print_sheet.html" target="_blank" class="btn btn-outline-glass btn-sm" style="font-size: 12px; padding: 6px 14px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; border-color: #34d399; color: #a7f3d0; text-decoration: none; border-radius: 10px; background: rgba(16, 185, 129, 0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+
+
+
+                        <span>🖨️</span> طباعة شيت سجل المرضى (A4)
+
+
+
+                    </a>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Patient Search & Filter Hub (بحث فوري برقم المريض والاسم) -->
+
+
+
+                <div class="glass-card patient-search-box" style="margin-bottom: 14px; padding: 14px; border: 1px solid rgba(52, 211, 153, 0.4); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+
+
+
+                    
+
+
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+
+
+
+                        <span style="font-size: 13px; font-weight: 800; color: #a7f3d0; display: flex; align-items: center; gap: 6px;">
+
+
+
+                            <span>🔍</span> بحث برقم المريض في قاعدة البيانات:
+
+
+
+                        </span>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-sm" onclick="resetPatientsFilter()" style="font-size: 11px; padding: 2px 8px; border-radius: 8px;">
+
+
+
+                            🔄 عرض جميع الملفات
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Search Input Bar with Icon and Action Button -->
+
+
+
+                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+
+
+
+                        <div style="position: relative; flex: 1;">
+
+
+
+                            <input type="text" id="patientQuickSearchInput" class="input-glass" 
+
+
+
+                                   placeholder="ادخل رقم الملف (مثل: 101) أو اسم المريض / العميل..." 
+
+
+
+                                   style="width: 100%; padding-right: 36px; padding-left: 30px; font-size: 13px; height: 42px;" 
+
+
+
+                                   oninput="filterPatientsByKeyword(this.value)"
+
+
+
+                                   onkeydown="if(event.key === 'Enter'){ executePatientSearch(); }">
+
+
+
+                            <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #34d399; pointer-events: none;">🔍</span>
+
+
+
+                            <button type="button" id="btnClearPatientSearch" onclick="resetPatientsFilter()" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #f87171; font-size: 18px; cursor: pointer; display: none;" title="مسح البحث">&times;</button>
+
+
+
+                        </div>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-sm btn-field-mic" data-target="patientQuickSearchInput" title="بحث بالصوت في سجل المرضى" style="height: 42px; padding: 0 12px; font-size: 12px; font-weight: 700; border-radius: 12px;">
+
+
+
+                            🎙️ صوت
+
+
+
+                        </button>
+
+
+
+                        <button type="button" id="btnExecuteSearch" class="btn btn-primary-glass" onclick="executePatientSearch()" style="height: 42px; padding: 0 16px; font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 4px; border-radius: 12px; white-space: nowrap;">
+
+
+
+                            <span>🔎</span> بحث
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Dropdown quick selector -->
+
+
+
+                    <div class="form-group" style="margin-bottom: 0;">
+
+
+
+                        <label for="patientSearchSelect" style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px; display: block;">
+
+
+
+                            📋 أو تصفح القائمة المنسدلة لجميع المرضى:
+
+
+
+                        </label>
+
+
+
+                        <select id="patientSearchSelect" class="select-glass" style="width: 100%; font-size: 12px; padding: 8px 10px;" onchange="filterPatientsBySelect(this.value)">
+
+
+
+                            <option value="">-- كل ملفات المرضى والعملاء --</option>
+
+
+
+                        </select>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div id="patientsListContainer">
+
+
+
+                    <!-- Populated dynamically via doctor.js -->
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- TAB 4: WhatsApp Follow-up Radar -->
+
+
+
+            <section id="section-radar" class="app-section">
+
+
+
+                
+
+
+
+                <div class="section-header-pill">
+
+
+
+                    <h2 class="section-headline">📡 رادار واتساب لمتابعة الحالات</h2>
+
+
+
+                    <button type="button" id="btnTestRadarNotif" class="btn btn-outline-glass btn-sm" style="font-size: 11px; padding: 4px 8px;" title="تجربة إشعار الساعة 12 منتصف الليل">
+
+
+
+                        🔔 تجربة إشعار
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Radar Hero Card with 1-Click Send All -->
+
+
+
+                <div class="radar-hero-card">
+
+
+
+                    <div class="hero-top-row">
+
+
+
+                        <div class="hero-radar-icon">📡</div>
+
+
+
+                        <div>
+
+
+
+                            <h3 class="hero-title">متابعة مواعيد الإعادة للعملاء</h3>
+
+
+
+                            <p class="hero-desc">إرسال رسائل تذكير لطيفة ومبرمجة على واتساب المالكين بضغطة زر واحدة لمنع الحظر.</p>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Single Button Dispatch -->
+
+
+
+                    <button type="button" id="btnBatchSendRadar" class="btn-send-all-radar">
+
+
+
+                        <span class="btn-all-icon">⚡</span>
+
+
+
+                        <div class="btn-all-content">
+
+
+
+                            <span class="btn-all-main" id="btnBatchMainText">إرسال كل رسائل متابعة بكرة بزرار واحد</span>
+
+
+
+                            <span class="btn-all-sub" id="btnBatchSubText">يفتح المحادثات تباعاً مع جاهزية النص بالكامل</span>
+
+
+
+                        </div>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Filter Bar -->
+
+
+
+                <div class="radar-filter-bar">
+
+
+
+                    <button type="button" class="btn-radar-filter active" data-filter="tomorrow" id="filterTomorrowBtn">
+
+
+
+                        📅 مواعيد بكرة (<span id="radarCountTomorrow">0</span>)
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn-radar-filter" data-filter="today" id="filterTodayBtn">
+
+
+
+                        ☀️ مواعيد اليوم (<span id="radarCountToday">0</span>)
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn-radar-filter" data-filter="upcoming" id="filterUpcomingBtn">
+
+
+
+                        🗓️ كل القادمة (<span id="radarCountUpcoming">0</span>)
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn-radar-filter" data-filter="month" id="filterMonthBtn">
+
+
+
+                        🌟 أول زوار الشهر / مرور شهر (<span id="radarCountMonth">0</span>)
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Radar Clients List Container -->
+
+
+
+                <div id="radarCardsContainer">
+
+
+
+                    <!-- Populated dynamically via doctor.js -->
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            
+            <!-- TAB 6: Admin Live Daily Operations Feed -->
+            <section id="section-admin-dashboard" class="app-section">
+                <div class="section-header-pill" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+                    <div>
+                        <h2 class="section-headline" style="margin:0; font-size:18px;">📊 رادار متابعة حالات اليوم المباشرة (إدارة العيادة)</h2>
+                        <small style="color:#64748B; font-weight:700;">متابعة لحظية عن بُعد لجميع الحالات المسجلة اليوم بدون الحاجة للاتصال بالعيادة</small>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                        <span class="badge" style="background:#10B981; color:#fff; font-size:11px; padding:6px 12px; border-radius:20px; font-weight:bold;">🟢 متصل بالسحابة (مباشر)</span>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="if(window.renderAdminDailyDashboard) window.renderAdminDailyDashboard();" style="font-size:12px; font-weight:bold; padding:6px 14px; border-radius:8px; cursor:pointer;">🔄 تحديث فوري</button>
+                    </div>
+                </div>
+
+                <!-- Admin Daily KPIs -->
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:18px;">
+                    <div style="background:rgba(255,255,255,0.92); border:1px solid #E2E8F0; border-radius:14px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                        <div style="font-size:12px; font-weight:800; color:#64748B;">📋 إجمالي حالات اليوم</div>
+                        <div id="adminStatTotalToday" style="font-size:24px; font-weight:900; color:#0F172A; margin-top:4px;">0</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.92); border:1px solid #E2E8F0; border-radius:14px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                        <div style="font-size:12px; font-weight:800; color:#D97706;">⏳ قيد الكشف / الانتظار</div>
+                        <div id="adminStatWaitingToday" style="font-size:24px; font-weight:900; color:#D97706; margin-top:4px;">0</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.92); border:1px solid #E2E8F0; border-radius:14px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                        <div style="font-size:12px; font-weight:800; color:#059669;">✅ حالات مكتملة</div>
+                        <div id="adminStatCompletedToday" style="font-size:24px; font-weight:900; color:#059669; margin-top:4px;">0</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.92); border:1px solid #E2E8F0; border-radius:14px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                        <div style="font-size:12px; font-weight:800; color:#2563EB;">💰 إجمالي المحصل اليوم</div>
+                        <div id="adminStatCollectedToday" style="font-size:24px; font-weight:900; color:#1D4ED8; margin-top:4px;">0 ج.م</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.92); border:1px solid #E2E8F0; border-radius:14px; padding:14px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+                        <div style="font-size:12px; font-weight:800; color:#DC2626;">⚠️ متبقي آجل</div>
+                        <div id="adminStatRemainingToday" style="font-size:24px; font-weight:900; color:#DC2626; margin-top:4px;">0 ج.م</div>
+                    </div>
+                </div>
+
+                <!-- Filters & Search -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; background:rgba(255,255,255,0.85); padding:10px 14px; border-radius:12px; border:1px solid #E2E8F0;">
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                        <label style="font-size:12px; font-weight:800; color:#475569;">تصفية:</label>
+                        <select id="adminDailyDoctorFilter" onchange="filterAdminDailyCases()" style="padding:6px 12px; border-radius:8px; border:1px solid #CBD5E1; font-size:12px; font-weight:700; background:#fff;">
+                            <option value="all">كل الأطباء</option>
+                        </select>
+                        <select id="adminDailyStatusFilter" onchange="filterAdminDailyCases()" style="padding:6px 12px; border-radius:8px; border:1px solid #CBD5E1; font-size:12px; font-weight:700; background:#fff;">
+                            <option value="all">كل الحالات</option>
+                            <option value="waiting">قيد الكشف / الانتظار</option>
+                            <option value="completed">كشوفات مكتملة</option>
+                        </select>
+                    </div>
+                    <input type="text" id="adminDailySearchInput" oninput="filterAdminDailyCases()" placeholder="🔍 بحث بالحيوان أو المالك أو الهاتف..." style="padding:7px 14px; border-radius:20px; border:1px solid #CBD5E1; font-size:12px; min-width:220px;">
+                </div>
+
+                <!-- Feed Container -->
+                <div id="adminDailyCasesFeed" style="display:flex; flex-direction:column; gap:12px;">
+                    <!-- Cases injected dynamically via renderAdminDailyDashboard() -->
+                </div>
+            </section>
+
+
+            <!-- TAB 5: Clinic Store & Products -->
+
+
+
+            <section id="section-store" class="app-section">
+
+
+
+                
+
+
+
+                <div class="section-header-pill">
+
+
+
+                    <h2 class="section-headline">🛒 متجر العيادة والمنتجات</h2>
+
+
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+
+
+
+                        <span class="badge-tag" id="storeCountBadge">0 منتج</span>
+
+
+
+                        <button type="button" id="btnManageCategories" class="btn btn-outline-glass btn-sm" onclick="window.openManageCategoriesModal()" style="font-size: 12px; padding: 6px 14px; font-weight: 800; color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+
+
+
+                            <span>⚙️</span>
+
+
+
+                            <span>إدارة الأقسام</span>
+
+
+
+                        </button>
+
+
+
+                        <button type="button" id="btnClearStoreFields" class="btn btn-outline-glass btn-sm" onclick="window.resetStoreFields()" style="font-size: 12px; padding: 6px 14px; font-weight: 800; color: #f87171; border-color: rgba(248, 113, 113, 0.4); display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+
+
+
+                            <span>🔄</span>
+
+
+
+                            <span>تفريغ الخانات</span>
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Voice Dictation for Store -->
+
+
+
+                <div class="glass-card store-voice-card">
+
+
+
+                    <div class="voice-header-row">
+
+
+
+                        <span style="font-size: 22px;">🎙️</span>
+
+
+
+                        <div style="flex: 1;">
+
+
+
+                            <h3 style="font-size: 14px; font-weight: 800; color: #ffffff; margin: 0;">تسجيل الصنف بالصوت الذكي الشامل</h3>
+
+
+
+                            <p style="font-size: 11px; color: var(--text-muted); margin: 3px 0 0 0;">انطق: "الصنف [الاسم] - السعر [السعر] - القسم [القسم]" (مثل: "اسم الصنف دراي فود رويال والسعر 450 والقسم أغذية")</p>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div style="display: flex; gap: 8px; margin-top: 10px; align-items: center;">
+
+
+
+                        <button type="button" id="btnStoreVoice" class="btn btn-primary-glass" onclick="window.handleStoreVoiceToggle(event)" style="flex: 1; padding: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;">
+
+
+
+                            <span id="storeMicIcon">🎙️</span>
+
+
+
+                            <span id="storeMicLabel">اضغط لبدء تسجيل الصنف</span>
+
+
+
+                        </button>
+
+
+
+                        <button type="button" id="btnSimulateStoreVoice" class="btn btn-outline-glass" style="font-size: 11px; padding: 11px 12px; white-space: nowrap;">
+
+
+
+                            🧪 محاكاة بالصوت
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div id="storeVoiceStatus" class="store-voice-status">
+
+
+
+                        ⏹️ مايك المتجر في وضع الاستعداد
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Add New Product Form -->
+
+
+
+                <div class="glass-card">
+
+
+
+                    <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+
+
+
+                        <span>➕ إضافة صنف جديد للمتجر</span>
+
+
+
+                    </h3>
+
+
+
+
+
+
+
+                    <form id="formNewProduct" onsubmit="handleSaveNewProduct(event); return false;">
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="productName">اسم الصنف / المنتج: <span class="req">*</span></label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="productName" title="إملاء اسم الصنف بالصوت">
+
+
+
+                                    🎙️ إملاء الاسم
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            <input type="text" id="productName" class="input-glass" placeholder="مثال: دراي فود رويال كانين للقطط" required autocomplete="off">
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="productPrice">السعر (ج.م): <span class="req">*</span></label>
+
+
+
+                                <button type="button" class="btn-field-mic" data-target="productPrice" title="إملاء السعر بالصوت">
+
+
+
+                                    🎙️ إملاء السعر
+
+
+
+                                </button>
+
+
+
+                            </div>
+
+
+
+                            <input type="text" inputmode="decimal" id="productPrice" class="input-glass" placeholder="مثال: 450 أو ٤٥٠" required autocomplete="off">
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+
+
+
+                            <div class="field-label-row">
+
+
+
+                                <label for="productCategory">قسم / تصنيف الصنف: <span class="req">*</span></label>
+
+
+
+                                <div style="display: flex; gap: 6px; align-items: center;">
+
+
+
+                                    <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.openManageCategoriesModal()" style="font-size: 11px; padding: 3px 8px; color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); cursor: pointer; border-radius: 6px;" title="إضافة قسم جديد أو تعديل الأقسام">
+
+
+
+                                        ➕ قسم جديد
+
+
+
+                                    </button>
+
+
+
+                                    <button type="button" class="btn-field-mic" data-target="productCategory" title="إملاء القسم بالصوت">
+
+
+
+                                        🎙️ إملاء القسم
+
+
+
+                                    </button>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            <select id="productCategory" class="input-glass" required>
+
+
+
+                                <option value="أغذية ودراي فود">🥫 أطعمة وأغذية (Pet Food)</option>
+
+
+
+                                <option value="أدوية وعلاجات">💊 أدوية وعلاجات (Medications)</option>
+
+
+
+                                <option value="مكملات وفيتامينات">🧪 مكملات وفيتامينات (Supplements)</option>
+
+
+
+                                <option value="عناية ونظافة">🛁 عناية ونظافة (Grooming & Hygiene)</option>
+
+
+
+                                <option value="مستلزمات وإكسسوارات">🎀 مستلزمات وإكسسوارات (Accessories)</option>
+
+
+
+                                <option value="عام / أخرى">📦 عام / أخرى (General)</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- Product Photo Upload (File Input) -->
+
+
+
+                        <div class="form-group">
+
+
+
+                            <label>صورة الصنف (اختياري):</label>
+
+
+
+                            <div class="input-inline-btn-group">
+
+
+
+                                <button type="button" id="btnUploadProductImg" class="btn-inline-upload" style="flex: 1;">
+
+
+
+                                    <span class="icon">📷</span>
+
+
+
+                                    <span class="btn-label" id="btnProductImgLabel">رفع صورة الصنف</span>
+
+
+
+                                </button>
+
+
+
+                                <input type="file" id="productImageInput" accept="image/*" style="display: none;">
+
+
+
+                            </div>
+
+
+
+                            
+
+
+
+                            <!-- Mini Preview Box -->
+
+
+
+                            <div id="productImgPreview" class="image-mini-preview" style="display: none; margin-top: 8px;">
+
+
+
+                                <img src="" alt="معاينة الصنف">
+
+
+
+                                <button type="button" id="btnRemoveProductImg" class="btn-remove-img">&times;</button>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="btn-container-mt">
+
+
+
+                            <button type="button" id="btnSaveProduct" class="btn btn-primary btn-block" onclick="handleSaveNewProduct(event)">
+
+
+
+                                <span>💾 حفظ الصنف في قسمه</span>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </form>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Products Directory / Grid Section -->
+
+
+
+                <div class="section-subheading-row" style="display: flex; justify-content: space-between; align-items: center; margin: 18px 4px 8px 4px;">
+
+
+
+                    <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0;">📦 قائمة أصناف العيادة بالقسم</h3>
+
+
+
+                    <span style="font-size: 11px; color: var(--text-muted);">اضغط القسم للتصفية</span>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Dynamic Category Filter Pills -->
+
+
+
+                <div id="storeCategoryFilters" class="store-category-filters">
+
+
+
+                    <!-- Populated dynamically via doctor.js -->
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div id="productsGridContainer" class="products-grid">
+
+
+
+                    <!-- Populated dynamically via doctor.js -->
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+        </main>
+
+
+
+
+
+
+
+        <!-- Bottom Navigation Bar -->
+
+
+
+        <nav class="bottom-nav-bar">
+
+
+
+            <a href="#visit" class="bottom-nav-item active" data-target="section-visit" onclick="if(window.switchSection) window.switchSection('section-visit'); return false;">
+
+
+
+                <span class="nav-icon">🩺</span>
+
+
+
+                <span class="nav-label">كشف وصوت</span>
+
+
+
+            </a>
+
+
+
+            <a href="#radar" class="bottom-nav-item" data-target="section-radar" onclick="if(window.switchSection) window.switchSection('section-radar'); return false;">
+
+
+
+                <span class="nav-icon">📡</span>
+
+
+
+                <span class="nav-label">رادار واتساب</span>
+
+
+
+                <span id="navRadarBadge" class="nav-badge" style="display: none;">0</span>
+
+
+
+            </a>
+            <a href="#admin-dashboard" id="bottomNavAdminTab" class="bottom-nav-item" data-target="section-admin-dashboard" onclick="if(window.switchSection) window.switchSection('section-admin-dashboard'); return false;" style="display: none;">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">حالات اليوم</span>
+                <span id="navAdminDailyBadge" class="nav-badge" style="display: none; background:#2563EB;">0</span>
+            </a>
+
+
+
+
+            <a href="#new-patient" class="bottom-nav-item" data-target="section-new-patient" onclick="if(window.switchSection) window.switchSection('section-new-patient'); return false;">
+
+
+
+                <span class="nav-icon">➕</span>
+
+
+
+                <span class="nav-label">ملف جديد</span>
+
+
+
+            </a>
+
+
+
+            <a href="#patients" class="bottom-nav-item" data-target="section-patients" onclick="if(window.switchSection) window.switchSection('section-patients'); return false;">
+
+
+
+                <span class="nav-icon">📋</span>
+
+
+
+                <span class="nav-label">سجل المرضى</span>
+
+
+
+            </a>
+
+
+
+            <a href="#store" class="bottom-nav-item" data-target="section-store" onclick="if(window.switchSection) window.switchSection('section-store'); return false;">
+
+
+
+                <span class="nav-icon">🛒</span>
+
+
+
+                <span class="nav-label">المتجر</span>
+
+
+
+            </a>
+
+
+
+        </nav>
+
+
+
+
+
+
+
+        <!-- Bottom Sheet Modal (Visit Summary & WhatsApp Dispatcher) -->
+
+
+
+        <div id="bottomSheetOverlay" class="modal-overlay">
+
+
+
+            <div id="bottomSheet" class="bottom-sheet">
+
+
+
+                
+
+
+
+                <div class="sheet-handle"></div>
+
+
+
+
+
+
+
+                <div class="sheet-header">
+
+
+
+                    <div class="sheet-title">🎉 تم تسجيل الزيارة بنجاح!</div>
+
+
+
+                    <button type="button" id="btnCloseBottomSheet" class="btn-close-sheet">&times;</button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="sheet-summary-box">
+
+
+
+                    <div style="font-size: 15px; font-weight: 800; color: #ffffff; margin-bottom: 6px;" id="sheetPetTitle"></div>
+
+
+
+                    <div>📅 <strong>تاريخ الكشف:</strong> <span id="sheetVisitDate"></span></div>
+
+
+
+                    <div>🩺 <strong>التشخيص:</strong> <span id="sheetDiagnosis"></span></div>
+
+
+
+                    <div>💊 <strong>العلاج:</strong> <span id="sheetTreatment"></span></div>
+
+
+
+                    <div id="sheetPrescriptionRow" style="display: none; margin-top: 4px;">📄 <strong>صورة الروشتة:</strong> <span id="sheetPrescriptionLink" style="color: #34d399; font-weight: 800; cursor: pointer; text-decoration: underline;">🔍 معاينة الروشتة المرفقة</span></div>
+
+
+
+                    <div>🗓️ <strong>موعد الإعادة:</strong> <span id="sheetFollowUp"></span></div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Attached Media Preview (Prescription + Labs) -->
+
+
+
+                <div id="sheetMediaPreviewBox" style="display: none; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 10px; margin: 12px 0;">
+
+
+
+                    <div style="font-size: 12px; font-weight: 800; color: #34d399; margin-bottom: 6px;">📑 المرفقات والصور الطبية بالكشف:</div>
+
+
+
+                    <div id="sheetMediaThumbsList" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Action Buttons: WhatsApp & Direct Client Report -->
+
+
+
+                <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+
+
+
+                    <button type="button" id="btnSendWhatsApp" class="btn btn-whatsapp btn-block" style="font-size: 14px; font-weight: 900; padding: 12px;">
+
+
+
+                        <span>📲 إرسال التقرير لواتساب العميل</span>
+
+
+
+                    </button>
+                    <button type="button" id="btnEditSavedVisitFromSheet" class="btn btn-outline-glass btn-block" onclick="editVisitFromCurrentSheet()" style="font-size: 13px; font-weight: 800; padding: 10px; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.1); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span>✏️ تعديل بيانات الكشف والمرفقات</span>
+                    </button>
+
+
+
+                    <div style="display: flex; gap: 8px;">
+
+
+
+                        <button type="button" class="btn btn-outline-glass" onclick="closeBottomSheet()" style="flex: 1; font-size: 13px; padding: 10px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: #94a3b8;"><span>✓</span> إغلاق</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass" onclick="copyVisitSummaryToClipboard()" style="flex: 1; font-size: 12px; padding: 10px; border-radius: 10px; color: #fff;">
+
+
+
+                            <span>📋</span> نسخ التقرير
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                    <button type="button" class="btn btn-outline-glass btn-block" onclick="closeBottomSheet()" style="font-size: 12px; padding: 8px; color: var(--text-muted); margin-top: 4px;">
+
+
+
+                        <span>إغلاق النافذة</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Full Patient Details Modal -->
+
+
+
+        <div id="patientDetailsModal" class="full-modal-overlay">
+
+
+
+            <div class="full-modal-header">
+
+
+
+                <h3 style="font-size: 17px; font-weight: 800;">📄 الملف الطبي الكامل</h3>
+
+
+
+                <button type="button" class="btn-close-sheet" onclick="closePatientDetailsModal()">&times;</button>
+
+
+
+            </div>
+
+
+
+            <div id="patientModalBody"></div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Batch Dispatch Progress Modal -->
+
+
+
+        <div id="batchRadarModal" class="batch-modal-overlay" style="display: none;">
+
+
+
+            <div class="batch-modal-card">
+
+
+
+                <div style="font-size: 38px; margin-bottom: 8px;">📡 ⚡</div>
+
+
+
+                <h3 style="font-size: 17px; font-weight: 800; color: #ffffff; margin-bottom: 6px;">جاري إرسال رادار المتابعة</h3>
+
+
+
+                <p id="batchModalStatusText" style="font-size: 13px; color: #a7f3d0; margin-bottom: 14px;">يتم فتح واتساب تلقائياً لكل عميل...</p>
+
+
+
+                <div style="background: rgba(255,255,255,0.1); border-radius: 12px; height: 10px; overflow: hidden; margin-bottom: 16px;">
+
+
+
+                    <div id="batchProgressBar" style="background: linear-gradient(90deg, #10b981, #34d1bf); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+
+
+
+                </div>
+
+
+
+                <div id="batchClientInfo" style="font-size: 13px; color: #ffffff; font-weight: 700; margin-bottom: 16px;">
+
+
+
+                    عميل 1 من 3: مشمش (أحمد إبراهيم)
+
+
+
+                </div>
+
+
+
+                <div style="display: flex; gap: 8px;">
+
+
+
+                    <button type="button" id="btnNextBatchClient" class="btn btn-whatsapp" style="flex: 2; padding: 10px;">
+
+
+
+                        <span>➡️ متابعة التالي</span>
+
+
+
+                    </button>
+
+
+
+                    <button type="button" id="btnCancelBatch" class="btn btn-outline-glass" style="flex: 1; padding: 10px;">
+
+
+
+                        <span>إلغاء</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Edit Client Phone Modal -->
+
+
+
+        <div id="editPhoneModal" class="batch-modal-overlay" style="display: none;">
+
+
+
+            <div class="batch-modal-card" style="text-align: right;">
+
+
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+
+
+
+                    <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 0;">📱 تعديل رقم واتساب العميل</h3>
+
+
+
+                    <button type="button" class="btn-close-sheet" onclick="closeEditPhoneModal()">&times;</button>
+
+
+
+                </div>
+
+
+
+                <p id="editPhoneModalSub" style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">تحديث رقم الهاتف لملف المريض لتواصل الواتساب والرادار</p>
+
+
+
+                <input type="hidden" id="editPhonePatientId" value="">
+
+
+
+                <div class="form-group" style="margin-bottom: 12px;">
+
+
+
+                    <div class="field-label-row">
+
+
+
+                        <label style="font-size: 12px; color: #a7f3d0;">اسم المالك:</label>
+
+
+
+                        <button type="button" class="btn-field-mic" data-target="editOwnerNameInput" title="إملاء اسم المالك بالصوت">🎙️ إملاء</button>
+
+
+
+                    </div>
+
+
+
+                    <input type="text" id="editOwnerNameInput" class="input-glass" style="width: 100%;">
+
+
+
+                </div>
+
+
+
+                <div class="form-group" style="margin-bottom: 16px;">
+
+
+
+                    <div class="field-label-row">
+
+
+
+                        <label style="font-size: 12px; color: #a7f3d0;">رقم الهاتف / واتساب الجديد: <span class="req">*</span></label>
+
+
+
+                        <button type="button" class="btn-field-mic" data-target="editOwnerPhoneInput" title="إملاء رقم الهاتف بالصوت">🎙️ إملاء</button>
+
+
+
+                    </div>
+
+
+
+                    <input type="tel" id="editOwnerPhoneInput" class="input-glass" placeholder="01xxxxxxxxx" style="width: 100%; direction: ltr; text-align: left;">
+
+
+
+                </div>
+
+
+
+                <div style="display: flex; gap: 8px;">
+
+
+
+                    <button type="button" class="btn btn-whatsapp" style="flex: 2; padding: 10px;" onclick="saveEditedClientPhone()">
+
+
+
+                        <span>💾 حفظ الرقم الجديد</span>
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn btn-outline-glass" style="flex: 1; padding: 10px;" onclick="closeEditPhoneModal()">
+
+
+
+                        <span>إلغاء</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Edit Patient Chronic Notes Modal -->
+
+
+
+        <div id="editChronicModal" class="batch-modal-overlay" style="display: none;">
+
+
+
+            <div class="batch-modal-card" style="text-align: right;">
+
+
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+
+
+
+                    <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 0;">⚠️ تعديل الحالة المزمنة والملاحظات</h3>
+
+
+
+                    <button type="button" class="btn-close-sheet" onclick="closeEditChronicModal()">&times;</button>
+
+
+
+                </div>
+
+
+
+                <p id="editChronicModalSub" style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">تحديث ملاحظات الحالة المزمنة لتنبيه الطبيب عند كل كشف</p>
+
+
+
+                <input type="hidden" id="editChronicPatientId" value="">
+
+
+
+                <div class="form-group" style="margin-bottom: 16px;">
+
+
+
+                    <div class="field-label-row">
+
+
+
+                        <label style="font-size: 12px; color: #fca5a5;">الحالة المزمنة أو الملاحظات الهامة:</label>
+
+
+
+                        <button type="button" class="btn-field-mic" data-target="editChronicNotesInput" title="إملاء الملاحظات الطبية بالصوت">🎙️ إملاء</button>
+
+
+
+                    </div>
+
+
+
+                    <textarea id="editChronicNotesInput" class="textarea-glass" rows="3" placeholder="اكتب الملاحظات الطبية الهامة أو الحالة المزمنة..." style="width: 100%;"></textarea>
+
+
+
+                </div>
+
+
+
+                <div style="display: flex; gap: 8px;">
+
+
+
+                    <button type="button" class="btn btn-primary-glass" style="flex: 2; padding: 10px;" onclick="saveEditedChronicNotes()">
+
+
+
+                        <span>💾 حفظ التعديل</span>
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn btn-outline-glass" style="flex: 1; padding: 10px;" onclick="closeEditChronicModal()">
+
+
+
+                        <span>إلغاء</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Change Password Modal -->
+
+
+
+        <div id="changePasswordModal" class="batch-modal-overlay" style="display: none;">
+
+
+
+            <div class="batch-modal-card" style="text-align: right; max-width: 380px;">
+
+
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+
+
+
+                    <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 0;">🔑 تغيير كلمة المرور</h3>
+
+
+
+                    <button type="button" class="btn-close-sheet" onclick="closeChangePasswordModal()">&times;</button>
+
+
+
+                </div>
+
+
+
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">تحديث كلمة المرور لحساب: <strong id="changePassUserLabel" style="color: #34d399;">د. شريف دياب</strong></p>
+
+
+
+                
+
+
+
+                <div id="changePassError" class="login-error-banner" style="display: none; margin-bottom: 12px;"></div>
+
+
+
+                
+
+
+
+                <div class="form-group" style="margin-bottom: 12px;">
+
+
+
+                    <label style="font-size: 12px; color: #a7f3d0;">كلمة المرور الحالية: <span class="req">*</span></label>
+
+
+
+                    <input type="password" id="currentPassInput" class="input-glass" style="width: 100%;" placeholder="••••••">
+
+
+
+                </div>
+
+
+
+                <div class="form-group" style="margin-bottom: 12px;">
+
+
+
+                    <label style="font-size: 12px; color: #a7f3d0;">كلمة المرور الجديدة: <span class="req">*</span></label>
+
+
+
+                    <input type="password" id="newPassInput" class="input-glass" style="width: 100%;" placeholder="••••••">
+
+
+
+                </div>
+
+
+
+                <div class="form-group" style="margin-bottom: 16px;">
+
+
+
+                    <label style="font-size: 12px; color: #a7f3d0;">تأكيد كلمة المرور الجديدة: <span class="req">*</span></label>
+
+
+
+                    <input type="password" id="confirmPassInput" class="input-glass" style="width: 100%;" placeholder="••••••">
+
+
+
+                </div>
+
+
+
+                <div style="display: flex; gap: 8px;">
+
+
+
+                    <button type="button" class="btn btn-primary-glass" style="flex: 2; padding: 10px;" onclick="saveNewAdminPassword()">
+
+
+
+                        <span>💾 حفظ التغيير</span>
+
+
+
+                    </button>
+
+
+
+                    <button type="button" class="btn btn-outline-glass" style="flex: 1; padding: 10px;" onclick="closeChangePasswordModal()">
+
+
+
+                        <span>إلغاء</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- =============================================================== -->
+
+
+
+    <!-- CLIENT PORTAL VIEW (واجهة العميل - تفتح برابط أو QR Code) -->
+
+
+
+    <!-- =============================================================== -->
+
+
+
+    <div id="clientPortalView" class="client-portal-wrapper" style="display: none;">
+
+
+
+        
+
+
+
+        <!-- Portal Header -->
+
+
+
+        <header class="portal-header">
+
+
+
+            <div class="portal-header-brand">
+
+
+
+                <img src="assets/images/logo.gif" alt="PetiCare" class="portal-logo-img" onerror="this.style.display='none'; document.getElementById('portalFallbackIcon').style.display='inline-block';">
+
+
+
+                <span id="portalFallbackIcon" style="display: none; font-size: 24px;">🐾</span>
+
+
+
+                <div>
+
+
+
+                    <h1 class="portal-title">PetiCare Animal Hospital</h1>
+
+
+
+                    <span class="portal-subtitle">بوابة متابعة الأليف والمتجر البيطري</span>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <button type="button" class="btn-portal-exit" onclick="exitClientPortal()" title="دخول إدارة العيادة">
+
+
+
+                <span>🔐 دخول العيادة</span>
+
+
+
+            </button>
+
+
+
+        </header>
+
+
+
+
+
+
+
+        <!-- Portal Main Content Scrollable Area -->
+
+
+
+        <main class="portal-main-content">
+
+
+
+
+
+
+
+            <!-- 1. Client & Pet Profile Card -->
+
+
+
+            <section class="portal-profile-card">
+
+
+
+                <div class="portal-profile-header">
+
+
+
+                    <div class="portal-avatar-wrapper">
+
+
+
+                        <img id="portalClientAvatar" src="assets/images/logo.gif" alt="صورة المالك" class="portal-avatar-img" onerror="this.src=''; this.style.display='none'; document.getElementById('portalAvatarFallback').style.display='flex';">
+
+
+
+                        <div id="portalAvatarFallback" class="portal-avatar-fallback">👤</div>
+
+
+
+                        <label for="portalPhotoUploadInput" class="portal-photo-upload-btn" title="تغيير الصورة الشخصية">
+
+
+
+                            📷
+
+
+
+                        </label>
+
+
+
+                        <input type="file" id="portalPhotoUploadInput" accept="image/*" style="display: none;" onchange="handleClientPhotoUpload(event)">
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="portal-profile-info">
+
+
+
+                        <div class="portal-pet-tag">
+
+
+
+                            <span id="portalPetTypeBadge" class="badge-tag">قط / كلب</span>
+
+
+
+                            <span id="portalPatientIdBadge" class="badge-id">#PET-000</span>
+
+
+
+                        </div>
+
+
+
+                        <h2 id="portalPetName" class="portal-pet-headline">اسم الأليف</h2>
+
+
+
+                        <div class="portal-owner-line">
+
+
+
+                            <span>👤 المالك: <strong id="portalOwnerName">اسم المالك</strong></span>
+
+
+
+                        </div>
+
+
+
+                        <div class="portal-phone-line">
+
+
+
+                            <span>📱 واتساب: <strong id="portalOwnerPhone" dir="ltr">01xxxxxxxxx</strong></span>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Quick Profile Edit Toggle -->
+
+
+
+                <div class="portal-profile-actions">
+
+
+
+                    <button type="button" class="btn btn-outline-glass btn-sm" onclick="toggleClientProfileEditForm()">
+
+
+
+                        ✏️ تعديل بياناتي
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Hidden Inline Edit Form -->
+
+
+
+                <form id="portalProfileEditForm" class="portal-edit-form" style="display: none;" onsubmit="saveClientPortalProfile(event); return false;">
+
+
+
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+
+
+                        <label for="portalEditOwnerName" style="font-size: 12px; color: #a7f3d0;">اسم المالك:</label>
+
+
+
+                        <input type="text" id="portalEditOwnerName" class="input-glass" style="width: 100%;" required>
+
+
+
+                    </div>
+
+
+
+                    <div class="form-group" style="margin-bottom: 12px;">
+
+
+
+                        <label for="portalEditPhone" style="font-size: 12px; color: #a7f3d0;">رقم الواتساب:</label>
+
+
+
+                        <input type="tel" id="portalEditPhone" class="input-glass" dir="ltr" style="width: 100%; text-align: left;" required>
+
+
+
+                    </div>
+
+
+
+                    <div style="display: flex; gap: 8px;">
+
+
+
+                        <button type="submit" class="btn btn-whatsapp btn-sm" style="flex: 1; padding: 8px;">💾 حفظ التعديلات</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-sm" style="flex: 1; padding: 8px;" onclick="toggleClientProfileEditForm()">إلغاء</button>
+
+
+
+                    </div>
+
+
+
+                </form>
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- Navigation Pills: Medical Record vs Clinic Store -->
+
+
+
+            <div class="portal-nav-tabs">
+
+
+
+                <button type="button" id="tabBtnMedical" class="portal-tab-btn active" onclick="switchPortalTab('medical')">
+
+
+
+                    🩺 السجل الطبي للأليف
+
+
+
+                </button>
+
+
+
+                <button type="button" id="tabBtnStore" class="portal-tab-btn" onclick="switchPortalTab('store')">
+
+
+
+                    🛒 متجر العيادة (<span id="portalStoreCount">0</span>)
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- TAB 1: Pet Medical History -->
+
+
+
+            <section id="portalTabMedical" class="portal-tab-pane active">
+
+
+
+                <div class="portal-section-header">
+
+
+
+                    <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0;">📋 سجل الزيارات والفحوصات السابقة</h3>
+
+
+
+                    <span id="portalVisitsCountBadge" class="badge-count">0 زيارة</span>
+
+
+
+                </div>
+
+
+
+                <div id="portalVisitsTimeline" class="portal-visits-timeline">
+
+
+
+                    <!-- Populated dynamically -->
+
+
+
+                </div>
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- TAB 2: Mini Clinic Store -->
+
+
+
+            <section id="portalTabStore" class="portal-tab-pane" style="display: none;">
+
+
+
+                <div class="portal-section-header">
+
+
+
+                    <div>
+
+
+
+                        <h3 style="font-size: 15px; font-weight: 800; color: #ffffff; margin: 0;">🛍️ منتجات العناية والأدوية المتاحة</h3>
+
+
+
+                        <p class="portal-store-sub">اطلب ما يحتاجه أليفك ليصلك مباشرة بالتنسيق مع العيادة</p>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div id="portalProductsGrid" class="portal-products-grid">
+
+
+
+                    <!-- Populated dynamically -->
+
+
+
+                </div>
+
+
+
+            </section>
+
+
+
+
+
+
+
+        </main>
+
+
+
+
+
+
+
+        <!-- Sticky Floating Cart Bar (Appears when items are in cart) -->
+
+
+
+        <div id="portalStickyCartBar" class="portal-sticky-cart" style="display: none;">
+
+
+
+            <div class="cart-bar-info" onclick="togglePortalCartModal()">
+
+
+
+                <div class="cart-icon-bubble">
+
+
+
+                    🛒
+
+
+
+                    <span id="portalCartBadge" class="cart-bubble-badge">0</span>
+
+
+
+                </div>
+
+
+
+                <div>
+
+
+
+                    <div class="cart-total-label">سلة المشتريات</div>
+
+
+
+                    <div class="cart-total-sum"><span id="portalCartTotal">0</span> ج.م</div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <button type="button" class="btn btn-whatsapp btn-sm" onclick="sendClientOrderWhatsApp()">
+
+
+
+                <span>✅ إرسال الطلب للعيادة</span>
+
+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Cart Details Modal Sheet -->
+
+
+
+        <div id="portalCartModal" class="batch-modal-overlay" style="display: none;">
+
+
+
+            <div class="batch-modal-card" style="text-align: right; max-height: 85vh; display: flex; flex-direction: column;">
+
+
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+
+
+
+                    <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin: 0;">🛒 سلة مشتريات العيادة</h3>
+
+
+
+                    <button type="button" class="btn-close-sheet" onclick="togglePortalCartModal()">&times;</button>
+
+
+
+                </div>
+
+
+
+                <div id="portalCartItemsList" class="portal-cart-list" style="flex: 1; overflow-y: auto; margin-bottom: 12px;">
+
+
+
+                    <!-- Populated dynamically -->
+
+
+
+                </div>
+
+
+
+                <div class="portal-cart-summary-footer">
+
+
+
+                    <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: #ffffff; margin-bottom: 12px;">
+
+
+
+                        <span>إجمالي الحساب:</span>
+
+
+
+                        <span style="color: #34d399;"><span id="portalCartModalTotal">0</span> ج.م</span>
+
+
+
+                    </div>
+
+
+
+                    <button type="button" class="btn btn-whatsapp btn-block" onclick="sendClientOrderWhatsApp()">
+
+
+
+                        <span>📲 إرسال الطلب عبر واتساب للعيادة</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Full-Screen Image Lightbox Modal (تكبير صور التحاليل والفحوصات) -->
+
+
+
+    <div id="photoLightboxModal" class="photo-lightbox-overlay" style="display: none;" onclick="closePhotoLightbox(event)">
+
+
+
+        <div class="lightbox-toolbar" onclick="event.stopPropagation()">
+
+
+
+            <span id="lightboxCaption" class="lightbox-caption">🔬 فحص التحاليل الطبية</span>
+
+
+
+            <div class="lightbox-actions">
+
+
+
+                <button type="button" class="btn-lightbox-action" onclick="zoomLightbox(0.3)" title="تكبير">+</button>
+
+
+
+                <button type="button" class="btn-lightbox-action" onclick="zoomLightbox(-0.3)" title="تصغير">-</button>
+
+
+
+                <button type="button" class="btn-lightbox-action" onclick="resetLightboxZoom()" title="إعادة ضبط">100%</button>
+
+
+
+                <button type="button" class="btn-lightbox-action btn-lightbox-close" onclick="closePhotoLightbox()" title="إغلاق">&times;</button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="lightbox-image-stage" onclick="event.stopPropagation()">
+
+
+
+            <img id="lightboxTargetImg" src="" alt="صورة مكبرة" class="lightbox-img">
+
+
+
+        </div>
+
+
+
+        <div class="lightbox-footer-hint">
+
+
+
+            <span>💡 اسحب الصورة للتنقل، أو استخدم + و - للتكبير والقراءة بوضوح</span>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- WhatsApp Password Reset Modal -->
+
+
+
+    <div id="modalForgotPasswordWhatsApp" class="modal-glass-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 16px;">
+
+
+
+        <div class="glass-card" style="width: 100%; max-width: 420px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 20px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: right;" onclick="event.stopPropagation()">
+
+
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;">
+
+
+
+                <h3 style="margin: 0; font-size: 17px; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+
+
+
+                    <span>🔐</span>
+
+
+
+                    <span>استعادة كلمة المرور عبر واتساب</span>
+
+
+
+                </h3>
+
+
+
+                <button type="button" onclick="closeForgotPasswordWhatsAppModal()" style="background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; padding: 4px;">&times;</button>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 16px; line-height: 1.6;">
+
+
+
+                اختر الحساب المطلوب وأدخل رقم الهاتف لإرسال كلمة مرور مؤقتة جديدة عبر واتساب:
+
+
+
+            </p>
+
+
+
+
+
+
+
+            <div class="form-group" style="margin-bottom: 14px;">
+
+
+
+                <label for="forgotPassUserSelect" style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #94a3b8;">الحساب المطلوب:</label>
+
+
+
+                <select id="forgotPassUserSelect" class="input-glass" style="width: 100%; padding: 10px; font-weight: 700;">
+
+
+
+                    <option value="admin">👨‍⚕️ د. شريف دياب (المدير العام) - admin</option>
+
+
+
+                    <option value="doc1">🩺 دكتور 1 - doc1</option>
+
+
+
+                    <option value="doc2">🩺 دكتور 2 - doc2</option>
+
+
+
+                    <option value="doc3">🩺 دكتور 3 - doc3</option>
+
+
+
+                    <option value="doc">🩺 طبيب العيادة - doc</option>
+
+
+
+                </select>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group" style="margin-bottom: 20px;">
+
+
+
+                <label for="forgotPassPhone" style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #94a3b8;">رقم الواتساب المسجل:</label>
+
+
+
+                <input type="tel" id="forgotPassPhone" class="input-glass" placeholder="010XXXXXXXX" dir="ltr" style="width: 100%; padding: 10px; text-align: left; font-weight: 700;">
+
+
+
+                <small style="display: block; font-size: 11px; color: #64748b; margin-top: 4px;">* سيتم فتح واتساب مباشرة مع رسالة تتضمن الرمز الجديد.</small>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div style="display: flex; gap: 10px;">
+
+
+
+                <button type="button" class="btn btn-primary-glass" style="flex: 1; padding: 12px; font-weight: 800; background: linear-gradient(135deg, #059669, #10b981);" onclick="submitForgotPasswordWhatsApp()">
+
+
+
+                    <span>📱 إرسال كلمة المرور عبر واتساب</span>
+
+
+
+                </button>
+
+
+
+                <button type="button" class="btn btn-outline-glass" style="padding: 12px 18px;" onclick="closeForgotPasswordWhatsAppModal()">
+
+
+
+                    إلغاء
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal: Manage Store Categories (إدارة وتعديل أقسام المتجر) -->
+
+
+
+    <div id="modalManageCategories" class="batch-modal-overlay" style="display: none; z-index: 10001;">
+
+
+
+        <div class="batch-modal-card" style="text-align: right; max-width: 480px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; padding: 20px;">
+
+
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+
+
+
+                <h3 style="font-size: 16px; font-weight: 800; color: #38bdf8; margin: 0; display: flex; align-items: center; gap: 8px;">
+
+
+
+                    <span>⚙️</span>
+
+
+
+                    <span>إدارة وتعديل أقسام المتجر</span>
+
+
+
+                </h3>
+
+
+
+                <button type="button" class="btn-close-sheet" onclick="window.closeManageCategoriesModal()">&times;</button>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div style="overflow-y: auto; flex: 1; padding-left: 4px; padding-right: 4px;">
+
+
+
+                <!-- Section A: Add New Category Form -->
+
+
+
+                <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 14px; padding: 14px; margin-bottom: 18px;">
+
+
+
+                    <h4 style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin: 0 0 10px 0; display: flex; align-items: center; gap: 6px;">
+
+
+
+                        <span>➕</span>
+
+
+
+                        <span>إضافة قسم جديد للمتجر</span>
+
+
+
+                    </h4>
+
+
+
+                    <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+
+
+
+                        <div style="flex: 1;">
+
+
+
+                            <input type="text" id="newCategoryNameInput" class="input-glass" placeholder="اسم القسم الجديد (مثال: طيور وأسماك)" style="width: 100%; font-size: 13px; padding: 8px 12px;">
+
+
+
+                        </div>
+
+
+
+                        <div style="width: 75px;">
+
+
+
+                            <input type="text" id="newCategoryIconInput" class="input-glass" placeholder="الأيقونة" value="📦" style="width: 100%; font-size: 14px; text-align: center; padding: 8px;">
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <!-- Quick emoji selectors -->
+
+
+
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center;">
+
+
+
+                        <span style="font-size: 11px; color: #94a3b8;">أيقونة مقترحة:</span>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🥫')" style="padding: 2px 6px;">🥫</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('💊')" style="padding: 2px 6px;">💊</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🧪')" style="padding: 2px 6px;">🧪</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🛁')" style="padding: 2px 6px;">🛁</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🎀')" style="padding: 2px 6px;">🎀</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🦜')" style="padding: 2px 6px;">🦜</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🐟')" style="padding: 2px 6px;">🐟</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🦴')" style="padding: 2px 6px;">🦴</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🐱')" style="padding: 2px 6px;">🐱</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🐶')" style="padding: 2px 6px;">🐶</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('🩺')" style="padding: 2px 6px;">🩺</button>
+
+
+
+                        <button type="button" class="btn btn-outline-glass btn-xs" onclick="window.selectCategoryEmoji('📦')" style="padding: 2px 6px;">📦</button>
+
+
+
+                    </div>
+
+
+
+                    <button type="button" class="btn btn-primary-glass btn-block btn-sm" onclick="window.handleAddNewCategoryFromModal()" style="font-weight: 800; padding: 9px;">
+
+
+
+                        <span>💾 حفظ وإضافة القسم</span>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- Section B: List of Current Categories with Edit & Delete Actions -->
+
+
+
+                <h4 style="font-size: 13px; font-weight: 800; color: #e2e8f0; margin: 0 0 10px 0; display: flex; justify-content: space-between; align-items: center;">
+
+
+
+                    <span>📋 الأقسام الحالية بالمتجر:</span>
+
+
+
+                    <span id="manageCategoriesCountBadge" style="font-size: 11px; color: #94a3b8;"></span>
+
+
+
+                </h4>
+
+
+
+                <div id="manageCategoriesListContainer" style="display: flex; flex-direction: column; gap: 8px;">
+
+
+
+                    <!-- Populated dynamically via doctor.js -->
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end;">
+
+
+
+                <button type="button" class="btn btn-outline-glass btn-sm" onclick="window.closeManageCategoriesModal()" style="padding: 8px 20px;">
+
+
+
+                    إغلاق
+
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Scripts -->
+
+
+
+    <script src="assets/js/data.js?v=20261111_v49"></script>
+
+
+
+    <script src="assets/js/qrcode.min.js"></script>
+
+
+
+    <script src="assets/js/image_storage.js?v=20261111_v49"></script>
+
+
+
+    <script src="assets/js/supabase.min.js"></script>
+    <script src="assets/js/cloud_sync.js?v=20261111_v49"></script>
+
+
+
+    <script src="assets/js/medical_corrector.js?v=20261111_v49"></script>
+
+
+
+    <script src="assets/js/doctor.js?v=20261111_v494"></script>
+
+
+
+    <!-- initApp handled via doctor.js -->
+
+
+
+
+
+
+
+    <!-- PWA Service Worker Registration & Fail-Safe App Opener -->
+
+
+
+    <script>
+
+
+
+        // Splash Fadeout Fail-Safe
+
+
+
+        setTimeout(function() {
+
+
+
+            var splash = document.getElementById('splashScreen');
+
+
+
+            if (splash && splash.style.display !== 'none') {
+
+
+
+                splash.style.display = 'none';
+
+
+
+            }
+
+
+
+        }, 1200);
+
+
+
+
+
+
+
+        if ('serviceWorker' in navigator) {
+
+
+
+            window.addEventListener('load', () => {
+
+
+
+                navigator.serviceWorker.register('sw.js?v=20261111_v49')
+
+
+
+                    .then(reg => {
+
+
+
+                        console.log('PWA ServiceWorker registered:', reg.scope);
+
+
+
+                        reg.update();
+
+
+
+                    })
+
+
+
+                    .catch(err => console.log('ServiceWorker registration skipped:', err));
+
+
+
+            });
+
+
+
+        }
+
+
+
+    </script>
+
+
+
+    <!-- Live Voice Diagnostic HUD (Activated via ?debug=1) -->
+
+
+
+    <script>
+
+
+
+        if (new URLSearchParams(location.search).get('debug') === '1') {
+
+
+
+          const d = document.createElement('pre');
+
+
+
+          d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;max-height:30vh;overflow:auto;margin:0;padding:6px;background:#000c;color:#0f0;font:11px monospace;z-index:99999;direction:ltr';
+
+
+
+          document.body.appendChild(d);
+
+
+
+          setInterval(() => { d.textContent = JSON.stringify(window.__voiceDebug ? window.__voiceDebug() : {}, null, 1); }, 500);
+
+
+
+        }
+
+
+
+    </script>
+
+
+
+
+    <!-- Modal: Cloud & WhatsApp Admin Settings (إعدادات السحابة والواتساب - للمدير فقط) -->
+    
+    <!-- Modal 10: Official Meta WhatsApp Cloud API Settings (v49) -->
+    <div id="modalCloudWhatsAppSettings" class="batch-modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 999999; backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 16px;">
+        <div class="modal-content glass-card" style="max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 22px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative;">
+            
+            <button type="button" onclick="closeCloudWhatsAppSettingsModal()" style="position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 12px;">
+                <span style="font-size: 26px;">💬</span>
+                <div>
+                    <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #38bdf8;">إعدادات Meta WhatsApp Cloud API الرسمية</h3>
+                    <p style="margin: 2px 0 0; font-size: 11px; color: #94a3b8;">إرسال التقارير الطبية والتنبيهات آلياً عبر بوت رسمي مع تحويل الردود لرقم الطبيب (v49)</p>
+                </div>
+            </div>
+
+            <!-- Meta Phone Number ID -->
+            <div class="form-group" style="margin-bottom: 12px;">
+                <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px; font-weight: 700;">
+                    📱 Meta Phone Number ID (رقم البوت الآلي المعتمد):
+                </label>
+                <input type="text" id="cfgMetaPhoneId" class="input-glass" placeholder="مثال: 100647892348572" style="width: 100%; font-size: 12px; padding: 8px 12px; font-family: monospace;">
+                <small style="color: #64748b; font-size: 10px;">الرقم البرمجي الآلي الذي يرسل التقارير في الخلفية دون فتح المتصفح.</small>
+            </div>
+
+            <!-- Meta Permanent Access Token -->
+            <div class="form-group" style="margin-bottom: 12px;">
+                <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px; font-weight: 700;">
+                    🔑 Meta System User Access Token:
+                </label>
+                <input type="password" id="cfgMetaAccessToken" class="input-glass" placeholder="EAAOx..." style="width: 100%; font-size: 12px; padding: 8px 12px; font-family: monospace;">
+                <small style="color: #64748b; font-size: 10px;">التوكن الدائم من Meta Developer Portal (يقبل الإرسال التلقائي المستمر).</small>
+            </div>
+
+            <!-- Approved Outbound Template Name -->
+            <div class="form-group" style="margin-bottom: 12px;">
+                <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px; font-weight: 700;">
+                    📋 اسم قالب الرسائل المعتمد (Template Name):
+                </label>
+                <input type="text" id="cfgMetaTemplateName" class="input-glass" value="peticare_report" placeholder="peticare_report" style="width: 100%; font-size: 12px; padding: 8px 12px;">
+                <small style="color: #64748b; font-size: 10px;">يستخدم تلقائياً عند مراسلة عملاء خارج نافذة الـ 24 ساعة لتفادي خطأ Meta 131047.</small>
+            </div>
+
+            <!-- Doctor Personal Phone for Forwarded Replies & 11 PM Radar -->
+            <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 4px; font-weight: 700;">
+                    📞 رقم واتساب د. شريف دياب الشخصي (لاستقبال الردود وتنبيه الرادار 11م):
+                </label>
+                <input type="text" id="cfgDoctorForwardPhone" class="input-glass" value="201555345999" placeholder="201555345999" style="width: 100%; font-size: 12px; padding: 8px 12px; font-weight: 800; color: #6ee7b7;">
+                <small style="color: #64748b; font-size: 10px;">أي عميل يرد على رسالة البوت سيتم تحويل رسالته فوراً لهذا الرقم، كما يستقبل تنبيه الرادار اليومي.</small>
+            </div>
+
+            <div style="display: flex; gap: 8px; justify-content: flex-end; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px;">
+                <button type="button" class="btn btn-secondary" onclick="closeCloudWhatsAppSettingsModal()" style="padding: 8px 16px; font-size: 12px;">إلغاء</button>
+                <button type="button" class="btn btn-primary" onclick="saveMetaWhatsAppSettings()" style="padding: 8px 20px; font-size: 12px; font-weight: 800; background: #0284c7;">💾 حفظ وتفعيل Meta API</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal: Live Today's Consultations (v49) -->
+    <div id="modalLiveTodayVisits" class="modal-overlay" style="display: none; align-items: center; justify-content: center; z-index: 999990; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);">
+        <div class="modal-content glass-card" style="max-width: 850px; width: 95%; max-height: 92vh; display: flex; flex-direction: column; padding: 20px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+            
+            <!-- Modal Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 12px; margin-bottom: 14px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">📋</span>
+                    <div>
+                        <h3 style="margin: 0; font-size: 17px; font-weight: 900; color: #38bdf8;">كشوفات اليوم اللحظية (بث مباشر بين غرف العيادة)</h3>
+                        <small style="color: #94a3b8; font-size: 11px;">متابعة فورية لحظية لكافة الحالات، الأطباء الفاحصين، والمتحصلات المالية</small>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="refreshLiveTodayVisitsUI()" style="font-size: 11px; padding: 5px 10px;">🔄 تحديث فوري</button>
+                    <button type="button" onclick="closeLiveTodayVisitsModal()" style="background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+                </div>
+            </div>
+
+            <!-- Top Summary Counters -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 12px; padding: 10px; text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: #7dd3fc;">🐾 إجمالي كشوفات اليوم</div>
+                    <div id="liveStatTotal" style="font-size: 22px; font-weight: 900; color: #38bdf8; margin-top: 2px;">0</div>
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 10px; text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: #6ee7b7;">💰 المحصل اليوم</div>
+                    <div id="liveStatCollected" style="font-size: 22px; font-weight: 900; color: #10b981; margin-top: 2px;">0 ج.م</div>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 12px; padding: 10px; text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: #fca5a5;">⏳ الآجل / المتبقي</div>
+                    <div id="liveStatRemaining" style="font-size: 22px; font-weight: 900; color: #ef4444; margin-top: 2px;">0 ج.م</div>
+                </div>
+            </div>
+
+            <!-- Filter & Search Input -->
+            <div style="margin-bottom: 12px;">
+                <input type="text" id="searchLiveVisitsInput" oninput="filterLiveTodayVisits(this.value)" placeholder="🔍 بحث باسم الأليف، اسم المالك، رقم الهاتف، أو اسم الطبيب..." class="input-glass" style="width: 100%; font-size: 12px; padding: 9px 14px; border-radius: 10px;">
+            </div>
+
+            <!-- Visits Container List (Scrollable) -->
+            <div id="liveTodayVisitsList" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px;">
+                <div style="text-align: center; color: #94a3b8; padding: 30px;">جاري تحميل كشوفات اليوم...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Saved Visit (v49) -->
+    <div id="modalEditVisit" class="modal-overlay" style="display: none; align-items: center; justify-content: center; z-index: 999995; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px);">
+        <div class="modal-content glass-card" style="max-width: 600px; width: 95%; max-height: 90vh; overflow-y: auto; padding: 22px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.7); position: relative;">
+            
+            <button type="button" onclick="closeEditVisitModal()" style="position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 12px;">
+                <span style="font-size: 24px;">✏️</span>
+                <div>
+                    <h3 style="margin: 0; font-size: 16px; font-weight: 900; color: #38bdf8;">تعديل بيانات الكشف والحسابات</h3>
+                    <small id="editVisitSubHeader" style="color: #94a3b8; font-size: 11px;">تحديث التشخيص، العلاج، أو تحصيل الأتعاب وتحديث السحابة فورياً</small>
+                </div>
+            </div>
+
+            <form id="formEditVisit" onsubmit="event.preventDefault(); saveEditedVisit();">
+                <input type="hidden" id="editVisitPatientId">
+                <input type="hidden" id="editVisitId">
+
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 12px; color: #cbd5e1; font-weight: 700; margin-bottom: 4px; display: block;">🩺 التشخيص الطبي:</label>
+                    <textarea id="editVisitDiagnosis" class="textarea-glass" rows="2" style="width: 100%; font-size: 12px;"></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 12px; color: #cbd5e1; font-weight: 700; margin-bottom: 4px; display: block;">💊 العلاج المقرر والروشتة:</label>
+                    <textarea id="editVisitTreatment" class="textarea-glass" rows="2" style="width: 100%; font-size: 12px;"></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div class="form-group">
+                        <label style="font-size: 11px; color: #cbd5e1; font-weight: 700; margin-bottom: 4px; display: block;">⏱️ الجرعة ومواعيدها:</label>
+                        <input type="text" id="editVisitDosage" class="input-glass" style="width: 100%; font-size: 12px;">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 11px; color: #cbd5e1; font-weight: 700; margin-bottom: 4px; display: block;">🔬 التحاليل والفحوصات:</label>
+                        <input type="text" id="editVisitLabs" class="input-glass" style="width: 100%; font-size: 12px;">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                    <div class="form-group">
+                        <label style="font-size: 11px; color: #7dd3fc; font-weight: 800; margin-bottom: 4px; display: block;">💵 الأتعاب (ج.م):</label>
+                        <input type="number" id="editVisitFee" oninput="calculateEditVisitRemaining()" class="input-glass" style="width: 100%; font-size: 13px; font-weight: 800;">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 11px; color: #6ee7b7; font-weight: 800; margin-bottom: 4px; display: block;">💰 المدفوع (ج.م):</label>
+                        <input type="number" id="editVisitPaid" oninput="calculateEditVisitRemaining()" class="input-glass" style="width: 100%; font-size: 13px; font-weight: 800;">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 11px; color: #fca5a5; font-weight: 800; margin-bottom: 4px; display: block;">⏳ المتبقي (ج.م):</label>
+                        <input type="number" id="editVisitRemaining" readonly class="input-glass" style="width: 100%; font-size: 13px; font-weight: 800; background: rgba(239,68,68,0.15); color: #fca5a5;">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="font-size: 11px; color: #cbd5e1; font-weight: 700; margin-bottom: 4px; display: block;">🗓️ موعد الإعادة (عدد الأيام):</label>
+                    <input type="number" id="editVisitFollowDays" class="input-glass" style="width: 100%; font-size: 12px;" min="0">
+                </div>
+
+                <!-- Attachments & Photos Editing Section -->
+                <div style="background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px;">
+                    <label style="font-size: 12px; color: #38bdf8; font-weight: 800; margin-bottom: 8px; display: block;">📷 تعديل المرفقات والصور والروشتات:</label>
+                    
+                    <!-- 1. Prescription Photo -->
+                    <div style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 11px; color: #cbd5e1; font-weight: 700;">📑 الروشتة الطبية:</span>
+                            <div style="display: flex; gap: 6px;">
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📷 كاميرا
+                                    <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleEditAttachmentUpload('prescription', this.files[0])">
+                                </label>
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📁 ملف/PDF
+                                    <input type="file" accept="image/*,application/pdf" style="display: none;" onchange="handleEditAttachmentUpload('prescription', this.files[0])">
+                                </label>
+                                <button type="button" class="btn btn-outline-glass btn-sm" onclick="removeEditAttachment('prescription')" style="font-size: 10px; padding: 3px 8px; color: #fca5a5; border-radius: 6px;">🗑️ حذف</button>
+                            </div>
+                        </div>
+                        <div id="editPrescriptionPreviewBox" style="min-height: 40px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 11px; color: #64748b;">لا توجد روشتة مرفقة</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Lab Photos / PDFs -->
+                    <div style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 11px; color: #cbd5e1; font-weight: 700;">🔬 صور التحاليل والتقارير:</span>
+                            <div style="display: flex; gap: 6px;">
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📷 كاميرا
+                                    <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleEditAttachmentUpload('lab', this.files[0])">
+                                </label>
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📁 ملف/PDF
+                                    <input type="file" accept="image/*,application/pdf" style="display: none;" onchange="handleEditAttachmentUpload('lab', this.files[0])">
+                                </label>
+                            </div>
+                        </div>
+                        <div id="editLabsPreviewBox" style="min-height: 40px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                            <span style="font-size: 11px; color: #64748b;">لا توجد تحاليل مرفقة</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Case Photo -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 11px; color: #cbd5e1; font-weight: 700;">🐾 صورة الحالة / الأليف:</span>
+                            <div style="display: flex; gap: 6px;">
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📷 كاميرا
+                                    <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleEditAttachmentUpload('case', this.files[0])">
+                                </label>
+                                <label class="btn btn-outline-glass btn-sm" style="font-size: 10px; padding: 3px 8px; cursor: pointer; border-radius: 6px;">
+                                    📁 ملف
+                                    <input type="file" accept="image/*" style="display: none;" onchange="handleEditAttachmentUpload('case', this.files[0])">
+                                </label>
+                                <button type="button" class="btn btn-outline-glass btn-sm" onclick="removeEditAttachment('case')" style="font-size: 10px; padding: 3px 8px; color: #fca5a5; border-radius: 6px;">🗑️ حذف</button>
+                            </div>
+                        </div>
+                        <div id="editCasePreviewBox" style="min-height: 40px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 11px; color: #64748b;">لا توجد صورة للحالة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditVisitModal()" style="padding: 8px 16px; font-size: 12px;">إلغاء</button>
+                    <button type="submit" class="btn btn-primary" style="padding: 8px 22px; font-size: 12px; font-weight: 800; background: #0284c7;">💾 حفظ التعديل والمزامنة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+
+</html>
+
+
+

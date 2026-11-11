@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <title>PetiCare Animal Hospital - بوابة العميل والمربي</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="icon" href="assets/images/logo.gif">
+
+  <style>
+
+    .login-container {
+
+      max-width: 440px;
+
+      margin: 0 auto;
+
+      padding: max(env(safe-area-inset-top, 0px), 36px) 16px max(env(safe-area-inset-bottom, 0px), 24px);
+
+      min-height: 100vh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+    }
+
+    .login-card {
+
+      background: rgba(255, 255, 255, 0.96);
+
+      border-radius: 24px;
+
+      padding: 24px 20px;
+
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #E2E8F0;
+
+    }
+
+    .login-input-group {
+
+      margin-bottom: 14px;
+
+    }
+
+    .login-input-group label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: var(--secondary);
+
+      margin-bottom: 6px;
+
+    }
+
+    .login-input {
+
+      width: 100%;
+
+      padding: 12px 14px;
+
+      border-radius: 12px;
+
+      border: 1px solid #CBD5E1;
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      background: #F8FAFC;
+
+      transition: border-color 0.2s;
+
+    }
+
+    .login-input:focus {
+
+      border-color: var(--primary);
+
+      outline: none;
+
+      background: #FFF;
+
+    }
+
+    .login-btn {
+
+      width: 100%;
+
+      padding: 14px;
+
+      border-radius: 14px;
+
+      border: none;
+
+      font-family: inherit;
+
+      font-size: 15px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      transition: transform 0.2s;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      color: #FFF;
+
+    }
+
+    .login-btn:active {
+
+      transform: scale(0.98);
+
+    }
+
+    .avatar-picker-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 10px;
+
+      margin-top: 8px;
+
+    }
+
+    .avatar-choice-btn {
+
+      border: 2px solid #E2E8F0;
+
+      border-radius: 14px;
+
+      background: #FFF;
+
+      padding: 8px;
+
+      cursor: pointer;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 4px;
+
+      transition: all 0.2s;
+
+    }
+
+    .avatar-choice-btn img {
+
+      width: 44px;
+
+      height: 44px;
+
+      border-radius: 10px;
+
+    }
+
+    .avatar-choice-btn.selected {
+
+      border-color: #2EC4B6;
+
+      background: #F0FDFA;
+
+      box-shadow: 0 4px 12px rgba(46,196,182,0.25);
+
+    }
+
+  </style>
+
+</head>
+
+<body style="background: radial-gradient(circle at center, #FFFDF8 0%, #FFE9CC 100%);">
+
+
+
+  <div class="login-container">
+
+    
+
+    <!-- Clinic Brand Header -->
+
+    <div style="text-align:center; margin-bottom:20px;">
+
+      <img src="assets/images/splash-logo.gif" alt="PetiCare Logo" style="width:105px; height:105px; border-radius:24px; box-shadow:0 8px 24px rgba(251, 133, 0, 0.3); border:4px solid #FFF; object-fit:cover; margin-bottom:10px;">
+
+      <h1 style="font-size:22px; font-weight:900; color:var(--secondary); margin:0;">بوابة العميل والمربي 🐾</h1>
+
+      <p style="font-size:13px; color:var(--primary-hover); font-weight:800; margin:4px 0 0;">عيادة د. شريف دياب • رعاية ومتابعة الأليف الذكية</p>
+
+    </div>
+
+
+
+    <!-- Isolated Client Login Card (No Doctor/Assistant toggles) -->
+
+    <div class="login-card">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid #F1F5F9; padding-bottom:10px;">
+
+        <span style="font-size:15px; font-weight:900; color:var(--secondary);">🐾 تسجيل دخول ملف الأليف</span>
+
+        <span style="font-size:11px; background:#DCFCE7; color:#15803D; padding:4px 10px; border-radius:10px; font-weight:800;">بوابة العملاء</span>
+
+      </div>
+
+
+
+      <form id="form-login-client">
+
+        <div class="login-input-group">
+
+          <label>رقم ملف الأليف (Patient ID) أو رقم الهاتف المسجل:</label>
+
+          <input type="text" id="client-user-input" class="login-input" required placeholder="مثال: PT-1001 أو 01012345678">
+
+          <span style="font-size:11px; color:#64748B; display:block; margin-top:4px;">تجد رقم الملف في إيصال الكشف أو رسالة الواتساب.</span>
+
+        </div>
+
+
+
+        <div class="login-input-group">
+
+          <label>كلمة المرور (Password):</label>
+
+          <input type="password" id="client-pass-input" class="login-input" required placeholder="كلمة المرور">
+
+          <span style="font-size:11px; color:#64748B; display:block; margin-top:4px;">💡 كلمة المرور الافتراضية لأول دخول هي رقم ملف الأليف نفسه (مثال: PT-1001).</span>
+
+        </div>
+
+
+
+        <p id="client-login-err" style="display:none; color:#DC2626; font-size:12px; font-weight:800; margin:8px 0;"></p>
+
+
+
+        <button type="submit" class="login-btn" style="background:linear-gradient(135deg, #FB8500 0%, #E65100 100%); margin-top:10px; box-shadow:0 6px 18px rgba(251,133,0,0.35);">
+
+          <span>🐾</span> فتح ملف أليفي والروشتة والتسوق
+
+        </button>
+
+      </form>
+
+    </div>
+
+
+
+    <!-- Staff Portal Switch Link -->
+
+    <div style="margin-top:16px; text-align:center;">
+
+      <a href="login.html" style="background:rgba(255,255,255,0.9); border:1px solid #CBD5E1; color:#334155; text-decoration:none; padding:10px 18px; border-radius:var(--radius-full); font-size:12px; font-weight:800; display:inline-flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+
+        <span>🔐 هل أنت طبيب أو مساعد؟ الدخول لبوابة الكادر الطبي ➔</span>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- Clinic Emergency Contact Bar -->
+
+    <div style="margin-top:20px; text-align:center; background:rgba(255,255,255,0.9); border-radius:16px; padding:16px; border:1px solid #CBD5E1;">
+
+      <div style="font-size:13px; font-weight:900; color:var(--secondary); margin-bottom:6px;">
+
+        🚨 خط الطوارئ وواتساب عيادات بيتي كير (د. شريف دياب) 24/7:
+
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:10px; margin-top:8px; font-size:12px; font-weight:900; flex-wrap:wrap;">
+
+        <a href="tel:01555345999" style="color:#DC2626; text-decoration:none; background:#FEE2E2; padding:6px 12px; border-radius:10px;">🚨 د. شريف: 01555345999</a>
+
+        <a href="https://wa.me/201555345999" target="_blank" rel="noopener noreferrer" style="color:#16A34A; text-decoration:none; background:#DCFCE7; padding:6px 12px; border-radius:10px;">💬 واتساب 01555345999</a>
+
+        <a href="tel:01555345999" style="color:#0284C7; text-decoration:none; background:#E0F2FE; padding:6px 12px; border-radius:10px;">📞 عيادة: 01555345999</a>
+
+        <a href="tel:0502383139" style="color:#334155; text-decoration:none; background:#F1F5F9; padding:6px 12px; border-radius:10px;">☎️ أرضي: 050 2383139</a>
+
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:10px; margin-top:12px; font-size:11px; font-weight:700;">
+
+        <a href="https://www.facebook.com/peticareanimalhoslital?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" style="color:#1877F2; text-decoration:none;">فيسبوك 💙</a>
+
+        <span>•</span>
+
+        <a href="https://www.instagram.com/peticare_animal_hospital?dlrf=M3IxeG92eG81YnA1" target="_blank" rel="noopener noreferrer" style="color:#E1306C; text-decoration:none;">إنستغرام 📸</a>
+
+        <span>•</span>
+
+        <a href="https://www.tiktok.com/@sheriffdiab?_r=1&_t=ZS-9AuMBYtCVnN" target="_blank" rel="noopener noreferrer" style="color:#111; text-decoration:none;">تيك توك 🎬</a>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- FIRST LOGIN CUSTOMIZATION MODAL -->
+
+  <div id="modal-first-login" class="modal-overlay">
+
+    <div class="modal-card">
+
+      <div style="text-align:center; margin-bottom:14px; border-bottom:1px solid #E2E8F0; padding-bottom:10px;">
+
+        <h3 style="font-size:17px; font-weight:900; color:var(--secondary); margin:0;">🎉 مرحباً بك في PetiCare!</h3>
+
+        <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0;">لأمان حسابك، يُرجى تعيين كلمة مرور شخصية واختيار صورة لأليفك:</p>
+
+      </div>
+
+
+
+      <form id="form-first-setup">
+
+        <div class="login-input-group">
+
+          <label>كلمة المرور الشخصية الجديدة:</label>
+
+          <input type="password" id="first-new-pass" class="login-input" required placeholder="أدخل كلمة مرور سهلة الحفظ">
+
+        </div>
+
+
+
+        <div class="login-input-group">
+
+          <label>تأكيد كلمة المرور:</label>
+
+          <input type="password" id="first-confirm-pass" class="login-input" required placeholder="أعد كتابة كلمة المرور">
+
+        </div>
+
+
+
+        <div class="login-input-group">
+
+          <label>اختر صورة رمزية لأليفك:</label>
+
+          <div class="avatar-picker-grid" id="first-avatar-grid">
+
+            <button type="button" class="avatar-choice-btn selected" data-avatar="assets/images/avatar-cat.svg">
+
+              <img src="assets/images/avatar-cat.svg" alt="Cat">
+
+              <span style="font-size:10px;">قط</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/avatar-dog.svg">
+
+              <img src="assets/images/avatar-dog.svg" alt="Dog">
+
+              <span style="font-size:10px;">كلب</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/avatar-bunny.svg">
+
+              <img src="assets/images/avatar-bunny.svg" alt="Bunny">
+
+              <span style="font-size:10px;">أرنب</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/logo.gif">
+
+              <img src="assets/images/logo.gif" alt="Logo">
+
+              <span style="font-size:10px;">لوجو</span>
+
+            </button>
+
+          </div>
+
+          <input type="hidden" id="first-avatar-val" value="assets/images/avatar-cat.svg">
+
+        </div>
+
+
+
+        <button type="submit" class="login-btn" style="background:#2EC4B6; margin-top:10px;">
+
+          💾 حفظ وتأكيد الدخول
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="assets/js/data.js"></script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      let pendingPatient = null;
+
+
+
+      // Avatar picker interaction
+
+      const avatarBtns = document.querySelectorAll('#first-avatar-grid .avatar-choice-btn');
+
+      avatarBtns.forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+          avatarBtns.forEach(b => b.classList.remove('selected'));
+
+          btn.classList.add('selected');
+
+          document.getElementById('first-avatar-val').value = btn.dataset.avatar;
+
+        });
+
+      });
+
+
+
+      // Client Form Submit
+
+      const formClient = document.getElementById('form-login-client');
+
+      const errEl = document.getElementById('client-login-err');
+
+
+
+      formClient.addEventListener('submit', async (e) => {
+
+        e.preventDefault();
+
+        const userInput = document.getElementById('client-user-input').value.trim();
+
+        const passInput = document.getElementById('client-pass-input').value.trim();
+
+
+
+        if (!userInput || !passInput) {
+
+          errEl.textContent = 'يرجى إدخال رقم الملف أو الهاتف وكلمة المرور.';
+
+          errEl.style.display = 'block';
+
+          return;
+
+        }
+
+
+
+        const patients = PetiCareDB.getPatients();
+
+        if (!patients || patients.length === 0) {
+
+          errEl.textContent = 'قاعدة البيانات جديدة ولا توجد ملفات مسجلة بعد. يرجى قيام إدارة العيادة بفتح ملف للأليف أولاً!';
+
+          errEl.style.display = 'block';
+
+          return;
+
+        }
+
+
+
+        const authRes = await PetiCareDB.authenticateClient(userInput, passInput);
+
+        const patient = Array.isArray(authRes) ? authRes[0] : authRes;
+
+
+
+        if (!patient) {
+
+          errEl.textContent = 'بيانات الدخول غير صحيحة! تأكد من رقم الملف أو الهاتف المسجل وكلمة المرور.';
+
+          errEl.style.display = 'block';
+
+          return;
+
+        }
+
+
+
+        // If first login and password hasn't been personalized yet
+
+        if (!patient.passwordChanged) {
+
+          pendingPatient = patient;
+
+          document.getElementById('modal-first-login').classList.add('open');
+
+          return;
+
+        }
+
+
+
+        // Redirect directly
+
+        window.location.href = `client.html?pid=${patient.id}`;
+
+      });
+
+
+
+      // First Setup Modal Submit
+
+      document.getElementById('form-first-setup').addEventListener('submit', (e) => {
+
+        e.preventDefault();
+
+        const n1 = document.getElementById('first-new-pass').value.trim();
+
+        const n2 = document.getElementById('first-confirm-pass').value.trim();
+
+        const avatar = document.getElementById('first-avatar-val').value;
+
+
+
+        if (n1 !== n2) {
+
+          alert('كلمتا المرور غير متطابقتين!');
+
+          return;
+
+        }
+
+        if (n1.length < 3) {
+
+          alert('يرجى اختيار كلمة مرور من 3 أحرف/أرقام على الأقل!');
+
+          return;
+
+        }
+
+
+
+        if (pendingPatient) {
+
+          PetiCareDB.updateClientCredentials(pendingPatient.id, n1, avatar);
+
+          alert('تم تعيين كلمة المرور وتحديث صورة الأليف بنجاح!');
+
+          window.location.href = `client.html?pid=${pendingPatient.id}`;
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
+

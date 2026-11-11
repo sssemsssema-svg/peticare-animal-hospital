@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="catHead" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFB74D"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="#FFF8E1"/>
+  <!-- Ears -->
+  <polygon points="45,85 70,25 95,75" fill="#FF9800"/>
+  <polygon points="55,80 72,40 88,75" fill="#FFCC80"/>
+  <polygon points="155,85 130,25 105,75" fill="#FF9800"/>
+  <polygon points="145,80 128,40 112,75" fill="#FFCC80"/>
+  <!-- Head -->
+  <circle cx="100" cy="115" r="60" fill="url(#catHead)"/>
+  <!-- Eyes -->
+  <ellipse cx="80" cy="110" rx="9" ry="12" fill="#2E7D32"/>
+  <circle cx="82" cy="107" r="4" fill="#FFF"/>
+  <ellipse cx="120" cy="110" rx="9" ry="12" fill="#2E7D32"/>
+  <circle cx="122" cy="107" r="4" fill="#FFF"/>
+  <!-- Nose & Mouth -->
+  <polygon points="100,123 94,118 106,118" fill="#E91E63"/>
+  <path d="M100 123 L100 128 M93 132 Q100 136 100 128 Q100 136 107 132" stroke="#5D4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Whiskers -->
+  <line x1="65" y1="122" x2="40" y2="118" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+  <line x1="65" y1="128" x2="42" y2="130" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+  <line x1="135" y1="122" x2="160" y2="118" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+  <line x1="135" y1="128" x2="158" y2="130" stroke="#8D6E63" stroke-width="2" stroke-linecap="round"/>
+</svg>

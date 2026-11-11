@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetiCare - سجل المرضى للطباعة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style id="pageStyle">@page { size: A4 portrait; margin: 10mm; }
+        /* Thermal 80mm Receipt Styles (v49) */
+        body.thermal-80mm {
+            width: 80mm !important;
+            max-width: 80mm !important;
+            padding: 3mm !important;
+            margin: 0 auto !important;
+            background: #fff !important;
+            font-size: 11px !important;
+        }
+        body.thermal-80mm .sheet-container {
+            max-width: 100% !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        body.thermal-80mm .header-section {
+            border-bottom: 1px dashed #000 !important;
+            padding-bottom: 6px !important;
+            margin-bottom: 8px !important;
+        }
+        body.thermal-80mm .clinic-brand h1 {
+            font-size: 15px !important;
+        }
+        body.thermal-80mm .patient-block {
+            border: 1px solid #cbd5e1 !important;
+            margin-bottom: 8px !important;
+            padding: 8px !important;
+        }
+        body.thermal-80mm .footer-signatures {
+            display: none !important;
+        }
+        @media print {
+            .no-print, .print-controls, .search-row, .header-actions {
+                display: none !important;
+            }
+            body.thermal-80mm {
+                width: 80mm !important;
+                margin: 0 !important;
+                padding: 2mm !important;
+            }
+        }
+
+    </style>
+    <style>
+        * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { background: #f1f5f9; color: #0f172a; margin: 0; padding: 12px; }
+        .sheet-container { width: 100%; max-width: 1000px; margin: 0 auto; background: #fff; padding: 18px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+
+        /* الرأس */
+        .header-section { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px; border-bottom: 2px solid #0f766e; padding-bottom: 12px; margin-bottom: 14px; }
+        .clinic-brand h1 { margin: 0; font-size: 20px; line-height: 1.4; color: #0f766e; font-weight: 900; }
+        .clinic-brand p { margin: 4px 0 0; font-size: 13px; color: #64748b; }
+        .header-meta { font-size: 12px; color: #475569; line-height: 1.8; }
+
+        /* شريط الأدوات (لا يُطبع) */
+        .actions-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .btn { background: #0f766e; color: #fff; border: 1px solid #0f766e; padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; white-space: nowrap; flex: 1 1 auto; }
+        .btn-outline { background: #f8fafc; color: #0f766e; }
+        .btn.active { background: #0f766e; color: #fff; }
+        .btn-outline:not(.active) { background: #f8fafc; color: #0f766e; }
+        .search-row { margin-bottom: 14px; }
+        .search-row input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
+
+        /* بطاقة المريض */
+        .patient-block { border: 1px solid #94a3b8; border-radius: 8px; margin-bottom: 14px; overflow: hidden; }
+        .patient-head { background: #f0fdfa; border-bottom: 1px solid #94a3b8; padding: 8px 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; font-size: 12px; }
+        .patient-head .title { grid-column: 1 / -1; font-size: 15px; font-weight: 900; color: #0f766e; }
+        .patient-head b { color: #475569; font-weight: 700; }
+        .patient-head .wide { grid-column: 1 / -1; }
+        .chronic { color: #b91c1c; font-weight: 700; }
+
+        /* الجداول: تتقسم على عرض الصفحة بدل ما تطلع بره */
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; min-width: 620px; border-collapse: collapse; table-layout: fixed; }
+        th, td { border: 1px solid #cbd5e1; padding: 6px 7px; font-size: 12px; text-align: right; vertical-align: top; word-break: break-word; overflow-wrap: anywhere; }
+        th { background: #f1f5f9; color: #0f766e; font-weight: 800; }
+        tr:nth-child(even) td { background: #fcfcfc; }
+        .badge { background: #e0f2fe; color: #0369a1; padding: 1px 7px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .muted { color: #94a3b8; }
+        .ltr { direction: ltr; text-align: right; }
+
+        .footer-signatures { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px dashed #cbd5e1; font-size: 12px; font-weight: 700; color: #475569; }
+
+        @media (max-width: 640px) {
+            body { padding: 6px; }
+            .sheet-container { padding: 12px; }
+            .patient-head { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .sheet-container { box-shadow: none; padding: 0; max-width: 100%; border-radius: 0; }
+            .actions-bar, .search-row, .no-print { display: none !important; }
+            .table-wrap { overflow: visible; }
+            table { min-width: 0; }
+            thead { display: table-header-group; }
+            tr { page-break-inside: avoid; }
+            .patient-block { page-break-inside: auto; }
+            .patient-head { page-break-after: avoid; }
+            th, .patient-head { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet-container">
+        <div class="header-section">
+            <div class="clinic-brand">
+                <h1>🐾 مستشفى بيتي كير البيطري | PetiCare</h1>
+                <p>عيادة د. شريف دياب • كشف وسجل الحالات والعملاء</p>
+            </div>
+            <div class="header-meta">
+                <div>📅 <strong>تاريخ الطباعة:</strong> <span id="printDate"></span></div>
+                <div>📋 <strong>عدد الحالات:</strong> <span id="patientCount">0</span></div>
+                <div>👤 <strong>طُبع بواسطة:</strong> <span id="printedBy">-</span></div>
+            </div>
+        </div>
+
+        <div class="actions-bar no-print">
+            <button type="button" class="btn" onclick="window.print()">🖨️ طباعة (A4)</button>
+            
+            <button type="button" class="btn btn-outline" id="btnToggleThermal" onclick="toggleThermalMode()">🧾 إيصال حراري (80mm)</button>
+            <button type="button" class="btn btn-outline active" id="btnModeFull" onclick="setMode('full')">📚 السجل الكامل لكل حالة</button>
+            <button type="button" class="btn btn-outline" id="btnModeSummary" onclick="setMode('summary')">📋 جدول ملخص</button>
+            <button type="button" class="btn btn-outline" id="btnBlank" onclick="addBlankRows(10)" style="display:none;">➕ 10 أسطر فارغة للكتابة اليدوية</button>
+            <a href="doctor.html" class="btn btn-outline">⬅️ عودة لشاشة الكشف</a>
+        </div>
+
+        <div class="search-row no-print">
+            <input type="search" id="filterInput" placeholder="🔍 ابحث باسم الأليف أو المالك أو رقم الملف..." oninput="render()">
+        </div>
+
+        <div id="content"></div>
+
+        <div class="footer-signatures">
+            <div>توقيع موظف الاستقبال: ______________</div>
+            <div>توقيع الطبيب المعالج: ______________</div>
+            <div>ختم مستشفى PetiCare: ______________</div>
+        </div>
+    </div>
+
+    <script src="assets/js/data.js"></script>
+    <script>
+        const petiData = new PetiCareData();
+        const session = petiData.getCurrentSession();
+        const uname = session ? String(session.username || '').toLowerCase() : '';
+        // رقم الهاتف يظهر للأدمن فقط. أي حساب آخر أو بدون تسجيل دخول لا يرى الرقم
+        const IS_ADMIN = !!session && (session.role === 'admin' || uname === 'admin' || uname === 'sherif');
+
+        function esc(v) {
+            return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+        function sortedVisits(p) {
+            return (p.visits || []).slice().sort((a, b) => {
+                const d = String(b.date || '').localeCompare(String(a.date || ''));
+                return d !== 0 ? d : (b.updatedAt || 0) - (a.updatedAt || 0);
+            });
+        }
+
+        document.getElementById('printDate').textContent = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('printedBy').textContent = session ? (typeof pcActorLabel === 'function' ? pcActorLabel(session) : session.name) : 'غير مسجل دخول';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterId = urlParams.get('id') || urlParams.get('patient_id');
+        const allPatients = petiData.getPatients() || [];
+        let mode = 'full';
+
+        function setMode(m) {
+            mode = m;
+            document.getElementById('btnModeFull').classList.toggle('active', m === 'full');
+            document.getElementById('btnModeSummary').classList.toggle('active', m === 'summary');
+            document.getElementById('btnBlank').style.display = m === 'summary' ? 'inline-flex' : 'none';
+            // الجدول الملخص عريض فيُطبع بالعرض، والسجل الكامل بالطول
+            document.getElementById('pageStyle').textContent = '@page { size: A4 ' + (m === 'summary' ? 'landscape' : 'portrait') + '; margin: 10mm; }';
+            render();
+        }
+
+        function currentList() {
+            let list = filterId ? allPatients.filter(p => String(p.id) === String(filterId)) : allPatients;
+            const q = (document.getElementById('filterInput').value || '').trim().toLowerCase();
+            if (q) {
+                list = list.filter(p => (p.name || '').toLowerCase().includes(q) || (p.ownerName || '').toLowerCase().includes(q) || String(p.id).toLowerCase().includes(q));
+            }
+            return list;
+        }
+
+        function fullHtml(p) {
+            const visits = sortedVisits(p);
+            const rows = visits.length ? visits.map((v, i) => `
+                <tr>
+                    <td style="width:6%; text-align:center;">${visits.length - i}</td>
+                    <td style="width:12%;">${esc(v.date)}</td>
+                    <td style="width:9%;">${esc(v.doctorName || '-')}</td>
+                    <td style="width:19%;">${esc(v.diagnosis)}</td>
+                    <td style="width:19%;">${esc(v.treatment)}</td>
+                    <td style="width:13%;">${esc(v.dosage)}</td>
+                    <td style="width:12%;">${esc(v.labs && v.labs !== 'لا توجد تحاليل' && v.labs !== 'لا يوجد' ? v.labs : '')}</td>
+                    <td style="width:10%;">${esc(v.followUpDate)}</td>
+                </tr>`).join('') : '<tr><td colspan="8" class="muted" style="text-align:center;">لا توجد زيارات مسجلة</td></tr>';
+            return `
+            <div class="patient-block">
+                <div class="patient-head">
+                    <div class="title">🐾 ${esc(p.name)} <span class="badge">${esc(p.type)}</span> &nbsp; ملف #${esc(p.id)}</div>
+                    <div><b>الوزن:</b> ${p.weight ? esc(p.weight) : '-'}</div>
+                    <div><b>المالك:</b> ${esc(p.ownerName)}</div>
+                    ${IS_ADMIN ? `<div><b>الهاتف:</b> <span class="ltr">${esc(p.phone)}</span></div>` : '<div></div>'}
+                    <div><b>تاريخ فتح الملف:</b> ${esc(p.createdAt || '-')}</div>
+                    <div><b>فُتح بواسطة:</b> ${esc(p.createdBy || '-')}</div>
+                    <div><b>عدد الزيارات:</b> ${visits.length}</div>
+                    ${p.chronicNotes ? `<div class="wide chronic">⚠️ حالة مزمنة / ملاحظات: ${esc(p.chronicNotes)}</div>` : ''}
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr>
+                            <th>م</th><th>التاريخ</th><th>الدكتور</th><th>التشخيص</th><th>العلاج</th><th>الجرعة</th><th>التحاليل</th><th>الإعادة</th>
+                        </tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+            </div>`;
+        }
+
+        function summaryHtml(list) {
+            const cols = IS_ADMIN ? 9 : 8;
+            const rows = list.map(p => {
+                const vs = sortedVisits(p);
+                const last = vs[0];
+                const lastTxt = last
+                    ? `<strong>${esc(last.date)}</strong><br>${esc(last.diagnosis)}<br><small>${esc(last.treatment)}</small>`
+                    : '<span class="muted">لا توجد زيارات</span>';
+                return `<tr>
+                    <td style="text-align:center; font-weight:700;">#${esc(p.id)}</td>
+                    <td style="font-weight:700;">${esc(p.name)}</td>
+                    <td><span class="badge">${esc(p.type)}</span></td>
+                    <td>${p.weight ? esc(p.weight) : '-'}</td>
+                    <td>${esc(p.ownerName)}</td>
+                    ${IS_ADMIN ? `<td class="ltr">${esc(p.phone)}</td>` : ''}
+                    <td style="text-align:center;">${vs.length}</td>
+                    <td>${lastTxt}</td>
+                    <td>${esc(p.chronicNotes || '')}</td>
+                </tr>`;
+            }).join('') || `<tr><td colspan="${cols}" class="muted" style="text-align:center;">لا توجد ملفات</td></tr>`;
+            return `<div class="table-wrap"><table style="min-width:720px;">
+                <thead><tr>
+                    <th style="width:8%;">رقم الملف</th><th style="width:11%;">اسم الأليف</th><th style="width:9%;">النوع</th><th style="width:7%;">الوزن</th><th style="width:13%;">المالك</th>
+                    ${IS_ADMIN ? '<th style="width:12%;">الهاتف</th>' : ''}
+                    <th style="width:7%;">الزيارات</th><th>آخر زيارة (تشخيص وعلاج)</th><th style="width:14%;">ملاحظات / حالة مزمنة</th>
+                </tr></thead>
+                <tbody id="summaryBody">${rows}</tbody></table></div>`;
+        }
+
+        function render() {
+            const list = currentList();
+            document.getElementById('patientCount').textContent = list.length;
+            if (filterId && list.length > 0) {
+                document.title = 'PetiCare - سجل المريض #' + list[0].id + ' (' + list[0].name + ')';
+            }
+            const box = document.getElementById('content');
+            if (list.length === 0) {
+                box.innerHTML = '<p class="muted" style="text-align:center; padding:20px;">لا توجد ملفات مطابقة.</p>';
+                return;
+            }
+            box.innerHTML = mode === 'full' ? list.map(fullHtml).join('') : summaryHtml(list);
+        }
+
+        function addBlankRows(count) {
+            const body = document.getElementById('summaryBody');
+            if (!body) return;
+            const cols = IS_ADMIN ? 9 : 8;
+            let html = '';
+            for (let i = 0; i < count; i++) {
+                html += '<tr style="height:38px;">' + '<td></td>'.repeat(cols) + '</tr>';
+            }
+            body.insertAdjacentHTML('beforeend', html);
+        }
+
+        // لو الصفحة مفتوحة لمريض واحد نعرض سجله الكامل مباشرة
+        render();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PetiCare - غرفة طبيب النوبتجية والمساعد</title>
+  <!-- Google Cairo Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/images/logo.jpg">
+</head>
+<body>
+
+  <!-- Assistant Privacy Top Banner -->
+  <div style="background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); color:#FFF; padding-top: max(env(safe-area-inset-top, 0px), 36px); padding-bottom: 12px; padding-left: 18px; padding-right: 18px; border-bottom:3px solid #2EC4B6; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:13px; font-weight:800;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="background:#2EC4B6; color:#FFF; padding:3px 10px; border-radius:12px; font-size:11px;">👨‍⚕️ واجهة المساعد / طبيب النوبتجية</span>
+      <span>🔒 خصوصية كاملة: أرقام هواتف العملاء محجوبة ومشفرة</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="btn-open-new-patient-modal" class="btn" style="background:#2EC4B6; color:#FFF; font-weight:800; font-size:12px; padding:6px 14px; border-radius:var(--radius-full); border:none; cursor:pointer;">
+        ➕ فتح ملف عميل جديد
+      </button>
+      <a href="doctor.html" style="background:#334155; color:#F8FAFC; text-decoration:none; padding:6px 12px; border-radius:12px; font-size:11px; display:inline-flex; align-items:center; gap:6px;">
+        <span>👑 انتقال لغرفة د. شريف (المدير)</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <div class="app-overlay">
+      <div class="doctor-desktop-wrapper">
+
+        <!-- Header with REAL logo.gif -->
+        <header class="app-header">
+          <div class="header-inner">
+            <a href="assistant.html" class="brand-section">
+              <img src="assets/images/logo.gif" alt="PetiCare Logo" class="brand-logo-img">
+              <div class="brand-texts">
+                <h1>PetiCare Duty Doctor</h1>
+                <p>عيادة د. شريف دياب • واجهة الكشف والروشتة الذكية للنوبتجية 🩺</p>
+              </div>
+            </a>
+            <div class="header-actions">
+              <a href="client.html" class="btn-icon-badge" title="معاينة شاشة العميل">
+                <img src="assets/images/paw-icon.jpg" class="icon-img-sm" alt="Paw">
+                <span>شاشة العميل</span>
+              </a>
+              <a href="patient.html" class="btn-icon-badge" id="doc-history-link" title="ملف الهستوري">
+                <img src="assets/images/pill-icon.jpg" class="icon-img-sm" alt="Pill">
+                <span>الهستوري الطبي</span>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="doc-tabs">
+          <button class="doc-tab-btn active" data-target="tab-voice-summary">
+            <img src="assets/images/paw-icon.jpg" class="icon-img-sm">
+            <span>الكشف الصوتي والروشتة</span>
+          </button>
+          <button class="doc-tab-btn" data-target="tab-dose-calc">
+            <img src="assets/images/pill-icon.jpg" class="icon-img-sm">
+            <span>حاسبة الجرعات المخصصة</span>
+          </button>
+          <button class="doc-tab-btn" data-target="tab-pet-shop">
+            <img src="assets/images/shop-canvit.svg" class="icon-img-sm">
+            <span>مخزون الأدوية والمستلزمات</span>
+          </button>
+        </nav>
+
+        <!-- Active Patient Identity Bar -->
+        <div class="card-section" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; background:rgba(255,255,255,0.95); border:1px solid #E2E8F0; border-radius:16px;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <img src="assets/images/avatar-cat.svg" id="doc-active-pet-avatar" class="pet-avatar-responsive" alt="Pet Avatar">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <h3 id="doc-active-pet-name" style="font-size:18px; font-weight:900; color:var(--secondary); margin:0;">سيمبا (Simba)</h3>
+                <span id="doc-active-species-badge" class="badge badge-surgery">قط شيرازي</span>
+              </div>
+              <p id="doc-active-pet-meta" style="font-size:12px; color:var(--text-muted); font-weight:800; margin:3px 0 0;">العمر: سنة و4 شهور • العميل: أحمد محمود</p>
+              <p id="doc-active-pet-phone-row" style="font-size:12px; color:#D90429; font-weight:800; margin:3px 0 0;">
+                📱 رقم الهاتف: <span id="doc-active-pet-phone">20101 **** 78 (محجوب للمساعد 🔒)</span>
+              </p>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px;">
+            <label for="doctor-patient-select" style="font-size:13px; font-weight:800; color:var(--secondary);">اختيار الحالة:</label>
+            <select id="doctor-patient-select" style="padding:8px 14px; border-radius:12px; border:1px solid #CBD5E1; font-family:inherit; font-size:13px; font-weight:800; color:var(--secondary); background:#FFF;">
+            </select>
+          </div>
+        </div>
+
+        <!-- Empty Patient Alert Banner -->
+        <div id="doc-empty-patient-notice" style="display:none; background:#FFFBEB; border:2px dashed #F59E0B; border-radius:14px; padding:14px 18px; margin-bottom:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:24px;">🐾</span>
+            <div>
+              <h4 style="font-size:14px; font-weight:900; color:#B45309; margin:0;">قاعدة بيانات العيادة فارغة وجديدة (Clean Slate)</h4>
+              <p style="font-size:12px; color:#78350F; margin:2px 0 0;">لا توجد حالات مسجلة حالياً. اضغط زر (➕ فتح ملف عميل جديد) لبدء إدخال الحالة والكشف الصوتي.</p>
+            </div>
+          </div>
+          <button onclick="document.getElementById('btn-open-new-patient-modal') && document.getElementById('btn-open-new-patient-modal').click()" class="btn-action btn-primary" style="font-size:12px; padding:8px 16px;">
+            ➕ فتح ملف عميل جديد الآن
+          </button>
+        </div>
+
+        <!-- DOSE SAFETY ENGINE ALERT -->
+        <div id="dose-safety-container"></div>
+
+        <!-- ================= TAB 1: CONTINUOUS VOICE & PARSER ================= -->
+        <section id="tab-voice-summary" class="doc-tab-content active">
+          <div class="card-section">
+            <div class="card-title">
+              <div class="card-title-text">
+                <img src="assets/images/logo.gif" class="icon-img-sm" style="border-radius:6px; object-fit:contain;">
+                <span>المحلل الصوتي المستمر لكلام الطبيب (AI Voice Consultation)</span>
+              </div>
+              <span style="font-size:12px; color:var(--text-muted);">تفريغ صوتي فوري وتوزيع تلقائي</span>
+            </div>
+
+            <!-- Voice Recording Box -->
+            <div class="voice-box">
+              <p style="font-size:14px; font-weight:800; color:var(--secondary); margin-bottom:4px;">
+                🎙️ المايكروفون يعمل بوضعية الاستماع المستمر - تحدث بصوتك وتابع الموجات الحية:
+              </p>
+
+              <!-- Live Equalizer Waveform Visualizer -->
+              <div class="voice-equalizer-live" id="voice-live-equalizer">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin: 6px 0;">
+                <div class="mic-circle-btn" id="btn-voice-record" title="اضغط لبدء أو إيقاف التسجيل الصوتي المباشر">
+                  🎙️
+                </div>
+              </div>
+
+              <div style="text-align:center; margin-bottom:8px;">
+                <button type="button" id="btn-native-speech-prompt" class="btn" style="background:#0F766E; color:#FFF; font-weight:800; font-size:12px; padding:6px 16px; border-radius:var(--radius-full); border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 3px 10px rgba(15,118,110,0.3);">
+                  <span>🎙️</span> لاقط جوجل الصوتي المباشر (Google Voice Dialog)
+                </button>
+              </div>
+
+              <div id="rec-timer-badge" class="rec-timer-badge" style="display:none;">
+                <span class="rec-pulse-dot"></span>
+                <span id="rec-timer-clock">00:00</span>
+                <span>(جاري الاستماع الحي)</span>
+              </div>
+
+              <p id="record-status-label" style="font-size:12px; color:var(--primary-hover); font-weight:800; margin-top:6px;">
+                جاهز للاستماع.. اضغط على المايك وتحدث بالصوت مباشرة ليتم التفريغ التلقائي
+              </p>
+
+              <textarea id="doc-voice-text" class="voice-textarea" placeholder="تحدث بصوتك لتفريغ الكشف... مثلاً: كشف الحالة، التشخيص التهاب تنفسي، هياخد كلافوكس 1 سم مرتين يومياً، والأكل فراخ مسلوقة، والإعادة بعد يومين..."></textarea>
+              
+              <div style="margin-top:10px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                <button id="btn-auto-parse-ai" class="btn-action btn-secondary" style="font-size:13px; font-weight:800;">
+                  <span>⚡</span> فرز وتحليل النص الصوتي وتوزيعه بالجدول
+                </button>
+              </div>
+            </div>
+
+            <!-- CLINICAL SUMMARY TABLE (جدول الكشف والتفريغ الشيك - كلمة ونص) -->
+            <div class="card-section" style="background:#FFF; border:2px solid #2EC4B6; border-radius:18px; padding:18px; margin-top:16px; box-shadow:0 6px 20px rgba(46,196,182,0.15);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:2px solid #F1F5F9; padding-bottom:8px;">
+                <h4 style="font-size:15px; font-weight:900; color:var(--secondary); margin:0; display:flex; align-items:center; gap:8px;">
+                  <span>📋</span> جدول ملخص الكشف والروشتة (المفرغ صوتياً):
+                </h4>
+                <span style="font-size:11px; background:#E6FFFA; color:#0F766E; padding:3px 10px; border-radius:10px; font-weight:800;">موجز ومباشر ⚡</span>
+              </div>
+
+              <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                <tbody>
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+                    <td style="width:125px; padding:10px 12px; font-weight:900; color:#334155; background:#F8FAFC; border-radius:10px 0 0 0;">🐾 اسم الأليف:</td>
+                    <td style="padding:10px 12px; font-weight:900; color:var(--secondary);">
+                      <input type="text" id="doc-active-pet-name-val" style="width:100%; border:none; background:transparent; font-weight:900; font-size:15px; color:var(--secondary);" value="سيمبا (Simba) - قط شيرازي" readonly>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+                    <td style="padding:10px 12px; font-weight:900; color:#334155; background:#F8FAFC;">🩺 الحالة / التشخيص:</td>
+                    <td style="padding:10px 12px;">
+                      <input type="text" id="doc-diagnosis-text" placeholder="الحالة والتشخيص كلمة ونص..." style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:8px; font-weight:800; font-family:inherit; color:var(--secondary); background:#FFF;" value="إجراء عملية تعقيم تجميلية ناجحة وفحص شامل.">
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+                    <td style="padding:10px 12px; font-weight:900; color:#334155; background:#F8FAFC;">💊 الروشتة والعلاج:</td>
+                    <td style="padding:10px 12px;">
+                      <textarea id="doc-prescriptions-summary" rows="2" placeholder="العلاج والجرعات المركزة..." style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:8px; font-weight:800; font-family:inherit; color:#1E293B; background:#FFF;">• كلافوكس نقط (1 سم³ مرتين يومياً)&#10;• ماكسيكام مسكن ومضاد التهاب (0.5 سم³ بعد الأكل)</textarea>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+                    <td style="padding:10px 12px; font-weight:900; color:#334155; background:#F8FAFC;">🍗 التغذية المسموحة:</td>
+                    <td style="padding:10px 12px;">
+                      <input type="text" id="doc-diet-text" placeholder="التغذية المسموحة..." style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:8px; font-weight:800; font-family:inherit; color:var(--secondary); background:#FFF;" value="صدور دجاج مسلوقة دافئة ومفرومة مع ماء وفير.">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:10px 12px; font-weight:900; color:#334155; background:#F8FAFC; border-radius:0 0 0 10px;">📅 المتابعة بعد:</td>
+                    <td style="padding:10px 12px;">
+                      <select id="doc-revisit-select" style="padding:8px 14px; border:1px solid #CBD5E1; border-radius:8px; font-weight:900; font-family:inherit; color:var(--secondary); background:#FFF;">
+                        <option value="1" selected>غداً (خلال 24 ساعة)</option>
+                        <option value="2">بعد يومين (48 ساعة)</option>
+                        <option value="3">بعد 3 أيام</option>
+                        <option value="7">بعد أسبوع</option>
+                        <option value="14">بعد أسبوعين</option>
+                        <option value="30">بعد شهر</option>
+                      </select>
+                      <input type="hidden" id="doc-revisit-text" value="1">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Main Commit & Sync Buttons -->
+              <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button id="btn-send-to-client" class="btn-action btn-primary" style="flex:2; min-width:200px; padding:12px; font-size:14px; font-weight:900; border-radius:12px; box-shadow:0 6px 18px rgba(46,196,182,0.35);">
+                  <span>💾</span> اعتماد الروشتة وإرسالها للعميل لحظياً (Live Sync)
+                </button>
+                <button id="btn-print-smart-rx" class="btn-action btn-secondary" style="flex:1; min-width:130px; font-size:13px; font-weight:800; border-radius:12px;">
+                  <span>🖨️</span> طباعة Rx
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 2: DOSE CALCULATOR ================= -->
+        <section id="tab-dose-calc" class="doc-tab-content">
+          <div class="card-section">
+            <div class="card-title">
+              <div class="card-title-text">
+                <img src="assets/images/pill-icon.jpg" class="icon-img-sm">
+                <span>حاسبة الجرعات البيطرية المخصصة حسب الوزن (Dose Calculator)</span>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:16px;">
+              <div>
+                <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">اختر الدواء:</label>
+                <select id="calc-drug-select" style="width:100%; padding:10px; border-radius:12px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;"></select>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">وزن الأليف (كجم):</label>
+                <input type="number" id="calc-pet-weight" step="0.1" style="width:100%; padding:10px; border-radius:12px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;" placeholder="4.2">
+              </div>
+            </div>
+            <div id="calc-result-box" style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:14px; padding:14px;">
+              <span style="font-size:12px; font-weight:800; color:#15803D; display:block;">الجرعة الدقيقة المحسوبة:</span>
+              <h3 id="calc-result-dose" style="font-size:16px; font-weight:900; color:#166534; margin:4px 0 0;">—</h3>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 3: PET SHOP INVENTORY (READ ONLY STOCK) ================= -->
+        <section id="tab-pet-shop" class="doc-tab-content">
+          <div class="card-section">
+            <div class="card-title">
+              <div class="card-title-text">
+                <img src="assets/images/shop-canvit.svg" class="icon-img-sm">
+                <span>مخزون الأدوية والمستلزمات بالعيادة (Stock Levels)</span>
+              </div>
+              <span style="font-size:11px; background:#EEF2F6; color:#475569; padding:2px 8px; border-radius:8px;">رؤية المخزون فقط</span>
+            </div>
+            <div id="assistant-shop-inventory-grid" class="shop-grid" style="margin-top:14px;"></div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW PATIENT PROFILE MODAL -->
+  <div id="new-patient-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #E2E8F0; padding-bottom:10px;">
+        <h3 style="font-size:17px; font-weight:900; color:var(--secondary); margin:0;">➕ فتح ملف جديد للعميل</h3>
+        <button id="btn-close-new-patient-modal" style="background:none; border:none; font-size:20px; cursor:pointer; color:#64748B;">✖</button>
+      </div>
+
+      <form id="form-new-patient">
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">اسم الأليف:</label>
+          <input type="text" id="np-pet-name" required placeholder="مثال: ريكو، بسبوسة" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit;">
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div>
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">النوع والفصيلة:</label>
+            <select id="np-species" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;">
+              <option value="cat">قط (قطة)</option>
+              <option value="dog">كلب</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">العمر التقريبي:</label>
+            <input type="text" id="np-age" placeholder="مثال: سنة، 6 شهور" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit;">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div>
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">الوزن بالكجم:</label>
+            <input type="number" id="np-weight" step="0.1" placeholder="4.0" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit;">
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">اسم المالك:</label>
+            <input type="text" id="np-owner-name" placeholder="اسم العميل" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">ملاحظات وشكوى الدخول المبدئية:</label>
+          <textarea id="np-notes" rows="2" placeholder="السبب الرئيسي للزيارة..." style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit;"></textarea>
+        </div>
+
+        <div style="text-align:center;">
+          <button type="submit" class="btn-action btn-primary" style="width:100%; padding:12px; font-weight:900;">
+            💾 حفظ الملف وفتح الكشف الصوتي فوراً
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PRINTABLE RX MODAL -->
+  <div id="printable-rx-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width:650px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;" class="no-print">
+        <h4 style="margin:0; font-weight:900;">🖨️ معاينة الروشتة الرسمية للطباعة</h4>
+        <button id="btn-close-print-modal" style="background:none; border:none; font-size:18px; cursor:pointer;">✖</button>
+      </div>
+      <div id="printable-rx-content"></div>
+      <div style="margin-top:14px; text-align:center;" class="no-print">
+        <button onclick="window.print()" class="btn-action btn-primary" style="padding:10px 24px;">🖨️ طباعة الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/supabase.min.js"></script>
+    <script src="assets/js/cloud_sync.js"></script>
+    <script src="assets/js/data.js"></script>
+  <script src="assets/js/doctor.js"></script>
+  <script>
+    // Force Assistant Role on this dedicated page
+    document.addEventListener('DOMContentLoaded', () => {
+      PetiCareDB.setRole('assistant');
+      const phoneSpan = document.getElementById('doc-active-pet-phone');
+      if (phoneSpan && activePatient) {
+        phoneSpan.textContent = PetiCareDB.maskPhone(activePatient.phone, 'assistant');
+      }
+
+      // Render read-only inventory for assistant
+      renderAssistantInventory();
+    });
+
+    function renderAssistantInventory() {
+      const grid = document.getElementById('assistant-shop-inventory-grid');
+      if (!grid) return;
+      const items = PetiCareDB.getShopItems();
+      grid.innerHTML = items.map(item => `
+        <div class="shop-card">
+          <img src="${item.image}" alt="${item.title}" class="shop-card-img">
+          <h4 style="font-size:14px; font-weight:900; color:var(--secondary); margin:6px 0 2px;">${item.title}</h4>
+          <span style="font-size:11px; color:var(--text-muted);">${item.category}</span>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+            <span style="font-size:14px; font-weight:900; color:var(--primary-hover);">${item.price} ج.م</span>
+            <span style="font-size:11px; font-weight:800; background:${item.stock > 0 ? '#E8F5E9' : '#FFEAEA'}; color:${item.stock > 0 ? '#2E7D32' : '#D90429'}; padding:2px 8px; border-radius:8px;">
+              المخزون: ${item.stock} علبة
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+
+</body>
+</html>

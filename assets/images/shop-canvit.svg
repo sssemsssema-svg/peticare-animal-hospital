@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="canvitBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#ECEFF1"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="30" fill="url(#canvitBg)"/>
+  <!-- Bottle Cap -->
+  <rect x="80" y="45" width="40" height="18" rx="4" fill="#00897B"/>
+  <rect x="75" y="60" width="50" height="8" rx="2" fill="#00695C"/>
+  <!-- Bottle Body -->
+  <rect x="65" y="68" width="70" height="95" rx="14" fill="url(#bottle)" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.12))"/>
+  <!-- Label -->
+  <rect x="68" y="85" width="64" height="60" rx="6" fill="#00897B"/>
+  <text x="100" y="103" font-family="Cairo, sans-serif" font-size="11" font-weight="900" fill="#FFF" text-anchor="middle">CANVIT</text>
+  <text x="100" y="117" font-family="Cairo, sans-serif" font-size="9" font-weight="800" fill="#A7FFEB" text-anchor="middle">IMMUNO</text>
+  <!-- Shield plus -->
+  <circle cx="100" cy="132" r="8" fill="#FFF"/>
+  <text x="100" y="136" font-family="Cairo, sans-serif" font-size="12" font-weight="900" fill="#00897B" text-anchor="middle">+</text>
+  <text x="100" y="188" font-family="Cairo, sans-serif" font-size="11" font-weight="800" fill="#00695C" text-anchor="middle">فيتامينات ومناعة</text>
+</svg>

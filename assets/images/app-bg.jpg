@@ -1,0 +1,3776 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <title>PetiCare Animal Hospital - متجر ومستلزمات العيادة 🛍️</title>
+
+  <!-- Google Fonts: Cairo -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="assets/images/logo.gif">
+
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+
+    :root {
+
+      --primary: #10B981;
+
+      --primary-hover: #059669;
+
+      --primary-light: rgba(16, 185, 129, 0.12);
+
+      --secondary: #0F172A;
+
+      --accent: #F59E0B;
+
+      --danger: #EF4444;
+
+      --bg-dark: #0B1120;
+
+      --bg-card: rgba(30, 41, 59, 0.7);
+
+      --border: rgba(255, 255, 255, 0.1);
+
+      --text: #F8FAFC;
+
+      --text-muted: #94A3B8;
+
+      --radius-sm: 8px;
+
+      --radius-md: 14px;
+
+      --radius-lg: 20px;
+
+      --radius-full: 9999px;
+
+      --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+
+    }
+
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      -webkit-tap-highlight-color: transparent;
+
+    }
+
+
+
+    body {
+
+      background-color: var(--bg-dark);
+
+      background-image: 
+
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+
+        radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.1) 0px, transparent 50%),
+
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+
+      background-attachment: fixed;
+
+      color: var(--text);
+
+      min-height: 100vh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      line-height: 1.5;
+
+    }
+
+
+
+    /* Container */
+
+    .container {
+
+      width: 100%;
+
+      max-width: 1080px;
+
+      margin: 0 auto;
+
+      padding: 0 16px;
+
+    }
+
+
+
+    /* Top Navigation Bar */
+
+    .store-navbar {
+
+      background: rgba(15, 23, 42, 0.85);
+
+      backdrop-filter: blur(12px);
+
+      -webkit-backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 100;
+
+      padding: 12px 0;
+
+    }
+
+
+
+    .navbar-inner {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+    }
+
+
+
+    .brand-box {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      text-decoration: none;
+
+      color: inherit;
+
+    }
+
+
+
+    .brand-logo {
+
+      width: 44px;
+
+      height: 44px;
+
+      border-radius: var(--radius-md);
+
+      object-fit: cover;
+
+      border: 2px solid var(--primary);
+
+      background: #FFF;
+
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+
+    }
+
+
+
+    .brand-texts h1 {
+
+      font-size: 16px;
+
+      font-weight: 900;
+
+      color: #FFF;
+
+      line-height: 1.2;
+
+    }
+
+
+
+    .brand-texts p {
+
+      font-size: 11px;
+
+      color: var(--primary);
+
+      font-weight: 700;
+
+    }
+
+
+
+    .nav-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+
+
+    .btn-emergency {
+
+      background: rgba(239, 68, 68, 0.15);
+
+      border: 1px solid rgba(239, 68, 68, 0.4);
+
+      color: #FCA5A5;
+
+      padding: 7px 12px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      text-decoration: none;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      transition: all 0.2s;
+
+    }
+
+
+
+    .btn-emergency:hover {
+
+      background: rgba(239, 68, 68, 0.25);
+
+    }
+
+
+
+    .btn-cart-nav {
+
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+
+      color: #FFF;
+
+      border: none;
+
+      padding: 8px 14px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      cursor: pointer;
+
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+
+      position: relative;
+
+    }
+
+
+
+    .cart-counter-badge {
+
+      background: #FFF;
+
+      color: var(--primary-hover);
+
+      border-radius: var(--radius-full);
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      min-width: 20px;
+
+      height: 20px;
+
+      padding: 0 4px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+
+    /* Hero Section */
+
+    .hero-section {
+
+      padding: 32px 0 20px;
+
+      text-align: center;
+
+    }
+
+
+
+    .hero-card {
+
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+
+      border: 1px solid rgba(16, 185, 129, 0.25);
+
+      border-radius: var(--radius-lg);
+
+      padding: 28px 20px;
+
+      box-shadow: var(--shadow-lg);
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .hero-card::before {
+
+      content: '';
+
+      position: absolute;
+
+      top: -50px;
+
+      right: -50px;
+
+      width: 140px;
+
+      height: 140px;
+
+      background: rgba(16, 185, 129, 0.12);
+
+      border-radius: 50%;
+
+      filter: blur(25px);
+
+    }
+
+
+
+    .hero-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      background: rgba(16, 185, 129, 0.15);
+
+      color: #6EE7B7;
+
+      padding: 6px 14px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      margin-bottom: 12px;
+
+      border: 1px solid rgba(16, 185, 129, 0.3);
+
+    }
+
+
+
+    .hero-title {
+
+      font-size: 24px;
+
+      font-weight: 900;
+
+      color: #FFF;
+
+      margin-bottom: 8px;
+
+    }
+
+
+
+    .hero-desc {
+
+      font-size: 14px;
+
+      color: var(--text-muted);
+
+      max-width: 580px;
+
+      margin: 0 auto 20px;
+
+      line-height: 1.6;
+
+    }
+
+
+
+    .hero-cta-btn {
+
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+      color: #FFF;
+
+      border: none;
+
+      padding: 12px 28px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 15px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      transition: transform 0.2s, box-shadow 0.2s;
+
+    }
+
+
+
+    .hero-cta-btn:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+
+    }
+
+
+
+    .perks-bar {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 18px;
+
+      margin-top: 24px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+
+    .perk-item {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      font-size: 12px;
+
+      color: #CBD5E1;
+
+      font-weight: 700;
+
+      background: rgba(255, 255, 255, 0.04);
+
+      padding: 6px 12px;
+
+      border-radius: var(--radius-full);
+
+      border: 1px solid var(--border);
+
+    }
+
+
+
+    /* Filter & Search Bar */
+
+    .catalog-controls {
+
+      margin: 24px 0 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 14px;
+
+    }
+
+
+
+    .search-box {
+
+      position: relative;
+
+    }
+
+
+
+    .search-input {
+
+      width: 100%;
+
+      background: rgba(30, 41, 59, 0.8);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-md);
+
+      padding: 14px 44px 14px 16px;
+
+      color: #FFF;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      outline: none;
+
+      transition: border-color 0.2s;
+
+    }
+
+
+
+    .search-input:focus {
+
+      border-color: var(--primary);
+
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+
+    }
+
+
+
+    .search-icon {
+
+      position: absolute;
+
+      right: 14px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      font-size: 18px;
+
+      color: var(--text-muted);
+
+      pointer-events: none;
+
+    }
+
+
+
+    .category-pills {
+
+      display: flex;
+
+      gap: 8px;
+
+      overflow-x: auto;
+
+      padding-bottom: 6px;
+
+      scrollbar-width: none;
+
+    }
+
+
+
+    .category-pills::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+
+    .cat-btn {
+
+      background: rgba(30, 41, 59, 0.7);
+
+      border: 1px solid var(--border);
+
+      color: var(--text-muted);
+
+      padding: 8px 16px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+      transition: all 0.2s;
+
+    }
+
+
+
+    .cat-btn:hover {
+
+      background: rgba(51, 65, 85, 0.8);
+
+      color: #FFF;
+
+    }
+
+
+
+    .cat-btn.active {
+
+      background: var(--primary);
+
+      color: #FFF;
+
+      border-color: var(--primary);
+
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+
+    }
+
+
+
+    /* Products Grid */
+
+    .products-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+      gap: 16px;
+
+      margin-bottom: 90px;
+
+    }
+
+
+
+    .product-card {
+
+      background: rgba(30, 41, 59, 0.65);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-lg);
+
+      padding: 16px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: relative;
+
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .product-card:hover {
+
+      transform: translateY(-3px);
+
+      border-color: rgba(16, 185, 129, 0.4);
+
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+    }
+
+
+
+    .product-img-box {
+
+      width: 100%;
+
+      height: 150px;
+
+      border-radius: var(--radius-md);
+
+      overflow: hidden;
+
+      background: rgba(15, 23, 42, 0.7);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-bottom: 12px;
+
+      position: relative;
+
+    }
+
+
+
+    .product-img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+
+
+    .product-fallback-icon {
+
+      font-size: 52px;
+
+    }
+
+
+
+    .product-tag {
+
+      position: absolute;
+
+      top: 10px;
+
+      right: 10px;
+
+      background: rgba(15, 23, 42, 0.85);
+
+      color: #6EE7B7;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      padding: 4px 8px;
+
+      border-radius: var(--radius-full);
+
+      border: 1px solid rgba(16, 185, 129, 0.3);
+
+    }
+
+
+
+    .product-info {
+
+      flex: 1;
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+
+
+    .product-cat {
+
+      font-size: 11px;
+
+      color: var(--accent);
+
+      font-weight: 800;
+
+      margin-bottom: 4px;
+
+    }
+
+
+
+    .product-title {
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+      margin-bottom: 8px;
+
+      line-height: 1.35;
+
+      min-height: 38px;
+
+    }
+
+
+
+    .product-price-row {
+
+      display: flex;
+
+      align-items: baseline;
+
+      justify-content: space-between;
+
+      margin-top: auto;
+
+      padding-top: 10px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    }
+
+
+
+    .product-price {
+
+      font-size: 18px;
+
+      font-weight: 900;
+
+      color: #34D399;
+
+    }
+
+
+
+    .product-price small {
+
+      font-size: 11px;
+
+      color: var(--text-muted);
+
+      font-weight: 700;
+
+      margin-right: 2px;
+
+    }
+
+
+
+    .btn-add-cart {
+
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+
+      color: #FFF;
+
+      border: none;
+
+      padding: 9px 14px;
+
+      border-radius: var(--radius-md);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      transition: all 0.2s;
+
+    }
+
+
+
+    .btn-add-cart:hover {
+
+      opacity: 0.92;
+
+      transform: scale(1.02);
+
+    }
+
+
+
+    .btn-add-cart.added {
+
+      background: var(--accent);
+
+    }
+
+
+
+    /* Empty State */
+
+    .empty-state {
+
+      grid-column: 1 / -1;
+
+      text-align: center;
+
+      padding: 48px 16px;
+
+      background: rgba(30, 41, 59, 0.4);
+
+      border-radius: var(--radius-lg);
+
+      border: 1px dashed var(--border);
+
+    }
+
+
+
+    .empty-state-icon {
+
+      font-size: 48px;
+
+      margin-bottom: 12px;
+
+      display: block;
+
+    }
+
+
+
+    .empty-state h3 {
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+      margin-bottom: 6px;
+
+    }
+
+
+
+    .empty-state p {
+
+      font-size: 13px;
+
+      color: var(--text-muted);
+
+      margin-bottom: 16px;
+
+    }
+
+
+
+    /* Floating Cart Sticky Bar */
+
+    .floating-cart-bar {
+
+      position: fixed;
+
+      bottom: 20px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: calc(100% - 32px);
+
+      max-width: 580px;
+
+      background: rgba(15, 23, 42, 0.95);
+
+      border: 2px solid var(--primary);
+
+      border-radius: var(--radius-full);
+
+      padding: 10px 18px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      z-index: 990;
+
+      backdrop-filter: blur(16px);
+
+      -webkit-backdrop-filter: blur(16px);
+
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    }
+
+
+
+    @keyframes slideUp {
+
+      from { transform: translate(-50%, 40px); opacity: 0; }
+
+      to { transform: translate(-50%, 0); opacity: 1; }
+
+    }
+
+
+
+    .cart-bar-left {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .cart-bubble {
+
+      width: 42px;
+
+      height: 42px;
+
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 20px;
+
+      position: relative;
+
+    }
+
+
+
+    .cart-badge-dot {
+
+      position: absolute;
+
+      top: -3px;
+
+      right: -3px;
+
+      background: #EF4444;
+
+      color: #FFF;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      min-width: 18px;
+
+      height: 18px;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border: 2px solid var(--bg-dark);
+
+    }
+
+
+
+    .cart-bar-info {
+
+      text-align: right;
+
+    }
+
+
+
+    .cart-bar-title {
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+    }
+
+
+
+    .cart-bar-sum {
+
+      font-size: 14px;
+
+      font-weight: 900;
+
+      color: #34D399;
+
+    }
+
+
+
+    .btn-checkout-now {
+
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+      color: #FFF;
+
+      border: none;
+
+      padding: 10px 20px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+
+    }
+
+
+
+    /* Modal / Drawer Overlay */
+
+    .modal-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.75);
+
+      backdrop-filter: blur(6px);
+
+      -webkit-backdrop-filter: blur(6px);
+
+      z-index: 1000;
+
+      display: none;
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+      padding: 0;
+
+    }
+
+
+
+    @media (min-width: 640px) {
+
+      .modal-overlay {
+
+        align-items: center;
+
+        padding: 20px;
+
+      }
+
+    }
+
+
+
+    .modal-card {
+
+      background: #1E293B;
+
+      border: 1px solid var(--border);
+
+      width: 100%;
+
+      max-width: 520px;
+
+      max-height: 90vh;
+
+      border-radius: 24px 24px 0 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      overflow: hidden;
+
+      animation: modalSlide 0.3s ease-out;
+
+    }
+
+
+
+    @media (min-width: 640px) {
+
+      .modal-card {
+
+        border-radius: 24px;
+
+      }
+
+    }
+
+
+
+    @keyframes modalSlide {
+
+      from { transform: translateY(50px); opacity: 0; }
+
+      to { transform: translateY(0); opacity: 1; }
+
+    }
+
+
+
+    .modal-header {
+
+      padding: 18px 20px;
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+
+    .modal-header h3 {
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+
+    .btn-close-modal {
+
+      background: rgba(255, 255, 255, 0.08);
+
+      border: none;
+
+      color: var(--text-muted);
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      font-size: 18px;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+
+    .btn-close-modal:hover {
+
+      background: rgba(255, 255, 255, 0.15);
+
+      color: #FFF;
+
+    }
+
+
+
+    .modal-body {
+
+      padding: 18px 20px;
+
+      overflow-y: auto;
+
+      flex: 1;
+
+    }
+
+
+
+    /* Cart Items in Modal */
+
+    .cart-items-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+
+    .cart-item-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      background: rgba(15, 23, 42, 0.6);
+
+      padding: 10px 12px;
+
+      border-radius: var(--radius-md);
+
+      border: 1px solid var(--border);
+
+    }
+
+
+
+    .cart-item-info {
+
+      flex: 1;
+
+      text-align: right;
+
+    }
+
+
+
+    .cart-item-name {
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+      line-height: 1.3;
+
+    }
+
+
+
+    .cart-item-price {
+
+      font-size: 12px;
+
+      color: #34D399;
+
+      font-weight: 800;
+
+      margin-top: 2px;
+
+    }
+
+
+
+    .cart-item-ctrls {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+
+    .btn-qty {
+
+      width: 28px;
+
+      height: 28px;
+
+      border-radius: var(--radius-sm);
+
+      border: 1px solid var(--border);
+
+      background: rgba(255, 255, 255, 0.06);
+
+      color: #FFF;
+
+      font-weight: 900;
+
+      font-size: 14px;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+
+    .btn-qty:hover {
+
+      background: var(--primary);
+
+    }
+
+
+
+    .item-qty-count {
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+      min-width: 20px;
+
+      text-align: center;
+
+    }
+
+
+
+    .btn-del-item {
+
+      background: transparent;
+
+      border: none;
+
+      color: #EF4444;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+      padding: 4px;
+
+      margin-right: 4px;
+
+    }
+
+
+
+    /* Total Summary Box */
+
+    .order-total-card {
+
+      background: rgba(16, 185, 129, 0.1);
+
+      border: 1px solid rgba(16, 185, 129, 0.3);
+
+      padding: 12px 16px;
+
+      border-radius: var(--radius-md);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 20px;
+
+    }
+
+
+
+    .order-total-card span {
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      color: #E2E8F0;
+
+    }
+
+
+
+    .order-total-card strong {
+
+      font-size: 20px;
+
+      font-weight: 900;
+
+      color: #34D399;
+
+    }
+
+
+
+    /* Checkout Customer Form */
+
+    .checkout-form {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+
+    .form-group {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+      text-align: right;
+
+    }
+
+
+
+    .form-group label {
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      color: #E2E8F0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+    }
+
+
+
+    .form-group label .req {
+
+      color: #EF4444;
+
+    }
+
+
+
+    .form-input, .form-textarea {
+
+      background: rgba(15, 23, 42, 0.8);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-md);
+
+      padding: 12px 14px;
+
+      color: #FFF;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      outline: none;
+
+      transition: border-color 0.2s;
+
+    }
+
+
+
+    .form-input:focus, .form-textarea:focus {
+
+      border-color: var(--primary);
+
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+
+    }
+
+
+
+    .form-textarea {
+
+      resize: vertical;
+
+      min-height: 60px;
+
+    }
+
+
+
+    .btn-submit-order {
+
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+
+      color: #FFF;
+
+      border: none;
+
+      padding: 14px;
+
+      border-radius: var(--radius-md);
+
+      font-size: 15px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+
+      margin-top: 8px;
+
+      transition: transform 0.2s;
+
+    }
+
+
+
+    .btn-submit-order:hover {
+
+      transform: translateY(-2px);
+
+    }
+
+
+
+    /* Footer */
+
+    .store-footer {
+
+      background: rgba(15, 23, 42, 0.95);
+
+      border-top: 1px solid var(--border);
+
+      padding: 24px 0 32px;
+
+      margin-top: auto;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      color: var(--text-muted);
+
+    }
+
+
+
+    .footer-links {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 16px;
+
+      margin: 12px 0;
+
+      flex-wrap: wrap;
+
+    }
+
+
+
+    .footer-link {
+
+      color: #CBD5E1;
+
+      text-decoration: none;
+
+      font-weight: 700;
+
+    }
+
+
+
+    .footer-link:hover {
+
+      color: var(--primary);
+
+    }
+
+
+
+    .staff-portal-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      background: rgba(255, 255, 255, 0.04);
+
+      color: #94A3B8;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      padding: 6px 14px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      text-decoration: none;
+
+      margin-top: 14px;
+
+      transition: all 0.2s;
+
+    }
+
+
+
+    .staff-portal-link:hover {
+
+      background: rgba(16, 185, 129, 0.15);
+
+      color: #6EE7B7;
+
+      border-color: rgba(16, 185, 129, 0.3);
+
+    }
+
+
+
+    /* Clinic Contacts & Socials Section */
+
+    .clinic-contact-section {
+
+      margin: 40px 0 20px;
+
+    }
+
+    .clinic-contact-card {
+
+      background: rgba(30, 41, 59, 0.7);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-radius: var(--radius-xl);
+
+      padding: 28px 24px;
+
+      backdrop-filter: blur(12px);
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    }
+
+    .contact-header {
+
+      text-align: center;
+
+      margin-bottom: 24px;
+
+    }
+
+    .contact-badge {
+
+      display: inline-block;
+
+      background: rgba(16, 185, 129, 0.15);
+
+      color: #34D399;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      padding: 4px 14px;
+
+      border-radius: var(--radius-full);
+
+      border: 1px solid rgba(16, 185, 129, 0.3);
+
+      margin-bottom: 10px;
+
+    }
+
+    .contact-title {
+
+      font-size: 22px;
+
+      font-weight: 900;
+
+      color: #F8FAFC;
+
+      margin: 0 0 6px;
+
+    }
+
+    .contact-subtitle {
+
+      font-size: 13px;
+
+      color: #94A3B8;
+
+      margin: 0;
+
+    }
+
+    .contact-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+      gap: 16px;
+
+      margin-bottom: 24px;
+
+    }
+
+    .contact-item-box {
+
+      background: rgba(15, 23, 42, 0.75);
+
+      border: 1px solid rgba(255, 255, 255, 0.07);
+
+      border-radius: var(--radius-lg);
+
+      padding: 16px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      transition: all 0.2s;
+
+    }
+
+    .contact-item-box:hover {
+
+      border-color: rgba(16, 185, 129, 0.3);
+
+      transform: translateY(-2px);
+
+    }
+
+    .item-top {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+    .item-icon-box {
+
+      width: 44px;
+
+      height: 44px;
+
+      border-radius: 12px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 20px;
+
+      flex-shrink: 0;
+
+    }
+
+    .item-content {
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+    .item-role {
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      color: #94A3B8;
+
+    }
+
+    .item-val {
+
+      font-size: 17px;
+
+      font-weight: 900;
+
+      color: #F8FAFC;
+
+      letter-spacing: 0.5px;
+
+      direction: ltr;
+
+      text-align: right;
+
+    }
+
+    .item-actions {
+
+      display: flex;
+
+      gap: 8px;
+
+    }
+
+    .btn-item-action {
+
+      flex: 1;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      padding: 9px;
+
+      border-radius: var(--radius-md);
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      text-decoration: none;
+
+      transition: all 0.2s;
+
+    }
+
+    .btn-item-wa {
+
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+      color: #FFF;
+
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+
+    }
+
+    .btn-item-wa:hover {
+
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+
+    }
+
+    .btn-item-call {
+
+      background: rgba(56, 189, 248, 0.15);
+
+      border: 1px solid rgba(56, 189, 248, 0.35);
+
+      color: #BAE6FD;
+
+    }
+
+    .btn-item-call:hover {
+
+      background: rgba(56, 189, 248, 0.25);
+
+    }
+
+    
+
+    /* Social Channels Banner */
+
+    .social-channels-card {
+
+      background: rgba(15, 23, 42, 0.85);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-radius: var(--radius-lg);
+
+      padding: 20px;
+
+    }
+
+    .social-title {
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #E2E8F0;
+
+      text-align: center;
+
+      margin-bottom: 16px;
+
+    }
+
+    .social-btns-flex {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+      gap: 12px;
+
+    }
+
+    .social-btn-card {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 12px 16px;
+
+      border-radius: var(--radius-md);
+
+      text-decoration: none;
+
+      transition: all 0.2s;
+
+    }
+
+    .social-btn-card:hover {
+
+      transform: translateY(-2px);
+
+    }
+
+    .social-btn-fb {
+
+      background: rgba(24, 119, 242, 0.12);
+
+      border: 1px solid rgba(24, 119, 242, 0.35);
+
+      color: #E2E8F0;
+
+    }
+
+    .social-btn-fb:hover {
+
+      background: rgba(24, 119, 242, 0.25);
+
+      border-color: #1877F2;
+
+    }
+
+    .social-btn-ig {
+
+      background: rgba(225, 48, 108, 0.12);
+
+      border: 1px solid rgba(225, 48, 108, 0.35);
+
+      color: #E2E8F0;
+
+    }
+
+    .social-btn-ig:hover {
+
+      background: rgba(225, 48, 108, 0.25);
+
+      border-color: #E1306C;
+
+    }
+
+    .social-btn-tt {
+
+      background: rgba(255, 255, 255, 0.06);
+
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      color: #E2E8F0;
+
+    }
+
+    .social-btn-tt:hover {
+
+      background: rgba(255, 255, 255, 0.14);
+
+      border-color: #FFF;
+
+    }
+
+    .social-icon {
+
+      font-size: 24px;
+
+      flex-shrink: 0;
+
+    }
+
+    .social-text-box {
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+
+    }
+
+    .social-net-name {
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #FFF;
+
+    }
+
+    .social-net-sub {
+
+      font-size: 11px;
+
+      color: #94A3B8;
+
+    }
+
+    .social-arrow {
+
+      font-size: 14px;
+
+      opacity: 0.6;
+
+    }
+
+
+
+    /* Footer Enhancements */
+
+    .footer-contact-summary {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin: 12px 0;
+
+      font-size: 12px;
+
+    }
+
+    .footer-sep {
+
+      opacity: 0.3;
+
+    }
+
+    .footer-social-summary {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-top: 10px;
+
+    }
+
+    .footer-social-pill {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 6px 14px;
+
+      border-radius: var(--radius-full);
+
+      background: rgba(255, 255, 255, 0.05);
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      color: #CBD5E1;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      text-decoration: none;
+
+      transition: all 0.2s;
+
+    }
+
+    .footer-social-pill:hover {
+
+      background: rgba(255, 255, 255, 0.12);
+
+      color: #FFF;
+
+    }
+
+
+
+    /* Floating Quick Contact FAB */
+
+    .floating-quick-contact {
+
+      position: fixed;
+
+      bottom: 24px;
+
+      left: 20px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      z-index: 999;
+
+    }
+
+    .quick-contact-fab {
+
+      width: 48px;
+
+      height: 48px;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 22px;
+
+      text-decoration: none;
+
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    }
+
+    .quick-contact-fab:hover {
+
+      transform: scale(1.1);
+
+    }
+
+    .fab-wa {
+
+      background: #25D366;
+
+      color: #FFF;
+
+    }
+
+    .fab-phone {
+
+      background: #0284C7;
+
+      color: #FFF;
+
+    }
+
+    @media (max-width: 480px) {
+
+      .floating-quick-contact {
+
+        bottom: 74px;
+
+        left: 14px;
+
+      }
+
+      .quick-contact-fab {
+
+        width: 42px;
+
+        height: 42px;
+
+        font-size: 19px;
+
+      }
+
+    }
+
+
+
+    /* Toast Notification */
+
+    .toast {
+
+      position: fixed;
+
+      top: 20px;
+
+      left: 50%;
+
+      transform: translateX(-50%) translateY(-30px);
+
+      background: rgba(16, 185, 129, 0.95);
+
+      color: #FFF;
+
+      padding: 10px 22px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+      z-index: 2000;
+
+      opacity: 0;
+
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+      pointer-events: none;
+
+    }
+
+
+
+    .toast.show {
+
+      transform: translateX(-50%) translateY(0);
+
+      opacity: 1;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <!-- Top Sticky Navigation Bar -->
+
+  <header class="store-navbar">
+
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="brand-box">
+
+        <img src="assets/images/logo.gif" alt="PetiCare Logo" class="brand-logo" onerror="this.src='assets/images/splash-logo.gif'; this.onerror=null;">
+
+        <div class="brand-texts">
+
+          <h1>PetiCare Animal Hospital</h1>
+
+          <p>متجر ومستلزمات العيادة 🛍️</p>
+
+        </div>
+
+      </a>
+
+
+
+      <div class="nav-actions">
+
+        <a href="tel:01555345999" class="btn-emergency" title="طوارئ العيادة 24/7">
+
+          <span>🚨</span>
+
+          <span>طوارئ 24/7</span>
+
+        </a>
+
+
+
+        <button type="button" class="btn-cart-nav" onclick="openCartModal()" title="سلة المشتريات">
+
+          <span>🛒 السلة</span>
+
+          <span id="navCartCount" class="cart-counter-badge">0</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- Main Content Area -->
+
+  <main class="container">
+
+
+
+    <!-- Welcoming Hero Card -->
+
+    <section class="hero-section">
+
+      <div class="hero-card">
+
+        <div class="hero-badge">
+
+          <span>🐾</span>
+
+          <span>تحت إشراف د. شريف دياب • رعاية طبية متخصصة بالحب</span>
+
+        </div>
+
+        <h2 class="hero-title">متجر ومستلزمات رعاية أليفك المتكامل</h2>
+
+        <p class="hero-desc">
+
+          أفضل الأطعمة، الفيتامينات، والمستلزمات الطبية المعتمدة لصحة وسعادة أليفك. اطلب الآن مباشرة عبر واتساب العيادة مع خدمة التوصيل السريع أو الاستلام من مقر المستشفى.
+
+        </p>
+
+        <button type="button" class="hero-cta-btn" onclick="scrollToProducts()">
+
+          <span>🛍️ تصفح المنتجات والشراء فوراً</span>
+
+          <span>⬇️</span>
+
+        </button>
+
+
+
+        <div class="perks-bar">
+
+          <div class="perk-item"><span>🚀</span><span>توصيل سريع للمنزل</span></div>
+
+          <div class="perk-item"><span>🩺</span><span>منتجات معتمدة ومضمونة</span></div>
+
+          <div class="perk-item"><span>💬</span><span>طلب فوري لواتساب العيادة (01555345999)</span></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Search & Category Filters -->
+
+    <section id="products-catalog" class="catalog-controls">
+
+      <div class="search-box">
+
+        <span class="search-icon">🔍</span>
+
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث باسم الصنف، النوع، أو الماركة (مثال: رويال، كانفيت، دراي فود)..." oninput="handleSearch(this.value)">
+
+      </div>
+
+
+
+      <div id="categoryPills" class="category-pills">
+
+        <button type="button" class="cat-btn active" onclick="filterCategory('all', this)">🐾 الكل</button>
+
+        <!-- Populated dynamically -->
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Products Grid -->
+
+    <section id="productsGrid" class="products-grid">
+
+      <!-- Populated dynamically -->
+
+    </section>
+
+
+
+    <!-- Clinic Official Contacts & Social Channels Section -->
+
+    <section class="clinic-contact-section" id="clinicContacts">
+
+      <div class="clinic-contact-card">
+
+        <div class="contact-header">
+
+          <div class="contact-badge">📞 تواصل مباشر وطوارئ 24/7</div>
+
+          <h3 class="contact-title">مستشفى وعيادات بيتي كير البيطرية</h3>
+
+          <p class="contact-subtitle">تحت إشراف د. شريف دياب • نسعد بخدمتكم وتوفير أفضل رعاية متخصصة لأليفكم</p>
+
+        </div>
+
+
+
+        <div class="contact-grid">
+
+          <!-- Dr. Sherif Mobile & WhatsApp 1 -->
+
+          <div class="contact-col">
+
+            <div class="contact-item-box">
+
+              <div class="item-top">
+
+                <div class="item-icon-box" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">📱</div>
+
+                <div class="item-content">
+
+                  <span class="item-role">موبايل وواتساب (د. شريف دياب)</span>
+
+                  <span class="item-val">01555345999</span>
+
+                </div>
+
+              </div>
+
+              <div class="item-actions">
+
+                <a href="https://wa.me/201555345999" target="_blank" rel="noopener noreferrer" class="btn-item-action btn-item-wa" title="محادثة واتساب">
+
+                  <span>💬 واتساب</span>
+
+                </a>
+
+                <a href="tel:01555345999" class="btn-item-action btn-item-call" title="اتصال هاتفي">
+
+                  <span>📞 اتصال</span>
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Doctor / Clinic Mobile & WhatsApp 2 -->
+
+          
+
+
+
+        <!-- Official Social Channels Banner -->
+
+        <div class="social-channels-card">
+
+          <div class="social-title">🌐 قنوات ومواقع التواصل الاجتماعي الرسمية (تابع د. شريف دياب ومستشفى بيتي كير):</div>
+
+          <div class="social-btns-flex">
+
+            <a href="https://www.facebook.com/peticareanimalhoslital?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="social-btn-card social-btn-fb">
+
+              <span class="social-icon">💙</span>
+
+              <div class="social-text-box">
+
+                <span class="social-net-name">فيسبوك • Facebook</span>
+
+                <span class="social-net-sub">الصفحة الرسمية لمستشفى بيتي كير</span>
+
+              </div>
+
+              <span class="social-arrow">➔</span>
+
+            </a>
+
+
+
+            <a href="https://www.instagram.com/peticare_animal_hospital?dlrf=M3IxeG92eG81YnA1" target="_blank" rel="noopener noreferrer" class="social-btn-card social-btn-ig">
+
+              <span class="social-icon">📸</span>
+
+              <div class="social-text-box">
+
+                <span class="social-net-name">إنستغرام • Instagram</span>
+
+                <span class="social-net-sub">@peticare_animal_hospital</span>
+
+              </div>
+
+              <span class="social-arrow">➔</span>
+
+            </a>
+
+
+
+            <a href="https://www.tiktok.com/@sheriffdiab?_r=1&_t=ZS-9AuMBYtCVnN" target="_blank" rel="noopener noreferrer" class="social-btn-card social-btn-tt">
+
+              <span class="social-icon">🎬</span>
+
+              <div class="social-text-box">
+
+                <span class="social-net-name">تيك توك • TikTok</span>
+
+                <span class="social-net-sub">د. شريف دياب @sheriffdiab</span>
+
+              </div>
+
+              <span class="social-arrow">➔</span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+
+
+  <!-- Floating Sticky Cart Bar (Shown when items > 0) -->
+
+  <div id="floatingCartBar" class="floating-cart-bar">
+
+    <div class="cart-bar-left" onclick="openCartModal()">
+
+      <div class="cart-bubble">
+
+        <span>🛒</span>
+
+        <span id="cartBubbleCount" class="cart-badge-dot">0</span>
+
+      </div>
+
+      <div class="cart-bar-info">
+
+        <div class="cart-bar-title"><span id="cartSummaryItems">0</span> أصناف بالسلة</div>
+
+        <div class="cart-bar-sum">الإجمالي: <strong id="cartSummaryTotal">0</strong> ج.م</div>
+
+      </div>
+
+    </div>
+
+    <button type="button" class="btn-checkout-now" onclick="openCartModal()">
+
+      <span>إتمام الطلب 💬</span>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- Cart & Checkout Modal Drawer -->
+
+  <div id="cartModal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <h3>
+
+          <span>🛒 سلة المشتريات وتأكيد الأوردر</span>
+
+        </h3>
+
+        <button type="button" class="btn-close-modal" onclick="closeCartModal()">&times;</button>
+
+      </div>
+
+
+
+      <div class="modal-body">
+
+        
+
+        <!-- Cart Items List -->
+
+        <div id="modalCartItems" class="cart-items-list">
+
+          <!-- Populated dynamically -->
+
+        </div>
+
+
+
+        <!-- Total Sum -->
+
+        <div class="order-total-card">
+
+          <span>إجمالي الحساب المطلوب:</span>
+
+          <strong><span id="modalCartTotal">0</span> ج.م</strong>
+
+        </div>
+
+
+
+        <!-- Customer Checkout Form -->
+
+        <form id="checkoutForm" class="checkout-form" onsubmit="submitWhatsAppOrder(event); return false;">
+
+          <div class="form-group">
+
+            <label for="orderWaPhone">
+
+              <span>📱 رقم الواتساب الأساسي:</span>
+
+              <span class="req">*</span>
+
+            </label>
+
+            <input type="tel" id="orderWaPhone" class="form-input" placeholder="مثال: 01012345678 أو 01555345999" required dir="ltr" style="text-align: right;">
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="orderBackupPhone">
+
+              <span>📞 رقم تواصل ثانٍ (احتياطي / بديل):</span>
+
+              <span class="req">*</span>
+
+            </label>
+
+            <input type="tel" id="orderBackupPhone" class="form-input" placeholder="رقم إضافي لضمان سهولة التواصل وقت التوصيل" required dir="ltr" style="text-align: right;">
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="orderAddress">
+
+              <span>📍 عنوان التوصيل بالتفصيل:</span>
+
+              <span class="req">*</span>
+
+            </label>
+
+            <textarea id="orderAddress" class="form-textarea" placeholder="المدينة، المنطقة، الشارع، رقم العمارة والشقة، وأي علامة مميزة..." required></textarea>
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="orderNotes">
+
+              <span>📝 ملاحظات إضافية (اختياري):</span>
+
+            </label>
+
+            <input type="text" id="orderNotes" class="form-input" placeholder="اسم الأليف، موعد مفضل للتوصيل، أو أي تفاصيل أخرى">
+
+          </div>
+
+
+
+          <button type="submit" class="btn-submit-order">
+
+            <span>💬 تأكيد الطلب وإرسال لواتساب العيادة (01555345999)</span>
+
+          </button>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Toast Element -->
+
+  <div id="storeToast" class="toast"></div>
+
+
+
+  <!-- Floating Quick Contact FAB (WhatsApp & Phone) -->
+
+  <div class="floating-quick-contact" title="تواصل سريع">
+
+    <a href="https://wa.me/201555345999" target="_blank" rel="noopener noreferrer" class="quick-contact-fab fab-wa" title="واتساب د. شريف دياب (01555345999)">
+
+      <span>💬</span>
+
+    </a>
+
+    <a href="tel:01555345999" class="quick-contact-fab fab-phone" title="اتصال فوري د. شريف دياب (01555345999)">
+
+      <span>📞</span>
+
+    </a>
+
+  </div>
+
+
+
+  <!-- Professional Footer -->
+
+  <footer class="store-footer">
+
+    <div class="container">
+
+      <p style="font-size: 14px; font-weight: 800; color: #F8FAFC; margin-bottom: 6px;">
+
+        🏥 PetiCare Animal Hospital &bull; مستشفى وعيادات د. شريف دياب للرعاية البيطرية
+
+      </p>
+
+      
+
+      <div class="footer-contact-summary">
+
+        <a href="tel:01555345999" class="footer-link">📞 د. شريف: 01555345999</a>
+
+        <span class="footer-sep">•</span>
+
+        <a href="https://wa.me/201555345999" target="_blank" rel="noopener noreferrer" class="footer-link" style="color: #6EE7B7;">💬 واتساب د. شريف</a>
+
+        <span class="footer-sep">•</span>
+
+        
+
+        <a href="tel:0502383139" class="footer-link">☎️ الخط الأرضي: 050 2383139</a>
+
+      </div>
+
+
+
+      <div class="footer-social-summary">
+
+        <a href="https://www.facebook.com/peticareanimalhoslital?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="footer-social-pill">
+
+          <span>💙 Facebook</span>
+
+        </a>
+
+        <a href="https://www.instagram.com/peticare_animal_hospital?dlrf=M3IxeG92eG81YnA1" target="_blank" rel="noopener noreferrer" class="footer-social-pill">
+
+          <span>📸 Instagram</span>
+
+        </a>
+
+        <a href="https://www.tiktok.com/@sheriffdiab?_r=1&_t=ZS-9AuMBYtCVnN" target="_blank" rel="noopener noreferrer" class="footer-social-pill">
+
+          <span>🎬 TikTok @sheriffdiab</span>
+
+        </a>
+
+      </div>
+
+
+
+      <p style="opacity: 0.7; font-size: 11px; margin-top: 14px;">جميع الحقوق محفوظة &copy; 2026 PetiCare Hospital &bull; إشراف د. شريف دياب</p>
+
+      
+
+      
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- Scripts -->
+
+  <script src="assets/js/supabase.min.js"></script>
+    <script src="assets/js/cloud_sync.js"></script>
+    <script src="assets/js/data.js?v=20261031_v47"></script>
+
+  <script>
+
+    // --------------------------------------------------------------------------
+
+    // PetiCare Public Store & WhatsApp Checkout Logic
+
+    // Target Clinic WhatsApp Number: 01555345999 (201555345999)
+
+    // --------------------------------------------------------------------------
+
+    const CLINIC_WHATSAPP_PHONE = '201555345999';
+
+
+
+    let allProducts = [];
+
+    let currentCategory = 'all';
+
+    let currentSearchQuery = '';
+
+    let storeCart = {}; // { [productId]: { product, qty } }
+
+
+
+    // Init on DOM ready
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      loadProductsData();
+
+      restoreSavedContactInfo();
+
+    });
+
+
+
+    function loadProductsData() {
+
+      if (window.petiCareData && typeof window.petiCareData.getProducts === 'function') {
+
+        allProducts = window.petiCareData.getProducts();
+
+      } else {
+
+        try {
+
+          const raw = localStorage.getItem('peticare_products_v1');
+
+          allProducts = raw ? JSON.parse(raw) : [];
+
+        } catch (e) {
+
+          allProducts = [];
+
+        }
+
+      }
+
+
+
+      // If storage is totally empty, check initial products fallback
+
+      if (!allProducts || allProducts.length === 0) {
+
+        if (typeof INITIAL_PRODUCTS !== 'undefined') {
+
+          allProducts = [...INITIAL_PRODUCTS];
+
+        }
+
+      }
+
+
+
+      renderCategoryPills();
+
+      renderProductsGrid();
+
+      updateCartUI();
+
+    }
+
+
+
+    function renderCategoryPills() {
+
+      const container = document.getElementById('categoryPills');
+
+      if (!container) return;
+
+
+
+      const categoriesSet = new Set();
+
+      allProducts.forEach(p => {
+
+        if (p.category && p.category.trim()) {
+
+          categoriesSet.add(p.category.trim());
+
+        }
+
+      });
+
+
+
+      const categories = Array.from(categoriesSet);
+
+
+
+      let html = `<button type="button" class="cat-btn ${currentCategory === 'all' ? 'active' : ''}" onclick="filterCategory('all', this)">🐾 الكل</button>`;
+
+      categories.forEach(cat => {
+
+        html += `<button type="button" class="cat-btn ${currentCategory === cat ? 'active' : ''}" onclick="filterCategory('${escapeHtml(cat)}', this)">${escapeHtml(cat)}</button>`;
+
+      });
+
+
+
+      container.innerHTML = html;
+
+    }
+
+
+
+    function filterCategory(cat, btn) {
+
+      currentCategory = cat;
+
+      const pills = document.querySelectorAll('.cat-btn');
+
+      pills.forEach(p => p.classList.remove('active'));
+
+      if (btn) btn.classList.add('active');
+
+      renderProductsGrid();
+
+    }
+
+
+
+    function handleSearch(val) {
+
+      currentSearchQuery = (val || '').trim().toLowerCase();
+
+      renderProductsGrid();
+
+    }
+
+
+
+    function renderProductsGrid() {
+
+      const grid = document.getElementById('productsGrid');
+
+      if (!grid) return;
+
+
+
+      let filtered = allProducts.filter(p => {
+
+        const matchesCategory = (currentCategory === 'all') || (p.category === currentCategory);
+
+        const name = (p.name || '').toLowerCase();
+
+        const cat = (p.category || '').toLowerCase();
+
+        const matchesSearch = !currentSearchQuery || name.includes(currentSearchQuery) || cat.includes(currentSearchQuery);
+
+        return matchesCategory && matchesSearch;
+
+      });
+
+
+
+      if (filtered.length === 0) {
+
+        grid.innerHTML = `
+
+          <div class="empty-state">
+
+            <span class="empty-state-icon">🛍️</span>
+
+            <h3>لا توجد أصناف مطابقة حالياً</h3>
+
+            <p>يمكنك التواصل مباشرة مع إدارة العيادة لطلب أي صنف خاص غير معروض.</p>
+
+            <a href="https://wa.me/${CLINIC_WHATSAPP_PHONE}?text=${encodeURIComponent('مرحباً عيادة بيتيكير، أرغب في الاستفسار عن توفر صنف معين 🐾')}" target="_blank" class="hero-cta-btn" style="text-decoration:none; padding:10px 20px; font-size:13px;">
+
+              <span>💬 استفسر عبر واتساب العيادة</span>
+
+            </a>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+
+      grid.innerHTML = filtered.map(item => {
+
+        const inCartQty = storeCart[item.id] ? storeCart[item.id].qty : 0;
+
+        const fallbackIcon = getCategoryFallbackIcon(item.category);
+
+        const imgHtml = (item.image && item.image.trim()) 
+
+          ? `<img src="${item.image}" alt="${escapeHtml(item.name)}" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="product-fallback-icon" style="display:none;">${fallbackIcon}</div>`
+
+          : `<div class="product-fallback-icon">${fallbackIcon}</div>`;
+
+
+
+        return `
+
+          <div class="product-card" id="card-${item.id}">
+
+            <div class="product-img-box">
+
+              ${imgHtml}
+
+              <span class="product-tag">متوفر بالعيادة ✓</span>
+
+            </div>
+
+            <div class="product-info">
+
+              <span class="product-cat">${escapeHtml(item.category || 'مستلزمات عامة')}</span>
+
+              <h4 class="product-title">${escapeHtml(item.name)}</h4>
+
+              <div class="product-price-row">
+
+                <div class="product-price">${item.price} <small>ج.م</small></div>
+
+                <button type="button" class="btn-add-cart ${inCartQty > 0 ? 'added' : ''}" onclick="addToCart('${item.id}')">
+
+                  <span>${inCartQty > 0 ? `+ ${inCartQty} بالسلة` : '+ أضف'}</span>
+
+                  <span>🛒</span>
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join('');
+
+    }
+
+
+
+    function getCategoryFallbackIcon(category) {
+
+      const c = (category || '').toLowerCase();
+
+      if (c.includes('أغذية') || c.includes('دراي') || c.includes('food')) return '🍖';
+
+      if (c.includes('دواء') || c.includes('أدوية') || c.includes('علاج') || c.includes('فيتامين')) return '💊';
+
+      if (c.includes('نظافة') || c.includes('شامبو') || c.includes('رعاية')) return '🧼';
+
+      if (c.includes('ألعاب') || c.includes('toy')) return '🎾';
+
+      return '🐾';
+
+    }
+
+
+
+    function addToCart(itemId) {
+
+      const product = allProducts.find(p => p.id === itemId);
+
+      if (!product) return;
+
+
+
+      if (!storeCart[itemId]) {
+
+        storeCart[itemId] = { product, qty: 1 };
+
+      } else {
+
+        storeCart[itemId].qty += 1;
+
+      }
+
+
+
+      updateCartUI();
+
+      renderProductsGrid();
+
+      showToast(`تمت إضافة ${product.name} إلى السلة 🛍️`);
+
+    }
+
+
+
+    function changeCartItemQty(itemId, delta) {
+
+      if (!storeCart[itemId]) return;
+
+      storeCart[itemId].qty += delta;
+
+      if (storeCart[itemId].qty <= 0) {
+
+        delete storeCart[itemId];
+
+      }
+
+      updateCartUI();
+
+      renderProductsGrid();
+
+      renderCartModalItems();
+
+    }
+
+
+
+    function removeCartItem(itemId) {
+
+      delete storeCart[itemId];
+
+      updateCartUI();
+
+      renderProductsGrid();
+
+      renderCartModalItems();
+
+    }
+
+
+
+    function updateCartUI() {
+
+      let totalQty = 0;
+
+      let totalPrice = 0;
+
+
+
+      Object.values(storeCart).forEach(entry => {
+
+        totalQty += entry.qty;
+
+        totalPrice += (entry.product.price * entry.qty);
+
+      });
+
+
+
+      // Nav cart badge
+
+      const navBadge = document.getElementById('navCartCount');
+
+      if (navBadge) navBadge.textContent = totalQty;
+
+
+
+      // Floating cart bar
+
+      const floatingBar = document.getElementById('floatingCartBar');
+
+      const bubbleCount = document.getElementById('cartBubbleCount');
+
+      const summaryItems = document.getElementById('cartSummaryItems');
+
+      const summaryTotal = document.getElementById('cartSummaryTotal');
+
+
+
+      if (totalQty > 0) {
+
+        if (floatingBar) floatingBar.style.display = 'flex';
+
+        if (bubbleCount) bubbleCount.textContent = totalQty;
+
+        if (summaryItems) summaryItems.textContent = totalQty;
+
+        if (summaryTotal) summaryTotal.textContent = totalPrice;
+
+      } else {
+
+        if (floatingBar) floatingBar.style.display = 'none';
+
+      }
+
+
+
+      // Modal total
+
+      const modalTotal = document.getElementById('modalCartTotal');
+
+      if (modalTotal) modalTotal.textContent = totalPrice;
+
+    }
+
+
+
+    function openCartModal() {
+
+      const modal = document.getElementById('cartModal');
+
+      if (!modal) return;
+
+      renderCartModalItems();
+
+      modal.style.display = 'flex';
+
+      document.body.style.overflow = 'hidden';
+
+    }
+
+
+
+    function closeCartModal() {
+
+      const modal = document.getElementById('cartModal');
+
+      if (!modal) return;
+
+      modal.style.display = 'none';
+
+      document.body.style.overflow = 'auto';
+
+    }
+
+
+
+    function handleModalOverlayClick(e) {
+
+      if (e.target && e.target.id === 'cartModal') {
+
+        closeCartModal();
+
+      }
+
+    }
+
+
+
+    function renderCartModalItems() {
+
+      const list = document.getElementById('modalCartItems');
+
+      if (!list) return;
+
+
+
+      const entries = Object.values(storeCart);
+
+      if (entries.length === 0) {
+
+        list.innerHTML = `
+
+          <div style="text-align:center; padding:24px 0; color:var(--text-muted);">
+
+            <div style="font-size:38px; margin-bottom:8px;">🛒</div>
+
+            <p style="font-size:14px; font-weight:800; color:#FFF;">السلة فارغة حالياً</p>
+
+            <p style="font-size:12px;">أضف ما يحتاجه أليفك من المنتجات لإتمام الأوردر.</p>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+
+      list.innerHTML = entries.map(entry => {
+
+        const lineTotal = entry.product.price * entry.qty;
+
+        return `
+
+          <div class="cart-item-row">
+
+            <div class="cart-item-info">
+
+              <div class="cart-item-name">${escapeHtml(entry.product.name)}</div>
+
+              <div class="cart-item-price">${entry.product.price} ج.م × ${entry.qty} = <strong>${lineTotal} ج.م</strong></div>
+
+            </div>
+
+            <div class="cart-item-ctrls">
+
+              <button type="button" class="btn-qty" onclick="changeCartItemQty('${entry.product.id}', -1)">-</button>
+
+              <span class="item-qty-count">${entry.qty}</span>
+
+              <button type="button" class="btn-qty" onclick="changeCartItemQty('${entry.product.id}', 1)">+</button>
+
+              <button type="button" class="btn-del-item" onclick="removeCartItem('${entry.product.id}')" title="حذف الصنف">🗑️</button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join('');
+
+    }
+
+
+
+    function scrollToProducts() {
+
+      const el = document.getElementById('products-catalog');
+
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+
+    }
+
+
+
+    // --------------------------------------------------------------------------
+
+    // WhatsApp Order Dispatch
+
+    // Targets 01555345999 (201555345999)
+
+    // --------------------------------------------------------------------------
+
+    function submitWhatsAppOrder(e) {
+
+      e.preventDefault();
+
+
+
+      const entries = Object.values(storeCart);
+
+      if (entries.length === 0) {
+
+        alert('⚠️ السلة فارغة! يرجى إضافة منتجات أولاً قبل تأكيد الأوردر.');
+
+        return;
+
+      }
+
+
+
+      const waPhone = document.getElementById('orderWaPhone').value.trim();
+
+      const backupPhone = document.getElementById('orderBackupPhone').value.trim();
+
+      const address = document.getElementById('orderAddress').value.trim();
+
+      const notes = document.getElementById('orderNotes').value.trim();
+
+
+
+      if (!waPhone || waPhone.length < 8) {
+
+        alert('⚠️ يرجى إدخال رقم واتساب صحيح للتواصل.');
+
+        document.getElementById('orderWaPhone').focus();
+
+        return;
+
+      }
+
+
+
+      if (!backupPhone || backupPhone.length < 8) {
+
+        alert('⚠️ يرجى إدخال رقم تواصل بديل/احتياطي لضمان دقة وسرعة التوصيل.');
+
+        document.getElementById('orderBackupPhone').focus();
+
+        return;
+
+      }
+
+
+
+      if (!address || address.length < 5) {
+
+        alert('⚠️ يرجى كتابة عنوان التوصيل بالتفصيل (المنطقة، الشارع، رقم العمارة والشقة).');
+
+        document.getElementById('orderAddress').focus();
+
+        return;
+
+      }
+
+
+
+      // Save to localStorage for convenience on next visits
+
+      try {
+
+        localStorage.setItem('peticare_last_order_wa', waPhone);
+
+        localStorage.setItem('peticare_last_order_backup', backupPhone);
+
+        localStorage.setItem('peticare_last_order_address', address);
+
+      } catch (err) {}
+
+
+
+      // Calculate order total & items string
+
+      let totalAmount = 0;
+
+      let orderItemsText = entries.map((entry, idx) => {
+
+        const subTotal = entry.product.price * entry.qty;
+
+        totalAmount += subTotal;
+
+        return `${idx + 1}. *${entry.product.name}*\n   الكمية: ${entry.qty} | السعر: ${subTotal} ج.م`;
+
+      }).join('\n');
+
+
+
+      const notesLine = notes ? `\n📝 *ملاحظات خاصة:* ${notes}` : '';
+
+
+
+      // Construct professional, beautifully formatted message
+
+      const msg = 
+
+`🐾 *طلب جديد من متجر مستشفى بيتيكير البيطري (PetiCare)* 🐾
+
+----------------------------------------
+
+🛒 *أصناف الأوردر:*
+
+${orderItemsText}
+
+----------------------------------------
+
+💰 *الإجمالي النهائي:* ${totalAmount} جنيه مصري
+
+----------------------------------------
+
+📋 *بيانات العميل والتوصيل:*
+
+📱 *رقم الواتساب:* ${waPhone}
+
+📞 *رقم التواصل البديل:* ${backupPhone}
+
+📍 *العنوان بالتفصيل:* ${address}${notesLine}
+
+----------------------------------------
+
+✨ نرجو تأكيد استلام الأوردر والبدء في التجهيز. شكراً جزيلاً! ❤️`;
+
+
+
+      const targetWaUrl = `https://wa.me/${CLINIC_WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+
+
+
+      // Open WhatsApp
+
+      window.open(targetWaUrl, '_blank');
+
+
+
+      // Clear cart & close modal
+
+      storeCart = {};
+
+      updateCartUI();
+
+      renderProductsGrid();
+
+      closeCartModal();
+
+      showToast('تم إرسال الأوردر لواتساب العيادة بنجاح! 🚀');
+
+    }
+
+
+
+    function restoreSavedContactInfo() {
+
+      try {
+
+        const savedWa = localStorage.getItem('peticare_last_order_wa');
+
+        const savedBackup = localStorage.getItem('peticare_last_order_backup');
+
+        const savedAddress = localStorage.getItem('peticare_last_order_address');
+
+
+
+        if (savedWa && document.getElementById('orderWaPhone')) {
+
+          document.getElementById('orderWaPhone').value = savedWa;
+
+        }
+
+        if (savedBackup && document.getElementById('orderBackupPhone')) {
+
+          document.getElementById('orderBackupPhone').value = savedBackup;
+
+        }
+
+        if (savedAddress && document.getElementById('orderAddress')) {
+
+          document.getElementById('orderAddress').value = savedAddress;
+
+        }
+
+      } catch (e) {}
+
+    }
+
+
+
+    function showToast(text) {
+
+      const toast = document.getElementById('storeToast');
+
+      if (!toast) return;
+
+      toast.textContent = text;
+
+      toast.classList.add('show');
+
+      setTimeout(() => {
+
+        toast.classList.remove('show');
+
+      }, 3000);
+
+    }
+
+
+
+    function escapeHtml(str) {
+
+      if (!str) return '';
+
+      return String(str)
+
+        .replace(/&/g, '&amp;')
+
+        .replace(/</g, '&lt;')
+
+        .replace(/>/g, '&gt;')
+
+        .replace(/"/g, '&quot;')
+
+        .replace(/'/g, '&#039;');
+
+    }
+
+  </script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"b52b6f4d299f4a5c9db542181e188c9f","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+
+</html>

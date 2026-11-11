@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="dogHead" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D7CCC8"/>
+      <stop offset="100%" stop-color="#A1887F"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="#EFEBE9"/>
+  <!-- Droopy Ears -->
+  <path d="M45 75 Q25 110 40 140 Q60 145 65 105 Z" fill="#6D4C41"/>
+  <path d="M155 75 Q175 110 160 140 Q140 145 135 105 Z" fill="#6D4C41"/>
+  <!-- Head -->
+  <ellipse cx="100" cy="110" rx="55" ry="52" fill="url(#dogHead)"/>
+  <!-- White Muzzle -->
+  <ellipse cx="100" cy="125" rx="30" ry="24" fill="#FFFFFF"/>
+  <!-- Eyes -->
+  <circle cx="82" cy="98" r="9" fill="#3E2723"/>
+  <circle cx="84" cy="95" r="3.5" fill="#FFF"/>
+  <circle cx="118" cy="98" r="9" fill="#3E2723"/>
+  <circle cx="120" cy="95" r="3.5" fill="#FFF"/>
+  <!-- Nose -->
+  <ellipse cx="100" cy="116" rx="11" ry="8" fill="#212121"/>
+  <!-- Mouth and Tongue -->
+  <path d="M100 124 L100 132 M92 132 Q100 138 100 132 Q100 138 108 132" stroke="#212121" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M96 134 Q100 148 104 134 Z" fill="#FF5252"/>
+</svg>

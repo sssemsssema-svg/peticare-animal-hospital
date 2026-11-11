@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <title>PetiCare Animal Hospital - بوابة الرعاية الذكية للأليف</title>
+
+  <!-- Google Cairo Font -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css?v=20261111_v49">
+
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="icon" href="assets/images/logo.jpg">
+
+</head>
+
+<body>
+
+
+
+  <!-- LIVE REAL-TIME SYNC BANNER -->
+
+  <div id="live-sync-banner" class="live-sync-banner">
+
+    <span>🔔</span> تم تحديث تقرير كشف أليفك للتو من العيادة!
+
+  </div>
+
+
+
+  <!-- SPLASH SCREEN ANIMATION WITH splash-logo.gif & meow-sound.mp3 -->
+
+  <div id="splash-screen" onclick="if(window.dismissClientSplash) window.dismissClientSplash(); else { this.style.display='none'; this.classList.add('hidden'); }" style="cursor: pointer;">
+
+    <div class="splash-content">
+
+      <img src="assets/images/splash-logo.gif" id="splash-logo-img" alt="PetiCare Splash Logo" class="splash-logo-img">
+
+      <h2 class="splash-title">PetiCare Animal Hospital</h2>
+
+      <p class="splash-subtitle">د. شريف دياب • بوابة الرعاية والمتابعة الطبية الفائقة</p>
+
+      
+
+      <button id="btn-splash-enter" class="btn-splash-enter">
+
+        <img src="assets/images/paw-icon.jpg" style="width:24px; height:24px;">
+
+        <span>دخول العيادة الذكية</span>
+
+      </button>
+
+      <p style="font-size:11px; color:var(--text-muted); margin-top:14px;">اضغط في أي مكان لتخطي شاشة البداية</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="app-container">
+
+    <div class="app-overlay">
+
+      <div class="mobile-wrapper">
+
+
+
+        <!-- Top Header with REAL splash-logo.gif (NO EMOJI!) & Emergency SOS button -->
+
+        <header class="app-header">
+
+          <div class="header-inner">
+
+            <div class="brand-section">
+
+              <img src="assets/images/splash-logo.gif" id="client-header-logo" alt="PetiCare Logo" class="brand-logo-img">
+
+              <div class="brand-texts">
+
+                <h1>PetiCare Animal Hospital</h1>
+
+                <p>د. شريف دياب • رعاية طبية متخصصة بالحب</p>
+
+              </div>
+
+            </div>
+
+            <div class="header-actions">
+
+              <a href="tel:01555345999" class="emergency-sos-pulse-btn trigger-emergency-modal" title="طوارئ 24/7">
+
+                🚨 استغاثة 24/7
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </header>
+
+
+
+        <!-- Main Content -->
+
+        <main class="main-content">
+
+
+
+          <!-- APK Direct Download Banner -->
+
+          <div class="card-section" style="background: linear-gradient(135deg, #2A9D8F 0%, #1D7066 100%); color:#fff; padding:14px 18px; border-radius:18px; margin-bottom:12px; box-shadow:0 8px 20px rgba(42,157,143,0.3); text-align:center;">
+
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+
+              <div style="text-align:right;">
+
+                <div style="font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
+
+                  <span>📱 تحميل تطبيق الأندرويد (PetiCare.apk)</span>
+
+                </div>
+
+                <div style="font-size:11px; opacity:0.9; margin-top:2px;">نزّل ملف التثبيت المباشر بصيغة APK على هاتفك الآن</div>
+
+              </div>
+
+              <a href="PetiCare.apk" download="PetiCare.apk" class="btn" style="background:#FFF; color:#1D7066; font-weight:800; padding:8px 16px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(0,0,0,0.15); font-size:12px;">
+
+                <span>⬇️ تحميل APK</span>
+
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- PROMINENT STANDALONE ACTIONS: PET SHOP & PERSONAL PROFILE -->
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:16px;">
+
+            <button id="btn-dashboard-shop" class="card-section" style="margin:0; padding:16px; text-align:center; border:2px solid #FB8500; background:linear-gradient(135deg, #FFF9F2 0%, #FFF3E6 100%); border-radius:18px; cursor:pointer; box-shadow:0 6px 18px rgba(251,133,0,0.12); transition:transform 0.2s;" type="button">
+
+              <img src="assets/images/shop-canvit.svg" style="width:48px; height:48px; margin-bottom:8px; display:inline-block;" alt="Shop">
+
+              <h4 style="font-size:15px; font-weight:900; color:#D97706; margin:0;">🛍️ المتجر (Pet Shop)</h4>
+
+              <p style="font-size:11px; color:#92400E; font-weight:800; margin:4px 0 0;">تصفح المستلزمات والأدوية</p>
+
+            </button>
+
+            
+
+            <button id="btn-dashboard-profile" class="card-section" style="margin:0; padding:16px; text-align:center; border:2px solid #2EC4B6; background:linear-gradient(135deg, #F0FDFA 0%, #E6FFFA 100%); border-radius:18px; cursor:pointer; box-shadow:0 6px 18px rgba(46,196,182,0.12); transition:transform 0.2s;" type="button">
+
+              <img src="assets/images/avatar-cat.svg" style="width:48px; height:48px; border-radius:14px; margin-bottom:8px; display:inline-block; border:2px solid #2EC4B6;" alt="Profile">
+
+              <h4 style="font-size:15px; font-weight:900; color:#0F766E; margin:0;">👤 الملف الشخصي</h4>
+
+              <p style="font-size:11px; color:#115E59; font-weight:800; margin:4px 0 0;">تعديل الصورة والباسورد</p>
+
+            </button>
+
+          </div>
+
+
+
+          <!-- Navigation Switcher Pills (Health Profile vs Pet Shop) -->
+
+          <div style="display:flex; gap:10px; margin-bottom:14px;">
+
+            <button id="nav-btn-health" class="btn-action active" style="flex:1; padding:10px; font-weight:800; font-size:13px; background:var(--primary); color:#FFF; border-radius:14px; border:none; cursor:pointer;">
+
+              🐾 كشف وملف أليفي الصحي
+
+            </button>
+
+            <button id="nav-btn-shop" class="btn-action" style="flex:1; padding:10px; font-weight:800; font-size:13px; background:#F1F5F9; color:var(--secondary); border-radius:14px; border:1px solid #CBD5E1; cursor:pointer;">
+
+              🛍️ البيت شوب والتسوق
+
+            </button>
+
+          </div>
+
+
+
+          <!-- Pet Hero Card -->
+
+          <div class="card-section" style="background: linear-gradient(135deg, rgba(255, 253, 248, 0.9) 0%, rgba(255, 248, 231, 0.9) 100%); border-color:#FFE4A0; padding:18px;">
+
+            <div style="display:flex; align-items:center; gap:14px;">
+
+              <div style="position:relative;">
+
+                <img src="assets/images/avatar-cat.svg" id="client-avatar-img" style="width:72px; height:72px; border-radius:20px; object-fit:cover; border:3px solid #FFF; box-shadow:var(--shadow-sm);" alt="Pet Avatar">
+
+                <img src="assets/images/paw-icon.jpg" style="position:absolute; bottom:-6px; right:-6px; width:26px; height:26px; border-radius:50%; background:#FFF; padding:2px; box-shadow:0 2px 6px rgba(0,0,0,0.15);" alt="Paw Icon">
+
+              </div>
+
+              <div style="flex:1;">
+
+                <span id="client-greeting" style="font-size:12px; font-weight:800; color:var(--primary-hover);">أهلاً بكم في PetiCare 🐾</span>
+
+                <h2 id="client-pet-name" style="font-size:20px; font-weight:900; color:var(--secondary); line-height:1.2;">سيمبا (Simba)</h2>
+
+                <p id="client-pet-sub" style="font-size:12px; color:var(--text-muted); font-weight:800; margin-top:2px;">قط شيرازي • رعاية د. شريف دياب</p>
+
+                <button id="btn-open-edit-pet" style="margin-top:6px; background:#FFF; border:1px solid #CBD5E1; color:var(--secondary); font-size:11px; font-weight:800; padding:4px 10px; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:4px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+
+                  ✏️ تعديل بيانات أليفي والصورة
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- Cosmetic Stitches Notice -->
+
+            <div id="client-surgery-notice" style="display:none; margin-top:14px; background:#E8F5E9; border-radius:14px; padding:10px 14px; border:1px solid #A5D6A7;">
+
+              <div style="display:flex; align-items:center; gap:8px;">
+
+                <img src="assets/images/paw-icon.jpg" style="width:20px; height:20px;">
+
+                <div>
+
+                  <h5 style="font-size:13px; font-weight:900; color:#2E7D32;">تطمين طبي: خياطة تجميلية تحت الجلد</h5>
+
+                  <p style="font-size:11px; color:#1B5E20; margin-top:1px;">الخيط يذوب تلقائياً بالكامل بدون أي حاجة لفك غرز نهائياً! ✨</p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- LIVE GROOMING & BOARDING TRACKER -->
+
+          <div id="client-grooming-tracker"></div>
+
+
+
+          <!-- AI TALKING VET & DOCTOR AUDIO REPORT -->
+
+          <div class="card-section" style="background:rgba(255, 253, 245, 0.9); border:2px solid #FFE4A0;">
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+
+              <div style="display:flex; align-items:center; gap:8px;">
+
+                <img src="assets/images/logo.gif" class="icon-img-sm" style="border-radius:6px;" alt="PetiCare">
+
+                <h4 style="font-size:14px; font-weight:900; color:var(--secondary);">🎬 د. شريف دياب يشرح حالة أليفك بالصوت والـ AI</h4>
+
+              </div>
+
+              <span style="font-size:11px; background:#E8F5E9; color:#2E7D32; font-weight:bold; padding:2px 8px; border-radius:10px;">تقرير معتمد 🟢</span>
+
+            </div>
+
+
+
+            <div style="display:flex; align-items:center; gap:14px;">
+
+              <img src="assets/images/logo.gif" id="client-talking-avatar" style="width:68px; height:68px; border-radius:18px; object-fit:contain; background:#FFF; border:2px solid #FFE4A0; box-shadow:0 4px 10px rgba(0,0,0,0.1);" alt="د. شريف دياب">
+
+              <div style="flex:1;">
+
+                <div id="client-voice-waveform" class="waveform-container">
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                  <div class="waveform-bar"></div>
+
+                </div>
+
+                <button id="btn-client-talking-vet" class="btn-action btn-primary" style="font-size:12px; width:100%; margin-top:8px;">
+
+                  <span>▶</span> استمع لشرح د. شريف دياب الصوتي للحالة
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- ELEGANT CLINICAL SUMMARY TABLE FOR CLIENT (جدول الكشف والروشتة الشيك) -->
+
+            <div style="background:#FFF; border:2px solid #2EC4B6; border-radius:16px; padding:14px; margin-top:14px; box-shadow:0 4px 12px rgba(46,196,182,0.12);">
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #F1F5F9; padding-bottom:6px;">
+
+                <span style="font-size:13px; font-weight:900; color:var(--secondary); display:flex; align-items:center; gap:6px;">
+
+                  <span>📋</span> جدول الكشف الطبي المعتمد (كلمة ونص):
+
+                </span>
+
+                <span style="font-size:10px; background:#E0F2FE; color:#0369A1; padding:2px 8px; border-radius:8px; font-weight:800;">معتمد من العيادة</span>
+
+              </div>
+
+              <table style="width:100%; border-collapse:collapse; font-size:12px;">
+
+                <tbody>
+
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+
+                    <td style="width:95px; padding:8px 10px; font-weight:900; color:#475569; background:#F8FAFC; border-radius:8px 0 0 0;">🐾 اسم الأليف:</td>
+
+                    <td id="client-table-pet-name" style="padding:8px 10px; font-weight:900; color:var(--secondary);">سيمبا (Simba)</td>
+
+                  </tr>
+
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+
+                    <td style="padding:8px 10px; font-weight:900; color:#475569; background:#F8FAFC;">🩺 الحالة / التشخيص:</td>
+
+                    <td id="client-diagnosis-text" style="padding:8px 10px; font-weight:800; color:var(--secondary);">عملية تعقيم تجميلية ناجحة وفحص شامل.</td>
+
+                  </tr>
+
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+
+                    <td style="padding:8px 10px; font-weight:900; color:#475569; background:#F8FAFC;">💊 الروشتة والعلاج:</td>
+
+                    <td id="client-table-rx" style="padding:8px 10px; font-weight:800; color:#1E293B; line-height:1.5;">• كلافوكس نقط (1 سم³ مرتين)&#10;• ماكسيكام مسكن (0.5 سم³ بعد الأكل)</td>
+
+                  </tr>
+
+                  <tr style="border-bottom:1px solid #F1F5F9;">
+
+                    <td style="padding:8px 10px; font-weight:900; color:#475569; background:#F8FAFC;">🍗 الأكل المسموح:</td>
+
+                    <td id="client-diet-text" style="padding:8px 10px; font-weight:700; color:#475569;">صدور دجاج مسلوقة دافئة ومفرومة مع ماء وفير.</td>
+
+                  </tr>
+
+                  <tr>
+
+                    <td style="padding:8px 10px; font-weight:900; color:#475569; background:#F8FAFC; border-radius:0 0 0 8px;">📅 المتابعة بعد:</td>
+
+                    <td id="client-revisit-text" style="padding:8px 10px; font-weight:900; color:#D90429;">غداً (اليوم التالي)</td>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- SMART INTERACTIVE PRESCRIPTION WITH pill-icon.jpg -->
+
+          <div class="card-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/pill-icon.jpg" class="icon-img-sm">
+
+                <span>الروشتة الذكية وجدول الجرعات التفاعلي</span>
+
+              </div>
+
+              <span style="font-size:11px; color:var(--text-muted);">اضغط لتأكيد الجرعة 🐾</span>
+
+            </div>
+
+
+
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+
+              برجاء الضغط على الجرعة عند إعطائها في موعدها لتسجيلها وإصدار صوت التنبيه واهتزاز الهاتف:
+
+            </p>
+
+
+
+            <div id="client-meds-container"></div>
+
+          </div>
+
+
+
+          <!-- VIDEO LIBRARY WITH play-button.jpg -->
+
+          <div class="card-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/play-button.jpg" class="icon-img-sm">
+
+                <span>فيديوهات توعية تيك توك د. شريف دياب</span>
+
+              </div>
+
+            </div>
+
+            <div id="client-video-section"></div>
+
+          </div>
+
+
+
+          <!-- EMERGENCY MEDICAL QR CARD -->
+
+          <div class="card-section" id="client-qr-card" style="background:rgba(255, 255, 255, 0.95); border:2px dashed var(--primary); text-align:center; padding:20px;">
+
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:6px;">
+
+              <img src="assets/images/logo.gif" style="width:24px; height:24px; border-radius:6px; object-fit:contain;">
+
+              <h4 style="font-size:15px; font-weight:900; color:var(--secondary);">
+
+                باركود الطوارئ الطبي للأليف (Emergency QR)
+
+              </h4>
+
+            </div>
+
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+
+              أظهر هذا الباركود لأي عيادة أو طبيب بيطري بالخارج لقراءة التاريخ الطبي، الحساسية، والأدوية فوراً!
+
+            </p>
+
+            <div style="display:inline-block; padding:10px; background:#FFF; border-radius:16px; box-shadow:var(--shadow-sm); border:1px solid #E2E8F0;">
+
+              <img id="client-emergency-qr" src="" alt="Emergency QR" style="width:170px; height:170px; display:block;" onerror="this.onerror=null; this.src='assets/images/logo.gif';">
+
+            </div>
+
+            <div style="margin-top:12px;">
+
+              <a id="client-view-history-btn" href="patient.html" class="btn-action btn-secondary" style="font-size:12px; padding:8px 18px; border-radius:var(--radius-full); text-decoration:none;">
+
+                فتح بطاقة الطوارئ والملاحظات الطبية 📋
+
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- BEFORE & AFTER ALBUM -->
+
+          <div class="card-section" id="client-album-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/paw-icon.jpg" class="icon-img-sm">
+
+                <span>ألبوم المتابعة والتعافي (قبل وبعد الكشف) 📸</span>
+
+              </div>
+
+              <span style="font-size:11px; color:#2E7D32; font-weight:bold;">توثيق معتمد</span>
+
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; text-align:center;">
+
+              <div style="background:#FFF; padding:10px; border-radius:14px; border:1px solid #E2E8F0;">
+
+                <span style="display:block; font-size:11px; font-weight:bold; color:#D90429; margin-bottom:6px;">قبل العلاج 🩹</span>
+
+                <img id="client-album-before" src="assets/images/default-avatar.jpg" style="width:100%; height:130px; object-fit:cover; border-radius:10px;" alt="Before">
+
+              </div>
+
+              <div style="background:#FFF; padding:10px; border-radius:14px; border:1px solid #E2E8F0;">
+
+                <span style="display:block; font-size:11px; font-weight:bold; color:#2E7D32; margin-bottom:6px;">بعد التعافي ✨</span>
+
+                <img id="client-album-after" src="assets/images/default-avatar.jpg" style="width:100%; height:130px; object-fit:cover; border-radius:10px;" alt="After">
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- PET SHOP SECTION -->
+
+          <div class="card-section" id="client-shop-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/pill-icon.jpg" class="icon-img-sm">
+
+                <span>متجر مستلزمات وأغذية PetiCare 🛍️</span>
+
+              </div>
+
+              <span style="font-size:11px; color:var(--primary-hover); font-weight:bold;">توصيل واستلام بالعيادة</span>
+
+            </div>
+
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+
+              اختر ما يحتاجه أليفك واطلب مباشرة ليصلك الأوردر على واتساب العيادة:
+
+            </p>
+
+            <div id="client-shop-grid" class="shop-grid"></div>
+
+          </div>
+
+
+
+          <!-- SOCIAL HUB WITH social-hub.jpg -->
+
+          <div id="client-social-hub"></div>
+
+
+
+        </main>
+
+
+
+        <!-- FLOATING CART BAR -->
+
+        <div id="client-floating-cart" class="floating-cart-bar" style="display:none;">
+
+          <div style="display:flex; align-items:center; gap:10px;">
+
+            <span style="font-size:22px;">🛒</span>
+
+            <div>
+
+              <div style="font-size:13px; font-weight:900;"><span id="cart-items-count">0</span> أصناف بالسلة</div>
+
+              <div style="font-size:11px; opacity:0.9;">الإجمالي: <strong id="cart-total-price">0</strong> ج.م</div>
+
+            </div>
+
+          </div>
+
+          <button id="btn-checkout-whatsapp" style="background:#25D366; color:#FFF; font-weight:900; font-size:12px; padding:8px 16px; border-radius:var(--radius-full); border:none; cursor:pointer; display:flex; align-items:center; gap:6px;">
+
+            <span>طلب عبر واتساب 💬</span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- FLOATING EMERGENCY BUTTON WITH emergency-call.jpg -->
+
+        <a href="tel:01555345999" class="floating-emergency trigger-emergency-modal">
+
+          <img src="assets/images/emergency-call.jpg" class="icon-img-sm" alt="Emergency">
+
+          <span>طوارئ 24/7 (01555345999)</span>
+
+        </a>
+
+
+
+        <!-- Footer with Official Contacts -->
+
+        <footer style="padding:20px 16px; text-align:center; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); background:rgba(255,255,255,0.92); border-radius: 16px; margin-top: 20px;">
+
+          <p style="font-weight: 800; color: var(--secondary); margin-bottom: 6px;">© 2026 PetiCare Animal Hospital • مستشفى وعيادات د. شريف دياب</p>
+
+          <p style="margin: 4px 0;">
+
+            📞 <strong>موبايل وواتساب:</strong> <a href="tel:01555345999" style="color: #0369A1; text-decoration: none; font-weight: 700;">01555345999</a> &bull; <a href="tel:01555345999" style="color: #0369A1; text-decoration: none; font-weight: 700;">01555345999</a> &bull; ☎️ <strong>أرضي:</strong> <a href="tel:0502383139" style="color: #334155; text-decoration: none; font-weight: 700;">050 2383139</a> 🐾
+
+          </p>
+
+          <div style="display:flex; justify-content:center; gap:8px; margin-top:10px; flex-wrap:wrap;">
+
+            <a href="https://www.facebook.com/peticareanimalhoslital?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" style="font-size:11px; color:#1877F2; text-decoration:none; font-weight:700;">Facebook 💙</a>
+
+            <span style="opacity:0.3;">•</span>
+
+            <a href="https://www.instagram.com/peticare_animal_hospital?dlrf=M3IxeG92eG81YnA1" target="_blank" rel="noopener noreferrer" style="font-size:11px; color:#E1306C; text-decoration:none; font-weight:700;">Instagram 📸</a>
+
+            <span style="opacity:0.3;">•</span>
+
+            <a href="https://www.tiktok.com/@sheriffdiab?_r=1&_t=ZS-9AuMBYtCVnN" target="_blank" rel="noopener noreferrer" style="font-size:11px; color:#111; text-decoration:none; font-weight:700;">TikTok @sheriffdiab 🎬</a>
+
+          </div>
+
+        </footer>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- EMERGENCY SYMPTOMS CONSULTATION MODAL -->
+
+  <div id="emergency-modal" class="modal-backdrop hidden">
+
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+
+        <div style="display:flex; align-items:center; gap:10px;">
+
+          <img src="assets/images/emergency-call.jpg" style="width:34px; height:34px; border-radius:8px;" alt="Emergency">
+
+          <div>
+
+            <h3 style="font-size:16px; font-weight:900; color:#D90429;">طوارئ د. شريف دياب 24 ساعة</h3>
+
+            <p style="font-size:11px; color:var(--text-muted);">اتصال مباشر: 01555345999 | واتساب طوارئ</p>
+
+          </div>
+
+        </div>
+
+        <button class="btn-close" id="btn-close-emergency">✕</button>
+
+      </div>
+
+
+
+      <p style="font-size:13px; font-weight:800; color:var(--secondary); margin-bottom:8px;">
+
+        اختر الأعراض التي تلاحظها على أليفك حالياً:
+
+      </p>
+
+
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="فقدان كامل للشهية وممتنع عن الأكل"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">🚫 ممتنع عن الأكل</span></label>
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="قيء متكرر أكثر من مرتين"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">🤮 قيء مستمر</span></label>
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="خمول شديد ونوم غير معتاد"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">😴 خمول شديد</span></label>
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="صعوبة أو نهجان وسرعة تنفس"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">🫁 نهجان وسرعة تنفس</span></label>
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="إسهال مائي"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">⚠️ إسهال</span></label>
+
+        <label style="cursor:pointer;"><input type="checkbox" name="symptom" value="مواء وأنين مستمر من الألم"> <span class="badge" style="background:#F1F5F9; color:#000; font-size:12px; padding:6px 12px;">😿 ألم أو أنين</span></label>
+
+      </div>
+
+
+
+      <div>
+
+        <label style="display:block; font-size:12px; font-weight:800; margin-bottom:4px; color:var(--secondary);">ملاحظات إضافية يراها المربي:</label>
+
+        <textarea id="emergency-notes" style="width:100%; min-height:75px; padding:10px; border-radius:12px; border:1px solid #CBD5E1; font-family:inherit; font-size:13px;" placeholder="اكتب أي ملاحظة سريعة في البيت..."></textarea>
+
+      </div>
+
+
+
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+
+        <button id="btn-send-emergency-wa" class="btn-action btn-whatsapp" style="width:100%; padding:14px; font-size:15px; border-radius:var(--radius-md);">
+
+          <span>💬</span> إرسال الاستشارة لواتساب الطوارئ (01555345999)
+
+        </button>
+
+        <a href="tel:01555345999" class="btn-action" style="background:#E63946; color:#FFF; font-size:14px; border-radius:var(--radius-md); padding:10px; text-align:center;">
+
+          <span>📞</span> اتصال طوارئ فوري الآن (01555345999)
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- EDIT PET PROFILE MODAL -->
+
+  <div id="modal-edit-pet" class="modal-overlay">
+
+    <div class="modal-card">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #E2E8F0; padding-bottom:10px;">
+
+        <h3 style="font-size:17px; font-weight:900; color:var(--secondary); margin:0;">✏️ تعديل بيانات وصورة أليفي</h3>
+
+        <button id="btn-close-edit-pet" style="background:none; border:none; font-size:20px; cursor:pointer; color:#64748B;">✖</button>
+
+      </div>
+
+
+
+      <form id="form-edit-pet">
+
+        <div style="margin-bottom:12px;">
+
+          <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">اسم الأليف:</label>
+
+          <input type="text" id="edit-pet-name" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;">
+
+        </div>
+
+
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+
+          <div>
+
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">الفصيلة / السلالة:</label>
+
+            <input type="text" id="edit-pet-species" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;">
+
+          </div>
+
+          <div>
+
+            <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">العمر:</label>
+
+            <input type="text" id="edit-pet-age" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit; font-weight:800;">
+
+          </div>
+
+        </div>
+
+
+
+        <div style="margin-bottom:14px;">
+
+          <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:6px;">اختر صورة رمزية لأليفك:</label>
+
+          <div class="avatar-picker-grid">
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/avatar-cat.svg">
+
+              <img src="assets/images/avatar-cat.svg" alt="Cat Avatar">
+
+              <span style="font-size:10px; margin-top:2px;">قط لطيف</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/avatar-dog.svg">
+
+              <img src="assets/images/avatar-dog.svg" alt="Dog Avatar">
+
+              <span style="font-size:10px; margin-top:2px;">كلب وفي</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/avatar-bunny.svg">
+
+              <img src="assets/images/avatar-bunny.svg" alt="Bunny Avatar">
+
+              <span style="font-size:10px; margin-top:2px;">أرنب</span>
+
+            </button>
+
+            <button type="button" class="avatar-choice-btn" data-avatar="assets/images/logo.jpg">
+
+              <img src="assets/images/logo.jpg" alt="Clinic Avatar">
+
+              <span style="font-size:10px; margin-top:2px;">شعار العيادة</span>
+
+            </button>
+
+          </div>
+
+          <input type="hidden" id="edit-pet-avatar-val" value="assets/images/avatar-cat.svg">
+
+        </div>
+
+
+
+        <div style="border-top:1px solid #E2E8F0; padding-top:10px; margin-top:10px; margin-bottom:12px;">
+
+          <label style="font-size:12px; font-weight:800; color:var(--secondary); display:block; margin-bottom:4px;">🔑 تغيير كلمة المرور الشخصية (اختياري):</label>
+
+          <input type="password" id="edit-client-new-pass" placeholder="اتركه فارغاً إذا كنت لا ترغب في تغييره" style="width:100%; padding:10px; border-radius:10px; border:1px solid #CBD5E1; font-family:inherit; font-size:13px;">
+
+        </div>
+
+
+
+        <div style="text-align:center;">
+
+          <button type="submit" class="btn-action btn-primary" style="width:100%; padding:12px; font-weight:900;">
+
+            💾 حفظ التعديلات وتحديث ملف أليفي
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Scripts -->
+
+  <script src="assets/js/supabase.min.js"></script>
+    <script src="assets/js/cloud_sync.js"></script>
+    <script src="assets/js/data.js?v=20261111_v49"></script>
+
+  <script src="assets/js/app.js?v=20261111_v49"></script>
+
+  <script>
+
+    if ('serviceWorker' in navigator) {
+
+      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration:', err));
+
+    }
+
+  </script>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>PetiCare - ملف الهستوري الطبي والسجل السري</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="icon" href="assets/images/logo.jpg">
+
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <div class="app-overlay">
+
+      <div class="doctor-desktop-wrapper">
+
+
+
+        <!-- Header with REAL logo.gif (NO EMOJI!) -->
+
+        <header class="app-header">
+
+          <div class="header-inner">
+
+            <a href="doctor.html" class="brand-section">
+
+              <img src="assets/images/logo.gif" alt="PetiCare Logo" class="brand-logo-img">
+
+              <div class="brand-texts">
+
+                <h1>PetiCare Medical History</h1>
+
+                <p>د. شريف دياب • ملف الهستوري الطبي والتنبيهات السرية للأطباء فقط 🩺</p>
+
+              </div>
+
+            </a>
+
+            <div class="header-actions">
+
+              <a href="tel:01555345999" class="btn-icon-badge" title="طوارئ د. شريف">
+
+                <span>🚨 01555345999</span>
+
+              </a>
+
+              <a href="tel:01555345999" class="btn-icon-badge" title="هاتف العيادة">
+
+                <span>📞 01555345999</span>
+
+              </a>
+
+              <a href="tel:0502383139" class="btn-icon-badge" title="الخط الأرضي">
+
+                <span>☎️ 050 2383139</span>
+
+              </a>
+
+              <a href="doctor.html" class="btn-icon-badge">
+
+                <img src="assets/images/paw-icon.jpg" class="icon-img-sm">
+
+                <span>عودة لغرفة الدكتور</span>
+
+              </a>
+
+              <a href="client.html" class="btn-icon-badge" id="btn-open-client-view">
+
+                <img src="assets/images/paw-icon.jpg" class="icon-img-sm">
+
+                <span>معاينة العميل</span>
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </header>
+
+
+
+        <main class="main-content">
+
+
+
+          <!-- Patient Identity Card -->
+
+          <div class="card-section" style="border-top: 4px solid var(--primary);">
+
+            
+
+            <!-- SECRET DOCTOR BADGES (CONFIDENTIAL) -->
+
+            <div style="margin-bottom: 14px;">
+
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+
+                <span style="font-size:12px; font-weight:800; color:#D90429; display:flex; align-items:center; gap:6px;">
+
+                  <img src="assets/images/emergency-call.jpg" style="width:18px; height:18px;">
+
+                  <span>تنبيهات سرية داخلية (خاصة بفريق د. شريف دياب ولا تظهر للعميل):</span>
+
+                </span>
+
+                <span style="font-size:11px; background:#FFE3E3; color:#D90429; padding:2px 8px; border-radius:6px; font-weight:bold;">سري للغاية 🔒</span>
+
+              </div>
+
+              <div id="patient-secret-badges" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+
+            </div>
+
+
+
+            <!-- Basic Info Grid -->
+
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+
+              <img src="assets/images/default-avatar.jpg" id="history-avatar" style="width:84px; height:84px; border-radius:20px; border:3px solid var(--primary); object-fit:cover;" alt="Avatar">
+
+              <div style="flex:1;">
+
+                <div style="display:flex; align-items:center; gap:10px;">
+
+                  <h2 id="history-pet-name" style="font-size:22px; font-weight:900; color:var(--secondary);">سيمبا (Simba)</h2>
+
+                  <span id="history-species-badge" class="badge badge-surgery">قط شيرازي</span>
+
+                </div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:8px; margin-top:8px; font-size:13px; color:var(--text-muted); font-weight:700;">
+
+                  <div>👤 المالك: <span id="history-owner-name" style="color:var(--secondary);">أحمد محمود</span></div>
+
+                  <div>📱 الهاتف: <span id="history-owner-phone" style="direction:ltr; display:inline-block; color:var(--secondary);">201012345678</span></div>
+
+                  <div>⚖️ الوزن: <span id="history-weight" style="color:var(--secondary);">4.2 كجم</span></div>
+
+                  <div>🎂 العمر: <span id="history-age" style="color:var(--secondary);">سنة و4 شهور</span></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Medical Log History -->
+
+          <div class="card-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/pill-icon.jpg" class="icon-img-sm">
+
+                <span>السجل المرضي والزيارات السابقة (Clinical Visits Log)</span>
+
+              </div>
+
+              <button class="btn-action btn-secondary" onclick="addNewLogEntry()" style="font-size:12px;">+ إضافة زيارة جديدة</button>
+
+            </div>
+
+
+
+            <div id="history-timeline-container" style="display:flex; flex-direction:column; gap:12px;"></div>
+
+          </div>
+
+
+
+          <!-- Before & After Photo Album -->
+
+          <div class="card-section">
+
+            <div class="card-title">
+
+              <div class="card-title-text">
+
+                <img src="assets/images/play-button.jpg" class="icon-img-sm">
+
+                <span>ألبوم صور الحالة (قبل وبعد العلاج) - TikTok & Medical Archive</span>
+
+              </div>
+
+            </div>
+
+
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:10px;">
+
+              <div style="background:rgba(248, 250, 252, 0.85); border:2px dashed #CBD5E1; border-radius:14px; padding:12px; text-align:center;">
+
+                <span class="badge" style="background:#E63946; color:#FFF; margin-bottom:8px;">قبل العلاج</span>
+
+                <img src="assets/images/default-avatar.jpg" style="width:100%; height:130px; object-fit:cover; border-radius:10px;">
+
+                <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">صورة الدخول والفحص المبدئي</p>
+
+              </div>
+
+              <div style="background:rgba(248, 250, 252, 0.85); border:2px dashed #CBD5E1; border-radius:14px; padding:12px; text-align:center;">
+
+                <span class="badge" style="background:#2EC4B6; color:#FFF; margin-bottom:8px;">بعد التعافي ✨</span>
+
+                <img src="assets/images/default-avatar.jpg" style="width:100%; height:130px; object-fit:cover; border-radius:10px;">
+
+                <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">بعد التئام الخياطة التجميلية مع د. شريف</p>
+
+              </div>
+
+            </div>
+
+
+
+            <div style="margin-top:16px; text-align:center;">
+
+              <button onclick="window.location.href='doctor.html'" class="btn-action btn-primary" style="padding:10px 20px;">
+
+                <img src="assets/images/play-button.jpg" class="icon-img-sm">
+
+                <span>الانتقال لتجهيز كارت التيك توك من أستوديو العيادة</span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+        </main>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="assets/js/supabase.min.js"></script>
+    <script src="assets/js/cloud_sync.js"></script>
+    <script src="assets/js/data.js"></script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const params = new URLSearchParams(window.location.search);
+
+      const pid = params.get('id') || 'PT-101';
+
+      const patient = PetiCareDB.getPatientById(pid);
+
+
+
+      if (!patient) return;
+
+
+
+      const currentRole = PetiCareDB.getRole ? PetiCareDB.getRole() : 'admin';
+
+      document.getElementById('history-pet-name').textContent = patient.petName;
+
+      document.getElementById('history-owner-name').textContent = patient.ownerName;
+
+      const maskedPhone = PetiCareDB.maskPhone ? PetiCareDB.maskPhone(patient.phone, currentRole) : patient.phone;
+
+      document.getElementById('history-owner-phone').textContent = maskedPhone;
+
+      document.getElementById('history-weight').textContent = patient.weight + ' كجم';
+
+      document.getElementById('history-age').textContent = patient.age;
+
+      document.getElementById('history-species-badge').textContent = patient.speciesName;
+
+      document.getElementById('btn-open-client-view').href = `client.html?pid=${patient.id}`;
+
+
+
+      const badgesContainer = document.getElementById('patient-secret-badges');
+
+      let alertsHtml = '';
+
+      if (patient.doctorAlerts && patient.doctorAlerts.length > 0) {
+
+        alertsHtml += patient.doctorAlerts.map(a => `
+
+          <div style="background:#FFEAEA; color:#D90429; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:800; border:1px solid #FFCCD2; display:inline-flex; align-items:center; gap:6px;">
+
+            <img src="assets/images/emergency-call.jpg" style="width:16px; height:16px;">
+
+            <span>${a.text}</span>
+
+          </div>
+
+        `).join('');
+
+      }
+
+      if (patient.allergies && patient.allergies.length > 0) {
+
+        alertsHtml += patient.allergies.map(al => `
+
+          <div style="background:#FFF3CD; color:#856404; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:800; border:1px solid #FFEEBA; display:inline-flex; align-items:center; gap:6px;">
+
+            <span>⚠️ حساسية: ${al}</span>
+
+          </div>
+
+        `).join('');
+
+      }
+
+      if (patient.bloodType) {
+
+        alertsHtml += `
+
+          <div style="background:#E2F0D9; color:#385723; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:800; border:1px solid #C5E0B4; display:inline-flex; align-items:center; gap:6px;">
+
+            <span>🩸 فصيلة الدم: ${patient.bloodType}</span>
+
+          </div>
+
+        `;
+
+      }
+
+      badgesContainer.innerHTML = alertsHtml || '<span style="font-size:12px; color:var(--text-muted);">لا توجد تنبيهات حرجة مسجلة لهذه الحالة.</span>';
+
+
+
+      const timeline = document.getElementById('history-timeline-container');
+
+      if (patient.history && patient.history.length > 0) {
+
+        timeline.innerHTML = patient.history.map(item => `
+
+          <div style="background:rgba(248, 250, 252, 0.9); border-right:4px solid var(--accent); border-radius:12px; padding:14px; border-top:1px solid #E2E8F0; border-left:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0;">
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+
+              <h4 style="font-size:15px; font-weight:800; color:var(--secondary);">${item.title}</h4>
+
+              <span style="font-size:12px; color:var(--text-muted); background:#EEF2F6; padding:2px 8px; border-radius:6px;">📅 ${item.date}</span>
+
+            </div>
+
+            <p style="font-size:13px; color:var(--text-main); line-height:1.5;">${item.notes}</p>
+
+          </div>
+
+        `).join('');
+
+      }
+
+    });
+
+
+
+    function addNewLogEntry() {
+
+      const title = prompt("عنوان الزيارة / الإجراء الطبي:");
+
+      if (!title) return;
+
+      const notes = prompt("الملاحظات الطبية:");
+
+      if (!notes) return;
+
+
+
+      const params = new URLSearchParams(window.location.search);
+
+      const pid = params.get('id') || 'PT-101';
+
+      const patient = PetiCareDB.getPatientById(pid);
+
+
+
+      patient.history.unshift({
+
+        date: new Date().toISOString().split('T')[0],
+
+        title,
+
+        notes
+
+      });
+
+      PetiCareDB.updatePatient(patient.id, { history: patient.history });
+
+      PetiCareDB.playMeow();
+
+      location.reload();
+
+    }
+
+  </script>
+
+
+</body>
+
+</html>
+

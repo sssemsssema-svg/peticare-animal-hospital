@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل ونسخ حزمة البايبلاين</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0b1528;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #38bdf8;
+        }
+        p {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            box-sizing: border-box;
+            transition: 0.2s;
+        }
+        .btn-download {
+            background: #0284c7;
+            color: #fff;
+        }
+        .btn-copy {
+            background: #10b981;
+            color: #fff;
+        }
+        .toast {
+            display: none;
+            background: #059669;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📦 حزمة الترقية الشاملة (440KB)</h2>
+        <p>جاهزة للتحميل أو النسخ المباشر من الموبايل لإلصاقها في خانة المراجعة بالبايبلاين:</p>
+
+        <a href="bundle.md" download="Zero_Touch_Pipeline_Media_Studio_Master_Bundle.md" class="btn btn-download">
+            📥 تحميل الملف (.md) على الموبايل
+        </a>
+
+        <button onclick="copyBundle()" id="copyBtn" class="btn btn-copy">
+            📋 نسخ محتوى الملف بالكامل
+        </button>
+
+        <div id="toast" class="toast">✅ تم نسخ محتوى الكود بالكامل للحافظة!</div>
+
+        <a href="bundle.txt" target="_blank" style="color: #94a3b8; font-size: 12px; display: inline-block; margin-top: 15px;">
+            📄 عرض الملف كنص عادي في المتصفح
+        </a>
+    </div>
+
+    <script>
+        async function copyBundle() {
+            const btn = document.getElementById('copyBtn');
+            btn.innerText = '⏳ جاري النسخ...';
+            try {
+                const res = await fetch('bundle.txt');
+                const text = await res.text();
+                await navigator.clipboard.writeText(text);
+                btn.innerText = '✅ تم النسخ بنجاح!';
+                document.getElementById('toast').style.display = 'block';
+                setTimeout(() => {
+                    btn.innerText = '📋 نسخ محتوى الملف بالكامل';
+                    document.getElementById('toast').style.display = 'none';
+                }, 3000);
+            } catch (err) {
+                alert('فشل النسخ التلقائي، يمكنك فتح الملف كنص ونسخه يدوياً.');
+                btn.innerText = '📋 نسخ محتوى الملف بالكامل';
+            }
+        }
+    </script>
+</body>
+</html>

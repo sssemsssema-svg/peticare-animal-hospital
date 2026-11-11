@@ -1,0 +1,272 @@
+/*
+ * PetiCare Mobile Layout Fix - v49.4
+ * Fixes:
+ * 1. Top tabs bar: Smoothly scrollable right and left with swipe/touch (متحرك يمين وشمال بسلاسة)
+ * 2. Doctor profile icon: Clickable, drops down via fixed body portal on top of everything
+ * 3. Upload buttons & camera dual action sizing
+ * 4. Bottom navigation bar touch targets & typography
+ * 5. Image sizing and card padding for mobile screens
+ * DO NOT touch any other JS logic, API, or feature code
+ */
+
+/* =====================================================
+   🔝 TOP HEADER & TABS BAR (متحركة يمين وشمال بالسحب)
+   ===================================================== */
+@media (max-width: 600px) {
+    /* Hide brand title on mobile so tabs occupy the full header cleanly */
+    .app-header .header-brand {
+        display: none !important;
+    }
+
+    .app-header {
+        padding: calc(var(--safe-top) + 6px) 8px 6px 8px !important;
+        min-height: 44px !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        overflow-x: auto !important; /* Swipeable horizontally */
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important; /* Smooth momentum scroll */
+        scrollbar-width: none !important;
+        white-space: nowrap !important;
+        border-bottom: 1px solid rgba(96, 165, 250, 0.2) !important;
+    }
+
+    .app-header::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* Tabs Container: smooth swipe / horizontal drag right and left */
+    .header-actions-right {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important; /* Scrollable right & left */
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 2px 4px !important;
+        touch-action: pan-x !important;
+        min-width: 100% !important;
+    }
+
+    .header-actions-right::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* 1. Today's Consultations Tab (كشوفات اليوم) */
+    .btn-quick-today,
+    #btnLiveTodayVisits {
+        min-height: 32px !important;
+        max-height: 34px !important;
+        height: 32px !important;
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        border-radius: 8px !important;
+        gap: 5px !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    .btn-quick-today .badge-tag,
+    #liveTodayVisitsCount {
+        padding: 1px 6px !important;
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+        border-radius: 8px !important;
+    }
+
+    /* 2. Customer Store Tab (متجر العملاء) */
+    .btn-quick-store {
+        min-height: 32px !important;
+        max-height: 34px !important;
+        height: 32px !important;
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        border-radius: 8px !important;
+        gap: 5px !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    /* 3. Cloud Sync Pill (المزامنة والسحابة) */
+    .cloud-sync-pill {
+        min-height: 32px !important;
+        max-height: 34px !important;
+        height: 32px !important;
+        padding: 4px 8px !important;
+        font-size: 12px !important;
+        border-radius: 8px !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* 4. Doctor User Profile Button (د. شريف) */
+    .header-user-section {
+        flex-shrink: 0 !important;
+        position: relative !important;
+    }
+
+    .header-user-btn {
+        min-height: 32px !important;
+        max-height: 34px !important;
+        height: 32px !important;
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        gap: 5px !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .header-user-btn * {
+        pointer-events: none !important;
+    }
+
+    .user-display-name,
+    #headerUserName {
+        max-width: 70px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+    }
+
+    /* Dropdown menu: styled cleanly with fixed viewport coordinates */
+    .user-dropdown-menu {
+        min-width: 230px !important;
+        max-width: calc(100vw - 20px) !important;
+        background: rgba(15, 23, 42, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(96, 165, 250, 0.45) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(59, 130, 246, 0.3) !important;
+        z-index: 999999 !important;
+    }
+}
+
+/* =====================================================
+   📱 SMALL MOBILE SCREENS (≤ 420px)
+   ===================================================== */
+@media (max-width: 420px) {
+
+    /* ── Upload Dual Action Buttons (Camera / Device) ── */
+    .upload-dual-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 6px !important;
+    }
+
+    .upload-dual-actions .btn-inline-upload {
+        flex: 1 1 50% !important;
+        min-height: 38px !important;
+        padding: 6px 6px !important;
+        font-size: 11px !important;
+        justify-content: center !important;
+        gap: 4px !important;
+    }
+
+    .upload-dual-actions .btn-inline-upload .icon {
+        font-size: 15px !important;
+    }
+
+    /* ── All generic buttons: reduce padding slightly ── */
+    .btn {
+        padding: 10px 14px !important;
+        font-size: 14px !important;
+    }
+
+    /* Keep save/submit button full size for visibility */
+    .btn-success-glass.btn-block {
+        padding: 13px 14px !important;
+        font-size: 15px !important;
+    }
+
+    /* ── Bottom Navigation Bar ── */
+    .bottom-nav-bar {
+        height: calc(56px + var(--safe-bottom)) !important;
+    }
+
+    .bottom-nav-item .nav-icon {
+        font-size: 17px !important;
+    }
+
+    .bottom-nav-item .nav-label {
+        font-size: 9px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 100% !important;
+    }
+
+    /* ── Section content area: adjust bottom padding ── */
+    .section-scroll-content {
+        padding-bottom: calc(56px + var(--safe-bottom) + 8px) !important;
+    }
+
+    /* ── Admin KPI Grid: 2 cols on small screens ── */
+    [style*="minmax(170px"] {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* ── Input glass: compact height ── */
+    .input-glass,
+    .textarea-glass,
+    .select-glass {
+        font-size: 14px !important;
+    }
+
+    /* ── Section card padding ── */
+    .glass-card {
+        padding: 12px !important;
+    }
+
+    /* ── Radar banner text ── */
+    .radar-header-banner {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* =====================================================
+   📱 VERY SMALL SCREENS (≤ 360px - e.g. older Androids)
+   ===================================================== */
+@media (max-width: 360px) {
+    .btn-quick-today,
+    #btnLiveTodayVisits,
+    .btn-quick-store {
+        font-size: 10px !important;
+        padding: 3px 6px !important;
+    }
+
+    .bottom-nav-item .nav-label {
+        display: none !important;
+    }
+
+    .bottom-nav-bar {
+        height: calc(50px + var(--safe-bottom)) !important;
+    }
+
+    .upload-dual-actions .btn-inline-upload {
+        font-size: 10px !important;
+        padding: 5px 4px !important;
+    }
+}
